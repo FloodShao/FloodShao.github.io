@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.0.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.0.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.0.0" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Categories">
+<meta property="og:url" content="http://yoursite.com/categories/index.html">
+<meta property="og:site_name" content="Shao Guoliang的博客">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-10-31T02:33:06.000Z">
+<meta property="article:modified_time" content="2019-10-31T02:34:17.920Z">
+<meta property="article:author" content="Shao Guoliang">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.0.0',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/categories/"/>
+
+
+
+
+
+  <title>机器学习损失函数 | Shao Guoliang的博客</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Shao Guoliang的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">未来不迎，当时不杂，过往不恋</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/10/2019-10-10-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shao Guoliang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shao Guoliang的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">机器学习损失函数</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-10T13:51:07+08:00">2019-10-10</time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/10/10/2019-10-10-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/10/10/2019-10-10-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>参考<a href="https://www.csuldw.com/2016/03/26/2016-03-26-loss-function/" target="_blank" rel="noopener">https://www.csuldw.com/2016/03/26/2016-03-26-loss-function/</a>， 《统计学习方法》</p>
+<h3 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h3><p>损失函数（loss function）是用来估计你的模型预测值$f(x)$与真实值Y的不一致程度，它是一个非负值函数，通常用$L(Y, f(x))$来表示，损失函数越小，模型的预测能力就越好。损失函数是<strong>经验风险函数的核心部分</strong>，也是<strong>结构风险函数</strong>重要的组成部分。</p>
+<p>由于模型的输入输出(X, Y)是随机变量，符合联合分布P(X, Y), 所以损失函数的期望是：</p>
+<p>$$ R_{exp}(f) = E_{p}[L(Y, f(x))] = \int_{X*Y} L(Y, f(x)) P(X,Y)$$</p>
+<p>这是理论模型f(x)上的关于联合分布P(X,Y)的平均意义下的损失，成为风险函数或者期望损失。学习的目标就是要<strong>选择期望风险最小的模型</strong>。由于P(X, Y)是不知道的，实际上如果P(X, Y)是已知的我们就不用学习了，这个损失没有办法直接计算。所以我们采用f(x)下关于训练数据集的平均损失作为<strong>经验风险</strong>：</p>
+<p>$$ R_{emp}(f) = \frac{1}{N}\sum_{i=1}^{N}L(y_i, f(x_{i}))$$</p>
+<p>当样本容量无限扩大的时候，经验风险$$R_{emp}$$无限趋近于期望风险$$R_{exp}$$。</p>
+<p>但是当样本容量很小的时候，经验风险最小化的学习效果就不会很好，很可能会产生过拟合（over-fitting）的状况。这时我们采用<strong>结构风险最小化</strong>来防止过拟合。结构风险最小化等价于<strong>正则化</strong>：</p>
+<p>$$ R_{srm}(f) = \frac{1}{N}\sum_{i=1}^{N}L(y_{i}, f(x_{i})) + \lambda J(f)$$</p>
+<p>其中$J(f)$表示的是模型的复杂度，是定义在假设空间F上的泛函。复杂度表示了对复杂模型的惩罚。结构风险小需要经验风险与模型复杂度同时小。<strong>结构风险小的模型往往对训练数据以及未知的测试数据都有较好的预测。</strong></p>
+<h3 id="1-log对数损失函数（logistic-regression）"><a href="#1-log对数损失函数（logistic-regression）" class="headerlink" title="1.log对数损失函数（logistic regression）"></a>1.log对数损失函数（logistic regression）</h3><p><strong>首先</strong>，logistic regression的损失函数不是平方损失。<br>在logistic regression中，它假设样本服从（0-1分布），然后求得满足该分布的似然函数，接着去对数求极值。logistic regression只是把极大化当做一种思想，从损失函数的视角来看，他就成了log损失函数。</p>
+<ol>
+<li>将特征线性求和，通过逻辑函数$g(z)$映射到0-1区间，作为假设函数来进行预测。<br>$$g(z) = \frac{1}{1+e^{-z}}$$<br>$$h_{\theta}(x) = g(\theta^{T}x) = \frac{1}{1+e^{-\theta^{T}x}}$$</li>
+<li>假设样本服从0-1分布。<br>$$P(y=1|x,\theta) = h_\theta(x)$$<br>$$P(y=1|x,\theta) = 1-h_\theta(x)$$<br>也可以写成如下形式：<br>$$P(y|x,\theta) = (h_\theta(x))^y(1-h_\theta(x))^{1-y}$$</li>
+<li>对于训练数据集，假设是m个独立样本。那么损失函数定义为：<br>$$L(\theta) = P(Y|X,\theta) = \prod_{i=1}^{m}P(y_i|x_i,\theta) = \prod_{i=1}^{m} (h_\theta(x))^y(1-h_\theta(x))^{1-y} $$</li>
+</ol>
+<p>这才是原始的logistic regression的损失函数。要对这个损失函数求一阶导数很困难（连乘）。所以我们对该损失函数取log，并没有改变函数的单调性，但是转化成了加法，容易求导。于是：</p>
+<p>$$l(\theta) = log L(\theta) = \sum_{i=1}^{m}y^{(i)}log(h_\theta(x^{(i)})) + (1-y^{(i)})log(1-h_\theta(x^{(i)}))$$</p>
+<p><strong>log损失函数的标准形式</strong>:<br>$$L(Y, P(Y|X)) = -logP(Y|X)$$<br>该损失函数表示，利用已知的样本分布，找到最有可能导致这种分布的参数值，或者说什么样的参数才能使我们观测到目前这组数据的概率最大。本质上是最大似然估计。</p>
+<p>我们可以看出当P(Y|X)趋近于0的时候，损失函数趋近于无穷大，当P(Y|X)趋近于1的时候，损失函数趋近于0。</p>
+<h3 id="2-平方损失函数（最小二乘法，Ordinary-Least-Squares）"><a href="#2-平方损失函数（最小二乘法，Ordinary-Least-Squares）" class="headerlink" title="2. 平方损失函数（最小二乘法，Ordinary Least Squares）"></a>2. 平方损失函数（最小二乘法，Ordinary Least Squares）</h3><p>最小二乘法是线性回归的一种，最小二乘把线性回归转换成了一个凸优化问题。<strong>在线性回归中，他假设样本和噪声都服从高斯分布</strong>，最后通过极大似然估计可以推出最小二乘式。最小二乘的基本原则是：最优化拟合直线应该是是各点到回归直线的距离和最小的直线，即平方和最小。<strong>最小二乘法是基于距离的</strong>，一般我们用的最多的是欧几里得距离。使用欧式距离作为误差度量的原因如下：</p>
+<ul>
+<li>简单，计算方便</li>
+<li>欧式距离是一种很好的相似性度量标准</li>
+<li>在不同的表示域变换后特征性质不变</li>
+</ul>
+<p>标准形式为：<br>$$L(Y, f(x)) = \sum_{i=1}^{m}(y^{(i)}-f(x^{(i)}))^2 $$</p>
+<h3 id="3-指数损失函数（Adaboost）"><a href="#3-指数损失函数（Adaboost）" class="headerlink" title="3. 指数损失函数（Adaboost）"></a>3. 指数损失函数（Adaboost）</h3><p>Adaboost是一种叠加模型，基本思想是：获得一个弱分类器比较容易，而每个弱分类器能够较好的分类一部分数据集，那么在每一轮改变训练数据的权值和概率分布，将生成的若干个弱分类器合并成一个强分类器。它是前向分步加法算法的特例，是一个加和模型，损失函数就是指数函数。<br>在Adaboost中，经过m次迭代后，可以得到:<br>$$f_m(x) = f_{m-1}(x) + \alpha_mG_m(x)$$<br>Adaboost每次迭代的目的是为了找到最小化函数距离的参数$\alpha$和分类器$G_m$</p>
+<p>$$\mathop{\arg\min}<em>{\alpha,G_m} = \sum</em>{i=1}^{N}exp[-y^{(i)}(f_{m-1}(x^{(i)}) + \alpha G(x^{(i)}))]$$</p>
+<p>为什么要采用exp指数形式？回到损失函数定义，它是一个非负值函数。</p>
+<p>所以指数损失函数（exp-loss）标准形式为：<br>$$L(y, f(x)) = exp[-yf(x)]$$</p>
+<h3 id="4-Hinge损失函数（SVM）"><a href="#4-Hinge损失函数（SVM）" class="headerlink" title="4. Hinge损失函数（SVM）"></a>4. Hinge损失函数（SVM）</h3><p>在机器学习算法中，hinge损失函数和SVM息息相关。在SVM中，我们要找到支持向量，支持向量为到分类直线最近的点的距离向量。<br>在分类空间中，直线的法向量为$\omega$，截距为b,那么点到直线的距离为$(\omega\cdot x^{(i)} + b)$。我们要找到一条直线距离两个分类空间距离最大。</p>
+<p>函数间隔 $\widehat{\gamma}_i = y_i(\omega \cdot x_i + b)$<br>归一化法向量$||\omega|| = 1$,得到几何间隔 $\gamma_i = \frac{\omega}{||\omega||}\cdot x_i + \frac{b}{||\omega||}$</p>
+<p>所以优化问题变为了：（硬间隔）<br>$$<br>\begin{split}<br>&amp;\mathop{\max}_{\omega, b} \gamma\<br>&amp;s.t. y_i (\frac{\omega}{||\omega||}\cdot x_i + \frac{b}{||\omega||}) \geqslant \gamma<br>\end{split}<br>$$</p>
+<p>转换成函数间隔就变为了：<br>$$<br>\begin{split}<br>&amp;\mathop{\max}_{\omega, b} \frac{\widehat{\gamma}}{||\omega||}\<br>&amp;s.t. y_i (\omega \cdot x_i +b) \geqslant \widehat{\gamma}<br>\end{split}<br>$$</p>
+<p>这里函数间隔并不影响最终优化问题的解，它既不对优化问题产生影响，也不对约束产生影响。我们可以把这个函数间隔取为1.也就是将最近的分类点到直线的距离取为1.</p>
+<p>则SVM硬间隔问题就转化为了:<br>$$<br>\begin{split}<br>&amp;\mathop{\min}_{\omega, b} \frac{1}{2}||\omega||^2\<br>&amp;s.t. y_i (\omega \cdot x_i +b) - 1 \geqslant 0<br>\end{split}<br>$$</p>
+<p>硬间隔对于现行不可分训练数据是不使用的，因为无法使不等式约束始终成立。所以我们修改了函数间隔的约束条件，增加一个松弛变量。软间隔问题表示为：<br>$$<br>\begin{split}<br>\mathop{\min}<em>{\omega, b}\ &amp; \frac{1}{2}||\omega||^2 + C\sum</em>{i=1}^{N}\xi_i \<br>s.t.\ &amp; y_i (\omega \cdot x_i +b) \geqslant 1-\xi_i, i = 1,2,…N \<br>&amp; \xi_i \geqslant 0<br>\end{split}<br>$$</p>
+<p>上述软间隔优化问题从损失函数的角度来看就是最小化hinge-loss:<br>$$\mathop{\min}<em>{\omega, b}\sum</em>{i=1}^{N}[1-y_i(\omega\cdot x_i+b)]_+ + \lambda||\omega||^2$$</p>
+<p>hinge-loss的基本形式就是：<br>$$L(y(\omega\cdot x+b))=[1-y(\omega\cdot x + b)]<em>+$$<br>其中，<br>$$[z]</em>+ = \begin{cases}<br>z,&amp; z&gt;0\<br>0,&amp; z\leqslant 0 \<br>\end{cases}$$</p>
+<p>我的理解就是，当函数间隔大于1的时候，这是线性可分区域，这部分数据的惩罚为0.当函数间隔小于1的时候，这部分是软间隔，要加入惩罚。<br>值得注意的是$[-y(\omega\cdot x + b)]_+$是感知机的损失函数，也就是当函数距离为正，惩罚为0，当函数距离为负的时候，加入惩罚。在SVM中，加入支持向量的的归一化长度1，是表示不仅要分类正确，还要在可信度足够高的时候惩罚才为0。</p>
+<p><strong>核函数补充：SVM对偶问题</strong><br>我们可以从原始间隔优化问题（包含约束条件的问题）加入拉格朗日函数呈现优化问题的对偶问题。<br>原始软间隔问题为：<br>$$<br>\begin{split}<br>\mathop{\min}<em>{\omega, b}\ &amp; \frac{1}{2}||\omega||^2 + C\sum</em>{i=1}^{N}\xi_i \<br>s.t.\ &amp; y_i (\omega \cdot x_i +b) \geqslant 1-\xi_i, i = 1,2,…N \<br>&amp; \xi_i \geqslant 0<br>\end{split}<br>$$</p>
+<p>转换为拉格朗日函数为：<br>$$<br>L(\omega,b,\xi,\alpha,\mu) = \frac{1}{2}||\omega||^2 + C\sum_{i=1}^{N}\xi_i - \sum_{i=1}^{N}\alpha_i(y_i(\omega\cdot x_i+b)-1+\xi_i) - \sum_{i=1}^{N}\mu_i\xi_i<br>$$<br>其中，$\alpha_i \geqslant 0, \mu_i \geqslant 0$</p>
+<p>对偶问题就是拉格朗日函数的极大极小问题。对拉格朗日函数求一阶导数，得到<br>$$<br>\mathop{\min}<em>{\omega, b, \xi}\ L(\omega, b, \xi, \alpha, \mu) = -\frac{1}{2} \sum</em>{i=1}^{N}\sum_{j=1}^{N}\alpha_i \alpha_j y_i y_j (x_i \cdot x_j) + \sum_{i=1}^{N}\alpha_i<br>$$</p>
+<p>再对$\alpha$求极大，得到对偶问题。<br>$$<br>\begin{align}<br>\mathop{\max}<em>{\alpha}\ &amp; -\frac{1}{2} \sum</em>{i=1}^{N}\sum_{j=1}^{N}\alpha_i \alpha_j y_i y_j (x_i \cdot x_j) + \sum_{i=1}^{N}\alpha_i \<br>s.t.\ &amp; \sum_{i=1}^{N} \alpha_i y_i = 0 \<br>&amp; 0 \leqslant \alpha_i \leqslant C, i = 1,2,…,N\<br>\end{align}<br>$$</p>
+<p><strong>什么是核函数？</strong><br>设$\mathcal{X}$是输入空间，$\mathcal{H}$为特征空间（希尔伯特空间，完备的内积空间）。如果存在一个从$\mathcal{X}$到H的映射：<br>$$\phi(x): \mathcal{X} \rightarrow \mathcal{H}$$<br>是的对于所有的$x, z \in \mathcal{X}$, 函数$K(x, z)$满足条件（内积运算）<br>$$K(x, z) = \phi(x) \cdot \phi(z)$$<br>则称$K(x, z)$为核函数，$\phi(x)$为映射函数。</p>
+<p>核技巧的想法是，在学习和预测中只定义核函数，而不现实地定义映射函数。通常直接计算核函数比较容易。这样上述对偶问题的优化函数就变成了特征空间中的最小化问题：<br>$$<br>\mathop{\min}<em>{\alpha} W(\alpha) = \frac{1}{2} \sum</em>{i=1}^{N}\sum_{j=1}^{N}\alpha_i \alpha_j y_i y_j K(x_i, x_j) - \sum_{i=1}^{N}\alpha_i<br>$$</p>
+<p><strong>什么是希尔伯特空间？</strong><br>$欧式空间 \rightarrow 线性空间 + 定义内积 \Rightarrow 内积空间$</p>
+<ul>
+<li>欧式空间是一个特别的度量空间。</li>
+<li>度量空间是一个定义了距离函数的集合，该距离函数定义集合内所有元素之间的距离。该距离函数被称为集合的度量。欧式空间则是以欧几里得距离定义的度量空间。</li>
+<li>线性空间（或向量空间），一个对加法和数乘封闭的集合。</li>
+</ul>
+<p>$内积空间 + 完备性 \Rightarrow 希尔伯特空间$</p>
+<ul>
+<li>在欧几里得空间（本身就是线性空间）上定义内积。<br>$$<br>\langle x, y \rangle = \sum_{k=1}^{n}\overline{x_k} y_k<br>$$</li>
+<li>序列空间，假设B是任意一个任意维数的集合，可以定义其上序列空间<br>$$\ell^2(B) = \left{x: B \to \mathbb{C}\  \mid \sum_{b \in B}|x(b)|^2 &lt; \infty \right}$$<br>在此空间下定义如下内积:<br>$$<br>\langle x,y \rangle = \sum_{b \in B} \overline{x(b)} y(b)<br>$$<br>则构成一个希尔伯特空间。完备性是什么意思，就是该空间内所有的柯西序列等价于收敛序列。在完备空间中，所有的柯西数列都有极限，且极限在这个空间里。完备性保证了微积分中的大部分概念都在该空间中成立。</li>
+</ul>
+<h3 id="经典的损失函数对比"><a href="#经典的损失函数对比" class="headerlink" title="经典的损失函数对比"></a>经典的损失函数对比</h3><p>![损失函数](/images/2019-10-10-机器学习损失函数/loss function.png)<br>不同的损失函数其实都在近似0-1损失函数，也就是图中的黑线。当函数距离为负的时候就增大panelty，为正的时候减小panelty。这就是损失函数在做的事情。</p>
+<h3 id="5-交叉熵损失函数-（经常用在神经网络中）"><a href="#5-交叉熵损失函数-（经常用在神经网络中）" class="headerlink" title="5. 交叉熵损失函数 （经常用在神经网络中）"></a>5. 交叉熵损失函数 （经常用在神经网络中）</h3><p><strong>熵 entropy:</strong> 假设随机变量X的概率分布是P(X)，则其熵为：<br>$$<br>H(P) = -\sum_{x}P(x)logP(x) = \sum_{x}P(x)log\frac{1}{P(x)}<br>$$<br>熵满足下列不等式<br>$$<br>0 \leqslant H(P) \leqslant log|X|<br>$$<br>其中，|X|是X的取值个数，当且仅当X的分布式均匀分布时右边的等号成立，这就是说，当X服从均匀分布的时候，熵最大。信息量定义为<br>$$<br>I(x_0) = -log(p(x_0))<br>$$<br>直觉上来讲，越不可能发生的事情发生了，信息量越大，越可能的事情发生了，我们获得的信息量越小。熵就是所有信息量的期望。</p>
+<p><strong>相对熵：（KL散度）</strong> 设p(x), q(x)是X中取值的两个概率分布，则p对q的相对熵（离散事件）如下：<br>$$<br>D(p||q) = \sum_{x}p(x)log\frac{p(x)}{q(x)} = \sum_{x}p(x)log{p(x)} - \sum_{x}p(x)log{q(x)} = H_{p}(q) - H(p)<br>$$<br>KL散度是两个概率分布P和Q差别的非对称性度量。KL散度是用来度量使用<strong>基于Q的分布来编码服从P的分布的样本所需的额外的平均比特数</strong>。一定程度上，相对熵可以度量两个随机变量的距离。并且有$D(p||q)\neq D(q||p)$。需要注意的是 $D(p||q)$一定是大于等于0的。<br>从上述公式中我们可以看出：</p>
+<ul>
+<li>如果p(x) = q(x)，则两个事件分布完全相同，那么KL散度为0</li>
+<li>观察导出式发现，KL散度由p(x)自己的熵与q(x)信息量在p(x)上的期望共同决定。</li>
+</ul>
+<p><strong>互信息：</strong>两个随机变量X，Y的互信息定义为X，Y的联合分布和各自独立分布乘积的相对熵，用I(X,Y)表示：<br>$$<br>I(X,Y) = \sum_{x, y}p(x, y)log\frac{p(x,y)}{p(x)p(y)} = D(p(x,y) || p(x)p(y))<br>$$</p>
+<p>接下来计算<br>$$<br>\begin{align}<br>&amp; H(Y) - I(X,Y) \<br>&amp; = -\sum_{y}p(y)log{p(y)} - \sum_{x,y}p(x,y)log{\frac{p(x,y)}{p(x)p(y)}} \<br>&amp; = -\sum_{y}(\sum_{x}p(x,y))log{p(y)} - \sum_{x,y}p(x,y)log{\frac{p(x,y)}{p(x)p(y)}} \<br>&amp; = -\sum_{x,y} p(x,y)log{\frac{p(x,y)}{p(x)}} \<br>&amp; = -\sum_{x,y} p(x,y)log{p(y|x)} \<br>&amp; = H(Y|X)<br>\end{align}<br>$$</p>
+<p><strong>交叉熵：</strong> 交叉熵与KL散度的公式非常接近。假设有两个分布p,q, 则它们在给定样本集上的交叉熵定义如下：<br>$$<br>CEH(p,q) = E_p[-log{q}] = -\sum_{x \in \mathcal{X}} p(x)log{q(x)} = H(p) + D_{KL}(p||q)<br>$$<br>可以看出交叉熵与相对熵仅相差了p本身的熵H(p)。当p已知的时候，可以把H(p)看做一个常数，此时交叉熵与KL散度在行为上是等价的，都反应了分布p，q的相似程度。交叉熵越小，说明两个概率分布越相近。</p>
+<p>特别的，在logistic regression中<br>p：真实样本分布，服从参数为p的0-1分布，即$X \sim B(1, p)$<br>q：待估计的模型，服从参数为q的0-1分布，即$X \sim B(1, q)$<br>单个样本两者的交叉熵为：<br>$$<br>\begin{align}<br>CEH(p,q) &amp; = -\sum_{x \in \mathcal{X}} p(x) log{q(x)} \<br>&amp; = -[P_p(x=1)log{P_q(x=1)} + P_p(x=0)log{P_q(x=0)}] \<br>&amp; = -[plogq + (1-p)log(1-q)] \<br>&amp; = -[ylogh_\theta(x) + (1-y)log(1-h_\theta(x))]<br>\end{align}<br>$$<br>对所有的训练样本取均值就可以得出与最大似然估计取log方法求出的结果一致。</p>
+<p><strong>在神经网络中处理多分类问题：</strong></p>
+<ul>
+<li>神经网络的原始输出（也就是结点的直接输出结果）不是一个概率值，实质上只是输入的数值做了复杂的加权和非线性处理之后的值，那么如何将这个输出变为概率分布，一般会采用softmax和sigmoid做激活处理。</li>
+<li>对于多分类问题，采用<strong>softmax函数</strong>，原始输出为y1, y2, …yn. 经过softmax处理之后输出为：  </li>
+</ul>
+<p>$$<br>softmax(y_i) = \frac{e^{y_i}}{\sum_{i=1}^{n}e^{y_i}}<br>$$</p>
+<p>经过softmax的交叉熵也被成为softmax损失函数，它的表达式为：<br>$$<br>H(P,T) = -\sum_{1}^{C}p log(T)<br>$$<br>其中P为样本期望输出，它是一个one-hot编码形式，T为样本的实际输出，其中T为$[softmax(y1), softmax(y2)…]$ </p>
+<ul>
+<li>对于单节点二分类问题，采用<strong>sigmoid函数</strong>。</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Machine-Learning/" rel="tag"># Machine Learning</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/10/2019-10-10-%E9%9D%A2%E8%AF%95C-%E6%80%BB%E7%BB%93/" rel="next" title="面试C++总结">
+                <i class="fa fa-chevron-left"></i> 面试C++总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/10/11/Leetcode-221-Maximal-Square/" rel="prev" title="Leetcode#221.Maximal Square">
+                Leetcode#221.Maximal Square <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="Shao Guoliang" />
+            
+              <p class="site-author-name" itemprop="name">Shao Guoliang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/floodshao" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:guoliang_shao@u.nus.edu" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#损失函数"><span class="nav-number">1.</span> <span class="nav-text">损失函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-log对数损失函数（logistic-regression）"><span class="nav-number">2.</span> <span class="nav-text">1.log对数损失函数（logistic regression）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-平方损失函数（最小二乘法，Ordinary-Least-Squares）"><span class="nav-number">3.</span> <span class="nav-text">2. 平方损失函数（最小二乘法，Ordinary Least Squares）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-指数损失函数（Adaboost）"><span class="nav-number">4.</span> <span class="nav-text">3. 指数损失函数（Adaboost）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Hinge损失函数（SVM）"><span class="nav-number">5.</span> <span class="nav-text">4. Hinge损失函数（SVM）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#经典的损失函数对比"><span class="nav-number">6.</span> <span class="nav-text">经典的损失函数对比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-交叉熵损失函数-（经常用在神经网络中）"><span class="nav-number">7.</span> <span class="nav-text">5. 交叉熵损失函数 （经常用在神经网络中）</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shao Guoliang</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Pisces</a> v6.0.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.0.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.0.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.0.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.0.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'S8hhGklf9TcnfdaayOcyEXaY-gzGzoHsz',
+        appKey: 'N9bcSWiTfFKC2MYa8vY5GFGi',
+        placeholder: 'Leave your comments',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=6.0.0"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=6.0.0"></script>
+
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.0.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.0.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.0.0" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Categories">
+<meta property="og:url" content="http://yoursite.com/categories/index.html">
+<meta property="og:site_name" content="Shao Guoliang的博客">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-10-31T02:33:06.000Z">
+<meta property="article:modified_time" content="2019-10-31T02:34:17.920Z">
+<meta property="article:author" content="Shao Guoliang">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.0.0',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/categories/"/>
+
+
+
+
+
+  <title>Linux最小系统 | Shao Guoliang的博客</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Shao Guoliang的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">未来不迎，当时不杂，过往不恋</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/14/Linux%E6%9C%80%E5%B0%8F%E7%B3%BB%E7%BB%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shao Guoliang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shao Guoliang的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Linux最小系统</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-14T13:45:08+08:00">2020-01-14</time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/" itemprop="url" rel="index">
+                    <span itemprop="name">嵌入式</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/01/14/Linux%E6%9C%80%E5%B0%8F%E7%B3%BB%E7%BB%9F/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/01/14/Linux%E6%9C%80%E5%B0%8F%E7%B3%BB%E7%BB%9F/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>讯为iTOP-4412嵌入式学习。Linux最小系统制作与烧写</p>
+<h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3><ul>
+<li>ubuntu 12.04 (GCC版本降为4.4)  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">apt-get install gcc-4.4 g++-4.4 g++-4.4-multilib gcc-4.4-multilib</span><br><span class="line">update-alternatives --install &#x2F;usr&#x2F;bin&#x2F;gcc gcc &#x2F;usr&#x2F;bin&#x2F;gcc-4.4 100</span><br><span class="line">update-alternatives --install &#x2F;usr&#x2F;bin&#x2F;gcc gcc &#x2F;usr&#x2F;bin&#x2F;gcc-4.6 50</span><br><span class="line">update-alternatives --install &#x2F;usr&#x2F;bin&#x2F;g++ g++ &#x2F;usr&#x2F;bin&#x2F;g++-4.4 100</span><br><span class="line">update-alternatives --install &#x2F;usr&#x2F;bin&#x2F;g++ g++ &#x2F;usr&#x2F;bin&#x2F;g++-4.6 50</span><br><span class="line">update-alternatives --install &#x2F;usr&#x2F;bin&#x2F;cpp cpp-bin &#x2F;usr&#x2F;bin&#x2F;cpp-4.4 100</span><br><span class="line">update-alternatives --install &#x2F;usr&#x2F;bin&#x2F;cpp cpp-bin &#x2F;usr&#x2F;bin&#x2F;cpp-4.6 50</span><br><span class="line">gcc -v</span><br><span class="line"></span><br><span class="line">#恢复原来的gcc版本</span><br><span class="line">update-alternatives --remove cpp-bin &#x2F;usr&#x2F;bin&#x2F;cpp-4.4</span><br><span class="line">update-alternatives --remove g++ &#x2F;usr&#x2F;bin&#x2F;c++-4.4</span><br><span class="line">update-alternatives --remove gcc &#x2F;usr&#x2F;bin&#x2F;gcc-4.4</span><br></pre></td></tr></table></figure></li>
+<li>win 7 (烧写)</li>
+<li>busybox 1.22.1 (开源，下载地址：<a href="https://busybox.net/" target="_blank" rel="noopener">https://busybox.net/</a>)</li>
+<li>arm交叉编译器 arm-2009q3 (将提供的arm编译器arm-2009q3解压到/usr/local/arm，并在~/.bashrc中添加环境变量 export PATH=$PATH:/usr/local/arm/arm-2009q3/bin)</li>
+</ul>
+<h3 id="制作Linux最小系统"><a href="#制作Linux最小系统" class="headerlink" title="制作Linux最小系统"></a>制作Linux最小系统</h3><ol>
+<li>下载busybox 1.22.1 至ubuntu，并解压。<br>进入解压路径busybox-1.22.1，进行编译设置<code>make menuconfig</code> (图形界面设置)</li>
+</ol>
+<ul>
+<li>Busybox Setting —&gt; Build Option —&gt; cross compiler prefix —&gt; 填写 “arm-none-linux-gnueabi-”</li>
+<li>Busybox Setting —&gt; Installation Options —&gt; (./__install)Busybox installation prefix —&gt; 更改为“../system” 将系统内核文件生成在上层目录的system中<br>保存设置</li>
+</ul>
+<p>【tips】make menuconfig 命令依赖ncurses库的支持。如果没有安装该库会报错“scripts/kconfig/lxdialog/dialog.h:31:20: fatal error: curses.h: No such file or directory”<br>安装相应的库：<br><code>sudo apt-get install libncurses5-dev libncursesw5-dev</code><br>3. <code>make</code> 编译安装busybox.<br>4. <code>make install</code> 将编译生成的二进制文件装入../system中<br>5. 这时候system路径中是如下的：<br>    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">|--system</span><br><span class="line">    |--bin</span><br><span class="line">    |--linuxrc</span><br><span class="line">    |--sbin</span><br><span class="line">    |--usr</span><br></pre></td></tr></table></figure></p>
+<h3 id="完善Linux最小系统"><a href="#完善Linux最小系统" class="headerlink" title="完善Linux最小系统"></a>完善Linux最小系统</h3><p>制作文件系统还需要 /dev /mnt /lib /etc /proc /sys /tmp /var 等文件路径<br><code>mkdir /dev /mnt /lib /etc /proc /sys /tmp /var</code></p>
+<h4 id="配置文件-etc"><a href="#配置文件-etc" class="headerlink" title="配置文件/etc"></a>配置文件/etc</h4><ol>
+<li><p>建立/etc/eth0-setting文件, 并将权限改为755</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">IP&#x3D;192.168.1.230</span><br><span class="line">Mask&#x3D;255.255.255.0</span><br><span class="line">Gateway&#x3D;192.168.1.1</span><br><span class="line">DNS&#x3D;192.168.1.1</span><br><span class="line">MAC&#x3D;08:90:90:90:90:90</span><br></pre></td></tr></table></figure></li>
+<li><p>建立/etc/init.d/ifconfig-eth0文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">#!&#x2F;bin&#x2F;sh</span><br><span class="line"></span><br><span class="line">echo -n Try to bring eth0 interface up......&gt;&#x2F;dev&#x2F;ttySAC2</span><br><span class="line"></span><br><span class="line">if [-f &#x2F;etc&#x2F;eth0-setting]; then</span><br><span class="line">    source &#x2F;etc&#x2F;eth0-setting</span><br><span class="line">    if grep -q &quot;^&#x2F;dev&#x2F;root &#x2F; nfs &quot; &#x2F;etc&#x2F;mtab ; then</span><br><span class="line">        echo -n NFS root ...&gt; &#x2F;dev&#x2F;ttySAC2</span><br><span class="line">    else</span><br><span class="line">        ifconfig eth0 down</span><br><span class="line">        ifconfig eth0 hw ether $MAC</span><br><span class="line">        ifconfig eth0 $IP netmask $Mask up</span><br><span class="line">        route add default gw $Gateway</span><br><span class="line">    fi</span><br><span class="line">    echo nameserver $DNS &gt; &#x2F;etc&#x2F;resolv.conf</span><br><span class="line">else</span><br><span class="line">    if grep -q &quot;^&#x2F;dev&#x2F;root &#x2F; nfs &quot; &#x2F;etc&#x2F;mtab ; then</span><br><span class="line">        echo -n NFS root ... &gt; &#x2F;dev&#x2F;ttySAC2</span><br><span class="line">    else</span><br><span class="line">        &#x2F;sbin&#x2F;ifconfig eth0 192.168.253.12 netmask 255.255.255.0 up</span><br><span class="line">    fi</span><br><span class="line">fi </span><br><span class="line">echo Done &gt; &#x2F;dev&#x2F;ttySAC2</span><br></pre></td></tr></table></figure></li>
+<li><p>建立/etc/init.d/rcS文件，更改755权限</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line">#! &#x2F;bin&#x2F;sh</span><br><span class="line">PATH&#x3D;&#x2F;sbin:&#x2F;bin:&#x2F;usr&#x2F;sbin:&#x2F;usr&#x2F;bin:&#x2F;usr&#x2F;local&#x2F;bin:</span><br><span class="line">runlevel&#x3D;S</span><br><span class="line">prevlevel&#x3D;N</span><br><span class="line">umask 022</span><br><span class="line">export PATH runlevel prevlevel</span><br><span class="line"></span><br><span class="line">#</span><br><span class="line">#       Trap CTRL-C &amp;c only in this shell so we can interrupt subprocesses.</span><br><span class="line">#</span><br><span class="line">trap &quot;:&quot; INT QUIT TSTP</span><br><span class="line">&#x2F;bin&#x2F;hostname iTOP-4412</span><br><span class="line"></span><br><span class="line">#&#x2F;bin&#x2F;mount -n -t proc none &#x2F;proc</span><br><span class="line">#&#x2F;bin&#x2F;mount -n -t sysfs none &#x2F;sys</span><br><span class="line">#&#x2F;bin&#x2F;mount -n -t usbfs none &#x2F;proc&#x2F;bus&#x2F;usb</span><br><span class="line">#&#x2F;bin&#x2F;mount -t ramfs none &#x2F;dev</span><br><span class="line">[ -e &#x2F;proc&#x2F;1 ]    || &#x2F;bin&#x2F;mount -n -t proc  none &#x2F;proc</span><br><span class="line">[ -e &#x2F;sys&#x2F;class ] || &#x2F;bin&#x2F;mount -n -t sysfs none &#x2F;sys</span><br><span class="line">[ -e &#x2F;dev&#x2F;tty ]   || &#x2F;bin&#x2F;mount    -t ramfs none &#x2F;dev</span><br><span class="line"></span><br><span class="line">echo &#x2F;sbin&#x2F;mdev &gt; &#x2F;proc&#x2F;sys&#x2F;kernel&#x2F;hotplug</span><br><span class="line">&#x2F;sbin&#x2F;mdev -s</span><br><span class="line">#&#x2F;bin&#x2F;hotplug</span><br><span class="line"># mounting file system specified in &#x2F;etc&#x2F;fstab</span><br><span class="line">mkdir -p &#x2F;dev&#x2F;pts</span><br><span class="line">mkdir -p &#x2F;dev&#x2F;shm</span><br><span class="line">&#x2F;bin&#x2F;mount -n -t devpts none &#x2F;dev&#x2F;pts -o mode&#x3D;0622</span><br><span class="line">&#x2F;bin&#x2F;mount -n -t tmpfs tmpfs &#x2F;dev&#x2F;shm</span><br><span class="line">#&#x2F;bin&#x2F;mount -n -t ramfs none &#x2F;tmp</span><br><span class="line">#&#x2F;bin&#x2F;mount -n -t ramfs none &#x2F;var</span><br><span class="line">mkdir -p &#x2F;var&#x2F;empty</span><br><span class="line">mkdir -p &#x2F;var&#x2F;log</span><br><span class="line">mkdir -p &#x2F;var&#x2F;log&#x2F;boa</span><br><span class="line">mkdir -p &#x2F;var&#x2F;lock</span><br><span class="line">mkdir -p &#x2F;var&#x2F;run</span><br><span class="line">mkdir -p &#x2F;var&#x2F;tmp</span><br><span class="line"></span><br><span class="line">ln -sf &#x2F;dev&#x2F;ttyS2 &#x2F;dev&#x2F;tty2</span><br><span class="line">ln -sf &#x2F;dev&#x2F;ttyS2 &#x2F;dev&#x2F;tty3</span><br><span class="line">ln -sf &#x2F;dev&#x2F;ttyS2 &#x2F;dev&#x2F;tty4</span><br><span class="line"></span><br><span class="line">syslogd</span><br><span class="line">&#x2F;etc&#x2F;rc.d&#x2F;init.d&#x2F;netd start</span><br><span class="line">echo &quot;                        &quot; &gt; &#x2F;dev&#x2F;tty1</span><br><span class="line">echo &quot;Starting networking...&quot; &gt; &#x2F;dev&#x2F;tty1</span><br><span class="line">#sleep 1</span><br><span class="line">#&#x2F;etc&#x2F;rc.d&#x2F;init.d&#x2F;httpd start</span><br><span class="line">#echo &quot;                        &quot; &gt; &#x2F;dev&#x2F;tty1</span><br><span class="line">#echo &quot;Starting web server...&quot; &gt; &#x2F;dev&#x2F;tty1</span><br><span class="line">#sleep 1</span><br><span class="line">#&#x2F;etc&#x2F;rc.d&#x2F;init.d&#x2F;leds start</span><br><span class="line">#echo &quot;                        &quot; &gt; &#x2F;dev&#x2F;tty1</span><br><span class="line">#echo &quot;Starting leds service...&quot; &gt; &#x2F;dev&#x2F;tty1</span><br><span class="line">#echo &quot;                        &quot;</span><br><span class="line">#sleep 1</span><br><span class="line"></span><br><span class="line">#echo &quot;*************************************&quot; &gt; &#x2F;dev&#x2F;ttySAC2</span><br><span class="line">#echo &quot;     http:&#x2F;&#x2F;www.topeet.com.cn        &quot; &gt; &#x2F;dev&#x2F;ttySAC2</span><br><span class="line">#echo &quot;*************************************&quot; &gt; &#x2F;dev&#x2F;ttySAC2</span><br><span class="line">#echo &quot;*************************************&quot; </span><br><span class="line">#echo &quot;     http:&#x2F;&#x2F;www.topeet.com.cn        &quot; </span><br><span class="line">#echo &quot;*************************************&quot; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">mkdir &#x2F;mnt&#x2F;disk</span><br><span class="line"></span><br><span class="line">sleep 1</span><br><span class="line">&#x2F;sbin&#x2F;ifconfig lo 127.0.0.1</span><br><span class="line">&#x2F;etc&#x2F;init.d&#x2F;ifconfig-eth0</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>建立/etc/passwd文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">root::0:0:root:&#x2F;:&#x2F;bin&#x2F;sh</span><br><span class="line">bin:*:1:1:bin:&#x2F;bin:</span><br><span class="line">daemon:*:2:2:daemon:&#x2F;sbin:</span><br><span class="line">nobody:*:99:99:Nobody:&#x2F;:</span><br></pre></td></tr></table></figure></li>
+<li><p>建立/etc/profile文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># Ash profile</span><br><span class="line"># vim: syntax&#x3D;sh</span><br><span class="line"></span><br><span class="line"># No core files by default</span><br><span class="line">ulimit -S -c 0 &gt; &#x2F;dev&#x2F;null 2&gt;&amp;1</span><br><span class="line"></span><br><span class="line">USER&#x3D;&quot;&#96;id -un&#96;&quot;</span><br><span class="line">LOGNAME&#x3D;$USER</span><br><span class="line">PS1&#x3D;&#39;[$USER@HOSTNAME]# &#39;</span><br><span class="line">PATH&#x3D;$PATH</span><br><span class="line"></span><br><span class="line">HOSTNAME&#x3D;&#96;&#x2F;bin&#x2F;hostname&#96;</span><br><span class="line"></span><br><span class="line">export USER LOGNAME PS1 PATH</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>建立/etc/rc.d/init.d/netd， 修改755权限</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#!&#x2F;bin&#x2F;sh</span><br><span class="line"></span><br><span class="line">base&#x3D;inetd</span><br><span class="line"></span><br><span class="line"># See how we were called.</span><br><span class="line">case &quot;$1&quot; in</span><br><span class="line">    start)</span><br><span class="line">                &#x2F;usr&#x2F;sbin&#x2F;$base</span><br><span class="line">        ;;</span><br><span class="line">    stop)</span><br><span class="line">        pid&#x3D;&#96;&#x2F;bin&#x2F;pidof $base&#96;</span><br><span class="line">        if [ -n &quot;$pid&quot; ]; then</span><br><span class="line">            kill -9 $pid</span><br><span class="line">        fi</span><br><span class="line">        ;;</span><br><span class="line">esac</span><br><span class="line"></span><br><span class="line">exit 0</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h4 id="库文件-lib"><a href="#库文件-lib" class="headerlink" title="库文件/lib"></a>库文件/lib</h4><p>交叉编译环境与内核编译环境相同，编译器是arm-2009q3. Busybox编译生成的二进制文件以动态链接库的形式运行，所以要拷贝编译器里边的库文件到lib目录下<br><code>cp /usr/local/arm/arm-2009q3/arm-none-linux-gnueadi/libc/lib/* [lib dir]</code></p>
+<h4 id="日志目录-var"><a href="#日志目录-var" class="headerlink" title="日志目录 /var"></a>日志目录 /var</h4><p>在该目录下建立 ./lib ./lock ./log ./run ./tmp等五个目录</p>
+<h4 id="到这里就制作好了文件系统"><a href="#到这里就制作好了文件系统" class="headerlink" title="到这里就制作好了文件系统"></a>到这里就制作好了文件系统</h4><h3 id="安装打包软件和编译"><a href="#安装打包软件和编译" class="headerlink" title="安装打包软件和编译"></a>安装打包软件和编译</h3><p>打包工具make_ext4fs用来将文件系统制作成二进制文件。提供的linux_tools.tgz, 解压到<code>/</code>目录下</p>
+<p>在最小linux系统/system路径下，使用命令<code>make_ext4fs -s -l 314572800 -a root -L linux system.img system</code> 生成system.img文件系统镜像。</p>
+<h3 id="烧写最小系统"><a href="#烧写最小系统" class="headerlink" title="烧写最小系统"></a>烧写最小系统</h3><p>在win7下，通过Hyper Terminal 串口与版子进行连接，注意串口UART不支持热插拔<br>在Hyper Terminal下，命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">fdisk -c 0</span><br><span class="line">fatformat mmc 0:1</span><br><span class="line">ext3format mmc 0:2</span><br><span class="line">ext3format mmc 0:3</span><br><span class="line">ext3format mmc 0:4</span><br><span class="line">fastboot</span><br></pre></td></tr></table></figure>
+<p>将板子的OTG与win7连接起来，查看电脑是否能识别android phone，如果没有的话要安装驱动（位于文件02_编译器与烧写工具/tools/usb_otg_driver中，关注自己win7的版本）</p>
+<p>在cmd.exe中运行（注意在cmd中，更改路径为 cd /d platform_tools）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">fastboot.exe flash kernel file&#x2F;zImage</span><br><span class="line">fastboot.exe flash system file&#x2F;system.img</span><br><span class="line">fastboot.exe flash ramdisk file&#x2F;ramdisk-uboot.img</span><br><span class="line">fastboot -w</span><br><span class="line">fastboot reboot</span><br></pre></td></tr></table></figure>
+
+<h3 id="交叉编译一个helloworld文件，并做进system-tmp中"><a href="#交叉编译一个helloworld文件，并做进system-tmp中" class="headerlink" title="交叉编译一个helloworld文件，并做进system/tmp中"></a>交叉编译一个helloworld文件，并做进system/tmp中</h3><p>代码交叉编译helloworld.c</p>
+<ol>
+<li>保证环境变量将arm-2009a3/bin加进PATH</li>
+<li><code>arm-none-linux-gnueabi-gcc helloworld.c -o helloworld -static</code> -static静态链接将运用到的库静态链接进入可执行文件，因为现在的linux最小系统/usr中并没有包括glibc的动态链接库。注意这个helloworld文件在ubuntu下是不能执行的，因为是按照arm指令集进行编译的，而不是x86系统下的gcc编译的。</li>
+<li>将编译好的helloworld可执行文件cp到linux最小系统的/tmp路径下，将最小系统进行烧写。</li>
+<li>在Hyper Terminal下运行helloworld。</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" rel="tag"># 嵌入式</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/01/10/Mac%E4%B8%8B%E9%85%8D%E7%BD%AEVSCode/" rel="next" title="Mac下配置VSCode">
+                <i class="fa fa-chevron-left"></i> Mac下配置VSCode
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/01/31/C-%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BB%A5%E5%8F%8ASTL%E5%AE%B9%E5%99%A8%E6%80%BB%E7%BB%93/" rel="prev" title="C++常用数据类型以及STL容器总结">
+                C++常用数据类型以及STL容器总结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="Shao Guoliang" />
+            
+              <p class="site-author-name" itemprop="name">Shao Guoliang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/floodshao" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:guoliang_shao@u.nus.edu" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#环境"><span class="nav-number">1.</span> <span class="nav-text">环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#制作Linux最小系统"><span class="nav-number">2.</span> <span class="nav-text">制作Linux最小系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#完善Linux最小系统"><span class="nav-number">3.</span> <span class="nav-text">完善Linux最小系统</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#配置文件-etc"><span class="nav-number">3.1.</span> <span class="nav-text">配置文件&#x2F;etc</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#库文件-lib"><span class="nav-number">3.2.</span> <span class="nav-text">库文件&#x2F;lib</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#日志目录-var"><span class="nav-number">3.3.</span> <span class="nav-text">日志目录 &#x2F;var</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#到这里就制作好了文件系统"><span class="nav-number">3.4.</span> <span class="nav-text">到这里就制作好了文件系统</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装打包软件和编译"><span class="nav-number">4.</span> <span class="nav-text">安装打包软件和编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#烧写最小系统"><span class="nav-number">5.</span> <span class="nav-text">烧写最小系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#交叉编译一个helloworld文件，并做进system-tmp中"><span class="nav-number">6.</span> <span class="nav-text">交叉编译一个helloworld文件，并做进system&#x2F;tmp中</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shao Guoliang</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Pisces</a> v6.0.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.0.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.0.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.0.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.0.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'S8hhGklf9TcnfdaayOcyEXaY-gzGzoHsz',
+        appKey: 'N9bcSWiTfFKC2MYa8vY5GFGi',
+        placeholder: 'Leave your comments',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=6.0.0"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=6.0.0"></script>
+
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.0.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.0.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.0.0" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Categories">
+<meta property="og:url" content="http://yoursite.com/categories/index.html">
+<meta property="og:site_name" content="Shao Guoliang的博客">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-10-31T02:33:06.000Z">
+<meta property="article:modified_time" content="2019-10-31T02:34:17.920Z">
+<meta property="article:author" content="Shao Guoliang">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.0.0',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/categories/"/>
+
+
+
+
+
+  <title>Spark环境搭建与RDD编程基础 | Shao Guoliang的博客</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Shao Guoliang的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">未来不迎，当时不杂，过往不恋</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/10/2019-07-10-Spark%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E4%B8%8ERDD%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shao Guoliang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shao Guoliang的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Spark环境搭建与RDD编程基础</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-10T00:00:00+08:00">2019-07-10</time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/07/10/2019-07-10-Spark%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E4%B8%8ERDD%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/10/2019-07-10-Spark%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E4%B8%8ERDD%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ol>
+<li>Spark环境搭建</li>
+<li>Spark shell运行</li>
+<li>Spark wordcount Java版</li>
+</ol>
+<a id="more"></a> <!-- 摘要 -->
+
+<h3 id="1-Spark环境搭建"><a href="#1-Spark环境搭建" class="headerlink" title="1. Spark环境搭建"></a>1. Spark环境搭建</h3><p>spark仍然是一个解压安装包，将spark解压到固定路径，然后在环境变量中添加就可以了。</p>
+<p>Spark带有交互式的shell可以用作即时数据分析。与其他操作系统的shell不同的是，spark的shell可以用来与分布式存储在许多机器的内存或者硬盘上的数据进行交互，并且处理过程的分发由spark自动控制完成。</p>
+<p>注意要启动spark-shell的话，需要scala。直接brew install scala就可以了。命令：spark-shell</p>
+<p>如果要启动python-shell的话，命令：pyspark</p>
+<p><img src="/images/2019-07-10-Spark/spark-install-successful.png" alt="spark-install"></p>
+<h3 id="2-Spark编程基础-shell"><a href="#2-Spark编程基础-shell" class="headerlink" title="2. Spark编程基础-shell"></a>2. Spark编程基础-shell</h3><p>我们在shell中采用python语言来进行spark测试</p>
+<p><strong>环境</strong>：<br>Hadoop环境配置为单机模式，hadoop.tmp.dir设置为了一个文件夹。</p>
+<p>打开pyspark后，进行行数统计：</p>
+<p>注意这个文件TEST_SPARK.md是需要存在于hadoop.tmp.dir中的。但是这个时候我并没有启动hadoop，所以不知道是不是这么设置了之后就默认会从这个路径来读取了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; lines &#x3D; sc.textFile(&quot;TEST_SPARK.md&quot;) #创建一个名为lines的RDD</span><br><span class="line">&gt;&gt;&gt; lines.count()</span><br><span class="line">&gt;&gt;&gt; 4</span><br><span class="line">&gt;&gt;&gt; lines.first()</span><br><span class="line">&gt;&gt;&gt; u&#39;# This is a spark test file&#39;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Spark程序核心概念</strong><br>从上层来看，每个spark应用都由一个驱动器程序driver program来发起集群上的各种并行操作。驱动器程序包含应用的main函数，并且定义了集群上的分布式数据集，还对这些分布式数据集应用了相关操作。在shell中，实际的驱动器程序就是spark shell本身。</p>
+<p>驱动器程序通过一个SparkContext对象来访问Spark。这个对象代表对计算集群的一个连接。</p>
+<p><strong>Spark API</strong><br>Spark可以在Java，python，scala的独立程序中被连接使用，接下来使用的API就一样了。<br>在java和scala中，是需要给应用添加一个对spark-core的maven依赖就可以了。对应于安装的spark-2.4.3来说，使用如下的依赖：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- https:&#x2F;&#x2F;mvnrepository.com&#x2F;artifact&#x2F;org.apache.spark&#x2F;spark-core --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.spark&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spark-core_2.12&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;2.4.3&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-Spark-wordcount-Java版程序"><a href="#3-Spark-wordcount-Java版程序" class="headerlink" title="3. Spark wordcount Java版程序"></a>3. Spark wordcount Java版程序</h3><p>（1）Spark java程序<br>自从Java8之后，java支持了’-&gt;‘ 这个简写语法，但是要在maven编译中添加限定。这个spark传递函数将会在后续进行学习。<br>按照《Spark快速大数据分析》中第二章的wordcount例程出现了Iterator和Iterable转换的不匹配。既然Java8支持了lambda简写，很明确，那就大势所趋还是使用lambda简写吧。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * </span><br><span class="line"> *&#x2F;</span><br><span class="line">package com.fredshao.spark;</span><br><span class="line"></span><br><span class="line">import java.util.Arrays;</span><br><span class="line">import java.util.Iterator;</span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">import org.apache.spark.SparkConf;</span><br><span class="line">import org.apache.spark.api.java.JavaPairRDD;</span><br><span class="line">import org.apache.spark.api.java.JavaRDD;</span><br><span class="line">import org.apache.spark.api.java.JavaSparkContext;</span><br><span class="line">import org.apache.spark.api.java.function.FlatMapFunction;</span><br><span class="line">import org.apache.spark.api.java.function.Function2;</span><br><span class="line">import org.apache.spark.api.java.function.PairFunction;</span><br><span class="line"></span><br><span class="line">import com.twitter.chill.java.ArraysAsListSerializer;</span><br><span class="line"></span><br><span class="line">import scala.Tuple12;</span><br><span class="line">import scala.Tuple2;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * @author shaoguoliang</span><br><span class="line"> *</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class MySparkTest01 &#123;</span><br><span class="line">    public static void main(String[] args)&#123;</span><br><span class="line">        &#x2F;&#x2F;创建java版spark context</span><br><span class="line">        SparkConf conf &#x3D; new SparkConf().setAppName(&quot;sparktest01&quot;);</span><br><span class="line">        conf.setMaster(&quot;local&quot;);</span><br><span class="line">        JavaSparkContext sContext &#x3D; new JavaSparkContext(conf);</span><br><span class="line">        &#x2F;&#x2F;读取输入数据</span><br><span class="line">        JavaRDD&lt;String&gt; input &#x3D; sContext.textFile(&quot;..&#x2F;data&#x2F;Test_spark.txt&quot;);</span><br><span class="line">            	</span><br><span class="line">        &#x2F;&#x2F;切分为单词</span><br><span class="line">        JavaRDD&lt;String&gt; words &#x3D; input.flatMap(</span><br><span class="line">        	x -&gt; Arrays.asList(x.split(&quot; &quot;)).iterator()</span><br><span class="line">        );</span><br><span class="line">            	</span><br><span class="line">        &#x2F;&#x2F;转换为键值对技术</span><br><span class="line">        JavaPairRDD&lt;String, Integer&gt; counts &#x3D; words.mapToPair(x -&gt; new Tuple2&lt;&gt;(x, 1))</span><br><span class="line">        		.reduceByKey((x, y) -&gt; x + y);</span><br><span class="line">            	</span><br><span class="line">        System.out.println(counts.collect());</span><br><span class="line">            	</span><br><span class="line">        counts.saveAsTextFile(&quot;Test_spark_result.txt&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意</strong>：<br>相关的文件读取I/O一定要注意，<br>路径名前缀为：<code>file://</code> 表示是从本地主机读取和写入文件<br>路径名前缀为：<code>hdfs://</code> 表示是从集群中读取和写入文件<br>上述代码中就没有写清楚从哪里读取textFile，也没有写清楚textFile写到哪里，注意一定是要全路径名。<br>正确的写法是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">JavaRDD&lt;String&gt; input &#x3D; sc.textFile(&quot;file:&#x2F;&#x2F;&#x2F;Users&#x2F;shaoguoliang&#x2F;Workspaces&#x2F;MyEclipse 2017 CI&#x2F;spark-test-0.1&#x2F;data&#x2F;Test_spark.txt&quot;);</span><br><span class="line"></span><br><span class="line">和</span><br><span class="line"></span><br><span class="line">counts.saveAsTextFile(&quot;file:&#x2F;&#x2F;&#x2F;Users&#x2F;shaoguoliang&#x2F;Workspaces&#x2F;MyEclipse 2017 CI&#x2F;spark-test-0.1&#x2F;data&#x2F;count_result.txt&quot;);</span><br></pre></td></tr></table></figure>
+
+<p>（2） maven 依赖：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">&lt;project xmlns&#x3D;&quot;http:&#x2F;&#x2F;maven.apache.org&#x2F;POM&#x2F;4.0.0&quot; xmlns:xsi&#x3D;&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;2001&#x2F;XMLSchema-instance&quot; xsi:schemaLocation&#x3D;&quot;http:&#x2F;&#x2F;maven.apache.org&#x2F;POM&#x2F;4.0.0 http:&#x2F;&#x2F;maven.apache.org&#x2F;xsd&#x2F;maven-4.0.0.xsd&quot;&gt;</span><br><span class="line">  &lt;modelVersion&gt;4.0.0&lt;&#x2F;modelVersion&gt;</span><br><span class="line">  &lt;groupId&gt;com.fredshao.spark&lt;&#x2F;groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;spark-test-0.1&lt;&#x2F;artifactId&gt;</span><br><span class="line">  &lt;version&gt;0.0.1-SNAPSHOT&lt;&#x2F;version&gt;</span><br><span class="line">  </span><br><span class="line">  &lt;properties&gt;</span><br><span class="line">  	&lt;java.version&gt;1.8&lt;&#x2F;java.version&gt;</span><br><span class="line">  &lt;&#x2F;properties&gt;</span><br><span class="line">  </span><br><span class="line">  &lt;dependencies&gt;</span><br><span class="line">  	&lt;!-- https:&#x2F;&#x2F;mvnrepository.com&#x2F;artifact&#x2F;org.apache.spark&#x2F;spark-core --&gt;</span><br><span class="line">	&lt;dependency&gt;</span><br><span class="line">	    &lt;groupId&gt;org.apache.spark&lt;&#x2F;groupId&gt;</span><br><span class="line">	    &lt;artifactId&gt;spark-core_2.12&lt;&#x2F;artifactId&gt;</span><br><span class="line">	    &lt;version&gt;2.4.3&lt;&#x2F;version&gt;</span><br><span class="line">	&lt;&#x2F;dependency&gt;</span><br><span class="line">	</span><br><span class="line">	&lt;!--这个不是必备的--&gt;</span><br><span class="line">&lt;!--     &lt;dependency&gt;</span><br><span class="line">	    &lt;groupId&gt;org.apache.hadoop&lt;&#x2F;groupId&gt;</span><br><span class="line">	    &lt;artifactId&gt;hadoop-client&lt;&#x2F;artifactId&gt;</span><br><span class="line">	    &lt;version&gt;2.9.2&lt;&#x2F;version&gt;</span><br><span class="line">	&lt;&#x2F;dependency&gt; --&gt;</span><br><span class="line">  &lt;&#x2F;dependencies&gt;</span><br><span class="line">  </span><br><span class="line">  &lt;build&gt;</span><br><span class="line">    &lt;pluginManagement&gt;</span><br><span class="line">    	&lt;plugins&gt;</span><br><span class="line">    	   &lt;!--这个必须声明编译采用java1.8才可以使用lambda简写--&gt;</span><br><span class="line">    		&lt;plugin&gt;</span><br><span class="line">    			&lt;groupId&gt;org.apache.maven.plugins&lt;&#x2F;groupId&gt;</span><br><span class="line">    			&lt;artifactId&gt;maven-compiler-plugin&lt;&#x2F;artifactId&gt;</span><br><span class="line">    			&lt;version&gt;3.1&lt;&#x2F;version&gt;</span><br><span class="line">    			&lt;configuration&gt;</span><br><span class="line">    				&lt;source&gt;$&#123;java.version&#125;&lt;&#x2F;source&gt;</span><br><span class="line">    				&lt;target&gt;$&#123;java.version&#125;&lt;&#x2F;target&gt;</span><br><span class="line">    			&lt;&#x2F;configuration&gt;</span><br><span class="line">    		&lt;&#x2F;plugin&gt;</span><br><span class="line">    		</span><br><span class="line">    		&lt;!--通过这个插件打包jar，指定main函数入口--&gt;</span><br><span class="line">    		&lt;plugin&gt;</span><br><span class="line">			&lt;groupId&gt;org.apache.maven.plugins&lt;&#x2F;groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;maven-jar-plugin&lt;&#x2F;artifactId&gt;</span><br><span class="line">			&lt;version&gt;2.6&lt;&#x2F;version&gt;</span><br><span class="line">			&lt;configuration&gt;</span><br><span class="line">				&lt;archive&gt;</span><br><span class="line">					&lt;manifest&gt;</span><br><span class="line">						&lt;addClasspath&gt;true&lt;&#x2F;addClasspath&gt;</span><br><span class="line">						&lt;classpathPrefix&gt;lib&#x2F;&lt;&#x2F;classpathPrefix&gt;</span><br><span class="line">						&lt;mainClass&gt;com.fredshao.spark.MySparkTest01&lt;&#x2F;mainClass&gt;</span><br><span class="line">					&lt;&#x2F;manifest&gt;</span><br><span class="line">				&lt;&#x2F;archive&gt;</span><br><span class="line">			&lt;&#x2F;configuration&gt;</span><br><span class="line">		&lt;&#x2F;plugin&gt;</span><br><span class="line">    	&lt;&#x2F;plugins&gt;</span><br><span class="line">    &lt;&#x2F;pluginManagement&gt;</span><br><span class="line">  &lt;&#x2F;build&gt;</span><br><span class="line">  </span><br><span class="line">&lt;&#x2F;project&gt;</span><br></pre></td></tr></table></figure>
+
+<p>（3）mvn编译</p>
+<p>在Eclipse中，点击项目名称-&gt;Run as-&gt; maven build…</p>
+<p><img src="/images/2019-07-10-Spark/mvn_compile.png" alt="mvn_compile"></p>
+<p>在mvn build 中的goal里添加想要执行的mvn操作<br>clean compile package</p>
+<p><img src="/images/2019-07-10-Spark/mvn_proceed.png" alt="mvn_proceed"></p>
+<p>之后看到building jar显示已经生成了jar就可以了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[INFO] --- maven-jar-plugin:2.6:jar (default-jar) @ spark-test-0.1 ---</span><br><span class="line">[INFO] Building jar: &#x2F;Users&#x2F;shaoguoliang&#x2F;Workspaces&#x2F;MyEclipse 2017 CI&#x2F;spark-test-0.1&#x2F;target&#x2F;spark-test-0.1-0.0.1-SNAPSHOT.jar</span><br><span class="line">[INFO] ------------------------------------------------------------------------</span><br><span class="line">[INFO] BUILD SUCCESS</span><br><span class="line">[INFO] ------------------------------------------------------------------------</span><br><span class="line">[INFO] Total time: 3.872 s</span><br><span class="line">[INFO] Finished at: 2019-07-10T13:17:30+08:00</span><br><span class="line">[INFO] Final Memory: 36M&#x2F;336M</span><br><span class="line">[INFO] ------------------------------------------------------------------------</span><br></pre></td></tr></table></figure>
+
+<p>（4）spark 提交<br>因为我们已经将 $SPARK_HOME/bin添加进了 环境变量中，因为找到jar包所在目录，运行以下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spark-submit --master spark:&#x2F;&#x2F;localhost:7077 .&#x2F;spark-test-0.1-0.0.1-SNAPSHOT.jar</span><br></pre></td></tr></table></figure>
+
+<p>之后将会在target目录下生成 </p>
+<p><img src="/images/2019-07-10-Spark/word_count_result.png" alt="word_count_result"></p>
+<p>Test_spark_result.txt<br>将最终结果放在part-00000</p>
+<p>注意，这里的输入文件路径和输出文件路径都是在jar包路径下的。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Spark/" rel="tag"># Spark</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/09/2019-07-09-Spark%E6%98%AF%E4%BB%80%E4%B9%88/" rel="next" title="Spark是什么">
+                <i class="fa fa-chevron-left"></i> Spark是什么
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/11/2019-07-11-Spark_RDD_Programming/" rel="prev" title="Spark RDD编程">
+                Spark RDD编程 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="Shao Guoliang" />
+            
+              <p class="site-author-name" itemprop="name">Shao Guoliang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/floodshao" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:guoliang_shao@u.nus.edu" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Spark环境搭建"><span class="nav-number">1.</span> <span class="nav-text">1. Spark环境搭建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Spark编程基础-shell"><span class="nav-number">2.</span> <span class="nav-text">2. Spark编程基础-shell</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Spark-wordcount-Java版程序"><span class="nav-number">3.</span> <span class="nav-text">3. Spark wordcount Java版程序</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shao Guoliang</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Pisces</a> v6.0.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.0.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.0.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.0.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.0.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'S8hhGklf9TcnfdaayOcyEXaY-gzGzoHsz',
+        appKey: 'N9bcSWiTfFKC2MYa8vY5GFGi',
+        placeholder: 'Leave your comments',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=6.0.0"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=6.0.0"></script>
+
+
+  
+
+</body>
+</html>

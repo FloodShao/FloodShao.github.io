@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.0.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.0.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.0.0" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Categories">
+<meta property="og:url" content="http://yoursite.com/categories/index.html">
+<meta property="og:site_name" content="Shao Guoliang的博客">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-10-31T02:33:06.000Z">
+<meta property="article:modified_time" content="2019-10-31T02:34:17.920Z">
+<meta property="article:author" content="Shao Guoliang">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.0.0',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/categories/"/>
+
+
+
+
+
+  <title>极大似然估计与最大熵估计 | Shao Guoliang的博客</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Shao Guoliang的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">未来不迎，当时不杂，过往不恋</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/21/2019-08-21-%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%B0%E8%AE%A1%E4%B8%8E%E6%9E%81%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shao Guoliang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shao Guoliang的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">极大似然估计与最大熵估计</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-21T00:00:00+08:00">2019-08-21</time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/08/21/2019-08-21-%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%B0%E8%AE%A1%E4%B8%8E%E6%9E%81%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/21/2019-08-21-%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%B0%E8%AE%A1%E4%B8%8E%E6%9E%81%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本系列为在温习《统计学习方法》过程中的思考总结</p>
+<a id="more"></a> <!-- 摘要 -->
+
+<h3 id="生成模型与判别模型"><a href="#生成模型与判别模型" class="headerlink" title="生成模型与判别模型"></a>生成模型与判别模型</h3><p>学习一个模型就是对给定的输入预测相应的输出，也就是写出一个决策函数（对应回归问题）：$Y = f(X)$ 或条件概率（对应分类问题）： $P(Y|X)$</p>
+<h4 id="生成方法"><a href="#生成方法" class="headerlink" title="生成方法"></a>生成方法</h4><p>生成方法出发点是<strong>学习联合概率分布函数</strong>$P(X, Y)$, 然后求出条件概率分布 $P(Y|X)$。<br>$$<br>\begin{align}<br>    P(Y|X) = \frac{P(X, Y)}{P(X)}<br>\end{align}<br>$$</p>
+<p>而联合分布函数$P(X, Y)$和$P(X)$由概率最大似然估计从<strong>观测数据中求得</strong>。典型的生成模型有 <em>朴素贝叶斯法</em> 和 <em>隐含马尔科夫型</em> 。</p>
+<h4 id="判别方法"><a href="#判别方法" class="headerlink" title="判别方法"></a>判别方法</h4><p>判别方法是由数据直接学习决策函数$f(X)$或条件概率分布$P(Y|X)$。</p>
+<p>基本思路是设定一个<strong>含有模型参数的决策模型</strong>，然后通过最大似然拟合观测数据来选出<strong>最优化模型参数</strong>，从而得到最终的决策模型。</p>
+<p>典型的判别模型有 k-means，感知机，决策树，logistic regression，最大熵模型，支持向量机，提升方法和条件随机场。</p>
+<h4 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h4><p>生成方法的学习收敛速度快，当样本容量增加的时候，学到的模型可以更快的收敛于真是模型。当存在隐变量的时候，仍然可以使用生成方法。</p>
+<p>判别方法直接面对预测，往往学习的准确率更高。并且可以对数据进行各种程度上的抽象、定义特征并使用特征，可以简化学习问题。</p>
+<h3 id="似然估计与似然函数"><a href="#似然估计与似然函数" class="headerlink" title="似然估计与似然函数"></a>似然估计与似然函数</h3><h4 id="最大似然估计原理"><a href="#最大似然估计原理" class="headerlink" title="最大似然估计原理"></a>最大似然估计原理</h4><p>给定一个概率分布$D$， <strong>已知</strong>其概率分布函数（模型） 为$f_D$, 该概率分布函数包含一个模型参数$\theta$。在这个概率分布中进行采样得到数据集$T = {x_1, x_2, x_3, x_4,… x_n}$。 <strong>求解</strong>参数$\theta$来确定该分布$f_D$。</p>
+<p>我们可以构建似然函数：<br>$$<br>\begin{align}<br>L(\theta|x_1, …, x_n) = f_D(x1, x2, …, x_n|\theta)<br>\end{align}<br>$$<br>注意$L(\theta|x_1, …, x_n)$是$\theta$的函数，而$f_D(x1, x2, …, x_n|\theta)$是$x_1, …, x_n$的函数。$f_D(x1, x2, …, x_n|\theta)$表示在确定$\theta$的情况下，产生数据集$T$的概率。</p>
+<p>通过最大化似然函数$L(\theta)$我们可以找到使得数据集$T$出现概率最大的模型。</p>
+<h4 id="进行独立分布假设"><a href="#进行独立分布假设" class="headerlink" title="进行独立分布假设"></a>进行独立分布假设</h4><p>似然函数可以写成<br><strong>形式1</strong><br>$$<br>\begin{equation}<br>L(\theta|x_1, …, x_n) = f_D(x1, x2, …, x_n|\theta) = \prod_{i=1}^{n} f_D(x_i|\theta)<br>\end{equation}<br>$$</p>
+<p>假设随机变量X是离散的，具有取值范围为${v_1, v_2, … v_k}$ 那么上述极大似然函数可以写为<br><strong>形式2</strong>：<br>$$<br>\begin{align}<br>L(\theta|x_1, …, x_n) = \prod_{i=1}^{k} f_D(v_i)^{C(x=v_{i})}<br>\end{align}<br>$$</p>
+<p>两边对等开n次方可得：<br>$$<br>\begin{align}<br>L(\theta|x_1, …, x_n)^{1/n} = \prod_{i=1}^{k} f_D(v_i)^{C(x=v_{i})/n}<br>\end{align}<br>$$</p>
+<p>其中$C(x=v_{i})$是随机变量X取得$v_i$的数量，$n$为所有样本总数</p>
+<p>此时注意到$\bar{f_D}(x)=C(x=v_{i})/n$，就是从数据中得来的经验概率。</p>
+<p>而求$L(\theta|x_1, …, x_n)^{1/n}$的最大值和求$L(\theta|x_1, …, x_n)$是等价的，所以我们就可以把似然函数写成<br><strong>形式3</strong>：<br>$$ L(\theta|x) = \prod_{i=1}^{n}P(x|\theta)^{\bar{P}(x)} $$</p>
+<p>这也就是似然函数的一般形式<br>$$<br>\begin{align}<br>L(\theta|x) = \prod_{i=1}^{n}P(x)^{\bar{P}(x)}<br>\end{align}<br>$$</p>
+<h4 id="求解模型参数"><a href="#求解模型参数" class="headerlink" title="求解模型参数"></a>求解模型参数</h4><p>$$<br>\begin{align}<br>\hat{\theta} = \mathop{\arg\max}_{\theta} L(\theta|x)<br>\end{align}<br>$$</p>
+<h3 id="朴素贝叶斯估计-生成模型"><a href="#朴素贝叶斯估计-生成模型" class="headerlink" title="朴素贝叶斯估计-生成模型"></a>朴素贝叶斯估计-生成模型</h3><p>（1）估计$P(x, y) = \bar{P}(x|y) \bar{P}(y)$, 其中$\bar{P}(x|y)$和$\bar{P}(y)$是从数据集中得来的经验概率（条件概率和先验概率）<br>（2）进行独立分布假设<br>$\bar{P}(X=x|Y=c_k)=\bar{P}(X=x_1,x_2,…,x_n|Y=c_k) = \prod_{j=1}^{n} P(X = x_j|Y=c_k)$<br>（3）计算分入某个类的概率(贝叶斯公式)<br>$$<br>\begin{align}<br>P(Y=c_k|X=x) = \frac{P(X=x|Y=c_k) P(Y=c_k)}{\sum_k P(X=x|Y=c_k) P(Y=c_k)}<br>\end{align}<br>$$<br>注意分母是全概率$P(X=x)$与$Y$没有关系。<br>(4) 选取概率最大的那个类作为估计输出 $\mathop{\arg\max}<em>{c_k} P(c_k | X=x)$<br>$$<br>\begin{align}<br>y = \mathop{\arg\max}</em>{c_k} P(Y=c_k) \prod_j(X=x_j|Y=c_k)<br>\end{align}<br>$$<br>朴素贝叶斯估计是将实例分到后验概率最大的类中，等价于期望风险最小化。</p>
+<h3 id="Logistic-Regression-二元-判别模型"><a href="#Logistic-Regression-二元-判别模型" class="headerlink" title="Logistic Regression (二元) - 判别模型"></a>Logistic Regression (二元) - 判别模型</h3><p>(1) 设定模型为logistic model：<br>认为一个事件发生的概率为p，那么定义其对数几率(log odds)为$logit(p) = \frac{p}{1-p}$。<br>模型认为$logit(p) = w\cdot x+b$，也就是一个事件发生的对数几率是其输入的线性模型。<br>由此推出的：</p>
+<p>$$ p(Y=1|X) = \frac{exp(w\cdot x+b)}{1+exp(w\cdot x+b)} = \pi(x)$$<br>$$ P(Y=0|X) = 1-p(Y=1|X) = \frac{1}{1+exp(w\cdot x+b)} = 1-\pi(x)$$</p>
+<p>(2) 参数模型估计，极大似然估计 （采用形式2）<br>$$L(w) = \mathop{\prod}<em>{i=1}^{N} [\pi(x_i)]^{y_i} [1-\pi(x_i)]^{1-y_i}$$<br>对数似然函数为<br>$$ L(w) = \mathop{\sum}</em>{i=1}^{N}[y_i(w \cdot x_i) - log(1+exp(w \cdot x_i))]$$<br>最大化似然估计求得模型参数</p>
+<h3 id="最大熵模型-判别模型"><a href="#最大熵模型-判别模型" class="headerlink" title="最大熵模型 - 判别模型"></a>最大熵模型 - 判别模型</h3><h4 id="最大熵原理"><a href="#最大熵原理" class="headerlink" title="最大熵原理"></a>最大熵原理</h4><p>最大熵原理认为，学习概率模型时，在所有可能的概率模型中，熵最大的模型是最好的模型。（对比于上式logistic regression认为极大似然概率最大的模型是最好的模型，当然极大似然估计可能会出现overfitting的问题）。</p>
+<p>直观的来说，最大熵原理认为要选择的概率模型首先必须满足已有的实时，即在约束条件下，在没有更多信息的情况下，那么不确定的部分都是”等可能的“。这时候熵可以来作为可优化的指标。</p>
+<h4 id="模型定义"><a href="#模型定义" class="headerlink" title="模型定义"></a>模型定义</h4><p>（1）特征函数$f(x, y)$描述输入x和输出y之间的某一个事实，是一个二值函数，当x，y满足这个事实的时候取值为1，否则取值为0。</p>
+<p>（2）特征函数关于经验分布$\bar{P}(x, y)$的期望为</p>
+<p>$$ E_{\bar{P}}(f) = \mathop{\sum}_{x,y}\bar{P}(x, y) f(x,y)$$</p>
+<p>关于模型$P(Y|X)$和经验分布$\bar{P}(X)$的期望为</p>
+<p>$$ E_{P}(f) = \mathop{\sum}_{x,y}\bar{P}(x) P(Y|X) f(x,y)$$</p>
+<p><strong>如果模型能够获取训练数据的信息，那么两个期望应该相等</strong>。注意，这个模型可能有很多个，凡是能够拟合训练数据的模型都满足这个约束条件。</p>
+<p>（3）最大熵模型，假设满足所有约束条件的模型集合为C，那么定义在条件概率分布$P(Y|X)$上的条件熵为<br>$$H(P) = -\mathop{\sum}_{x,y}\bar{P}(x) P(Y|X) log(P(Y|X))$$<br>则模型中条件熵$H(P)$最大的模型成为最大熵模型。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" rel="tag"># 统计学习方法</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/16/2019-08-12-%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95/" rel="next" title="回溯算法">
+                <i class="fa fa-chevron-left"></i> 回溯算法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/22/2019-08-22-%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93/" rel="prev" title="2019毕业面试总结（持续更新）">
+                2019毕业面试总结（持续更新） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="Shao Guoliang" />
+            
+              <p class="site-author-name" itemprop="name">Shao Guoliang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/floodshao" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:guoliang_shao@u.nus.edu" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#生成模型与判别模型"><span class="nav-number">1.</span> <span class="nav-text">生成模型与判别模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#生成方法"><span class="nav-number">1.1.</span> <span class="nav-text">生成方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#判别方法"><span class="nav-number">1.2.</span> <span class="nav-text">判别方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对比"><span class="nav-number">1.3.</span> <span class="nav-text">对比</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#似然估计与似然函数"><span class="nav-number">2.</span> <span class="nav-text">似然估计与似然函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#最大似然估计原理"><span class="nav-number">2.1.</span> <span class="nav-text">最大似然估计原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进行独立分布假设"><span class="nav-number">2.2.</span> <span class="nav-text">进行独立分布假设</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#求解模型参数"><span class="nav-number">2.3.</span> <span class="nav-text">求解模型参数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#朴素贝叶斯估计-生成模型"><span class="nav-number">3.</span> <span class="nav-text">朴素贝叶斯估计-生成模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Logistic-Regression-二元-判别模型"><span class="nav-number">4.</span> <span class="nav-text">Logistic Regression (二元) - 判别模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最大熵模型-判别模型"><span class="nav-number">5.</span> <span class="nav-text">最大熵模型 - 判别模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#最大熵原理"><span class="nav-number">5.1.</span> <span class="nav-text">最大熵原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#模型定义"><span class="nav-number">5.2.</span> <span class="nav-text">模型定义</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shao Guoliang</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Pisces</a> v6.0.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.0.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.0.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.0.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.0.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'S8hhGklf9TcnfdaayOcyEXaY-gzGzoHsz',
+        appKey: 'N9bcSWiTfFKC2MYa8vY5GFGi',
+        placeholder: 'Leave your comments',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=6.0.0"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=6.0.0"></script>
+
+
+  
+
+</body>
+</html>

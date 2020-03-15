@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.0.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.0.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.0.0" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Categories">
+<meta property="og:url" content="http://yoursite.com/categories/index.html">
+<meta property="og:site_name" content="Shao Guoliang的博客">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-10-31T02:33:06.000Z">
+<meta property="article:modified_time" content="2019-10-31T02:34:17.920Z">
+<meta property="article:author" content="Shao Guoliang">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.0.0',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/categories/"/>
+
+
+
+
+
+  <title>Scala语言学习汇总 | Shao Guoliang的博客</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Shao Guoliang的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">未来不迎，当时不杂，过往不恋</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/31/2019-07-31-Scala%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E6%B1%87%E6%80%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shao Guoliang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shao Guoliang的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Scala语言学习汇总</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-31T00:00:00+08:00">2019-07-31</time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/07/31/2019-07-31-Scala%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E6%B1%87%E6%80%BB/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/31/2019-07-31-Scala%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E6%B1%87%E6%80%BB/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>参考<a href="http://dblab.xmu.edu.cn/blog/spark/" target="_blank" rel="noopener">http://dblab.xmu.edu.cn/blog/spark/</a> 林子雨老师的Spark入门教程中Scala语言的部分。</p>
+<a id="more"></a> <!-- 摘要 -->
+
+<h2 id="为什么使用Scala语言"><a href="#为什么使用Scala语言" class="headerlink" title="为什么使用Scala语言"></a>为什么使用Scala语言</h2><ul>
+<li>Scala是多范式编程语言，集成了面向对象和函数式语言的特性。运行与JVM虚拟机上，并兼容现有的Java程序。Scala代码可以调用Java方法，访问Java字段，集成Java类和实现Java接口。<strong>Scala是一门纯粹的面向对象编程语言</strong>。</li>
+<li>Scala具备<strong>强大的并发性</strong>，支持函数式编程，可以更好地支持分布式系统</li>
+<li>Scala语法简介，能够提供优雅的API</li>
+<li>Scala兼容Java，运行速度快，且能够融合到Hadoop生态圈</li>
+<li>Scala相对Java支持交互编程，而Java必须要编译才能运行。</li>
+</ul>
+<h2 id="Scala安装"><a href="#Scala安装" class="headerlink" title="Scala安装"></a>Scala安装</h2><p>Scala需要运行在JVM上，因此必须要安装Java JDK。</p>
+<h3 id="在macOS下安装"><a href="#在macOS下安装" class="headerlink" title="在macOS下安装"></a>在macOS下安装</h3><p><code>brew install scala</code> 就可以直接安装scala</p>
+<h3 id="Linux下安装"><a href="#Linux下安装" class="headerlink" title="Linux下安装"></a>Linux下安装</h3><ul>
+<li>在<a href="https://www.scala-lang.org/download/" target="_blank" rel="noopener">scala官网</a>上下载scala安装包</li>
+<li>tar 解压到安装目录 <code>tar xvzf scala.tgz -C dest_dir</code></li>
+<li>将scala命令添加到环境变量(可以放在/etc/profile)中 <code>export PATH=$PATH:/usr/local/scala/bin</code></li>
+<li>在命令行中检查scala是否能找到该命令</li>
+</ul>
+<h2 id="Scala编程"><a href="#Scala编程" class="headerlink" title="Scala编程"></a>Scala编程</h2><h3 id="Scala与Java编程的区别"><a href="#Scala与Java编程的区别" class="headerlink" title="Scala与Java编程的区别"></a>Scala与Java编程的区别</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">object HelloWorld&#123;</span><br><span class="line">    def main(args: Array[String])&#123;</span><br><span class="line">        println(&quot;Hello World!&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>（1）Scala程序中同样要定义程序入口main()函数。但与Java不同的是，在Java中，main函数必须是静态函数 <code>public static void main(String[] args)</code>，而Scala中必须使用对象方法。<br>（2）在Scala中对象的命名不一定要与文件名一致，但为了统一，还是建议命名为<code>HelloWorld.scala</code>。<br>（3）Scala语句结束没有<code>;</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ scala HelloWorld.scala &#x2F;&#x2F;编译Scala文件</span><br><span class="line">$ scala -classpath . HelloWorld &#x2F;&#x2F;执行生成的HelloWorld对象名称</span><br></pre></td></tr></table></figure>
+
+<h2 id="Scala语法-Scala-2-13-0"><a href="#Scala语法-Scala-2-13-0" class="headerlink" title="Scala语法(Scala 2.13.0)"></a>Scala语法(Scala 2.13.0)</h2><h3 id="变量与声明值"><a href="#变量与声明值" class="headerlink" title="变量与声明值"></a>变量与声明值</h3><p>scala有两种类型的变量：</p>
+<ul>
+<li><strong>val</strong>：不可变，在生命是就必须初始化，而且初始化以后就不能再赋值</li>
+<li><strong>var</strong>：可变的，声明的时候需要进行初始化，初始化以后还可以再次进行赋值</li>
+</ul>
+<p>Scala是自动推断变量的类型。也可以显式声明变量的类型。在每个程序中，scala都会自动添加<code>java.lang._</code>的引用，这样就在所有原文件中引入了java.lang包内的所有东西。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">val myStr &#x3D; &quot;HelloWorld!&quot;</span><br><span class="line">val myStr2 : String &#x3D; &quot;HelloWorld!&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h3><p>Byte，Char，Short，Int，Long，Float，Double和Bollean。<br>注意在Scala中，这些类型都是Class，并且都是scala包的成员。</p>
+<p><strong>在Scala中没有提供++或–的操作符</strong>，当需要递增或递减时，只能使用<code>i += 1</code></p>
+<p>方法：</p>
+<ul>
+<li><code>a 方法 b</code></li>
+<li><code>a.方法(b)</code></li>
+</ul>
+<h3 id="Range"><a href="#Range" class="headerlink" title="Range"></a>Range</h3><p>在执行for循环的时候，经常会用到数值序列，可以用Range来实现。Range可以支持创建不同数据类型的数值序列，包括Int，Long，Float，Double，Char，BigInt和BigDecimal等。</p>
+<p>(1) 创建从1到5的数值序列</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; 1 to 5</span><br><span class="line">res1: scala.collection.immutable.Range.Inclusive &#x3D; Range 1 to 5</span><br><span class="line"></span><br><span class="line">scala&gt; 1.to(5)</span><br><span class="line">res2: scala.collection.immutable.Range.Inclusive &#x3D; Range 1 to 5</span><br></pre></td></tr></table></figure>
+<p>(2) 创建从1到5的数值序列，不包含区间终点5， 步长为1</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; 1 until 5</span><br><span class="line">res3: scala.collection.immutable.Range &#x3D; Range 1 until 5</span><br></pre></td></tr></table></figure>
+<p>(3) 步长为2</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; 1 to 10 by 2</span><br><span class="line">res6: scala.collection.immutable.Range &#x3D; inexact Range 1 to 10 by 2</span><br></pre></td></tr></table></figure>
+<p>同样上述也可以创建为float类型</p>
+<h3 id="读写文件"><a href="#读写文件" class="headerlink" title="读写文件"></a>读写文件</h3><p>(1) 写入文本文件，执行后会在<code>~/</code>下建立output.txt文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; import java.io.PrintWriter</span><br><span class="line">import java.io.PrintWriter</span><br><span class="line"></span><br><span class="line">scala&gt; val out &#x3D; new PrintWriter(&quot;output.txt&quot;)</span><br><span class="line">out: java.io.PrintWriter &#x3D; java.io.PrintWriter@52035328</span><br><span class="line"></span><br><span class="line">scala&gt; for(i &lt;- 1 to 5) out.println(i)</span><br><span class="line"></span><br><span class="line">scala&gt; out.close()</span><br></pre></td></tr></table></figure>
+<p>(2) 读取文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; import scala.io.Source</span><br><span class="line">import scala.io.Source</span><br><span class="line"></span><br><span class="line">scala&gt; val inputFile &#x3D; Source.fromFile(&quot;output.txt&quot;)</span><br><span class="line">inputFile: scala.io.BufferedSource &#x3D; &lt;iterator&gt;</span><br><span class="line"></span><br><span class="line">scala&gt; val lines &#x3D; inputFile.getLines</span><br><span class="line">lines: Iterator[String] &#x3D; &lt;iterator&gt;</span><br><span class="line"></span><br><span class="line">scala&gt; for(line &lt;- lines) println(line)</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td></tr></table></figure>
+<h3 id="控制结构与Java语言相同"><a href="#控制结构与Java语言相同" class="headerlink" title="控制结构与Java语言相同"></a>控制结构与Java语言相同</h3><ul>
+<li>if</li>
+<li>while</li>
+<li>for(变量&lt;-表达式) 语句块</li>
+</ul>
+<p><code>变量&lt;-表达式</code>被称为 <em>生成器（generator）</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">for(i &lt;- 1 to 5 if i % 2 &#x3D;&#x3D; 0) println(i)</span><br><span class="line">for(i &lt;- 1 to 5; j &lt;- 1 to 3) println(i*j)</span><br></pre></td></tr></table></figure>
+
+<p>for还具有推导式。有时候需要对生成器过滤的结构进行进一步处理，我们可以使用yield关键字，对过滤后的结果构建一个<strong>集合</strong>.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for(i &lt;- 1 to 5 if i % 2&#x3D;&#x3D;0) yield i</span><br></pre></td></tr></table></figure>
+
+<h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h3><h4 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">val intValueArr &#x3D; new Array[Int](3) &#x2F;&#x2F;声明一个长度为3的整形数组，每个数组元素初始化为0</span><br><span class="line">intValueArr(0) &#x3D; 12</span><br><span class="line">val intValueArr &#x3D; Array(12, 45, 33) &#x2F;&#x2F;简洁初始化数组</span><br></pre></td></tr></table></figure>
+<h4 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; val intList &#x3D; List(1,2,3)</span><br><span class="line">intList: List[Int] &#x3D; List(1, 2, 3)</span><br><span class="line"></span><br><span class="line">scala&gt; intList.head</span><br><span class="line">res10: Int &#x3D; 1</span><br><span class="line"></span><br><span class="line">scala&gt; intList.tail</span><br><span class="line">res11: List[Int] &#x3D; List(2, 3)</span><br><span class="line"></span><br><span class="line">scala&gt; 0::intList &#x2F;&#x2F;使用::在列表的头部增加新的元素，得到一个新的列表。注意::是右结合的</span><br><span class="line">res12: List[Int] &#x3D; List(0, 1, 2, 3)</span><br><span class="line"></span><br><span class="line">scala&gt; intList.sum</span><br><span class="line">res16: Int &#x3D; 6</span><br></pre></td></tr></table></figure>
+<h4 id="元组。"><a href="#元组。" class="headerlink" title="元组。"></a>元组。</h4><p>元组是不同类型的值的聚集。列表中的每个元素必须是相同类型。而元组可以包含不同类型的元素。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; val tuple &#x3D; (&quot;BigData&quot;, 2015, 07, 1.2)</span><br><span class="line">tuple: (String, Int, Int, Double) &#x3D; (BigData,2015,7,1.2)</span><br><span class="line"></span><br><span class="line">scala&gt; tuple._1 &#x2F;&#x2F;访问第一个元素</span><br><span class="line">res17: String &#x3D; BigData</span><br></pre></td></tr></table></figure>
+<h4 id="集合-Set。"><a href="#集合-Set。" class="headerlink" title="集合 Set。"></a>集合 Set。</h4><p>集合是不重复元素的集合。列表中的元素是按照插入的先后顺序来组织的，但集合中不会记录元素的插入顺序，而是以hash方法对元素的值进行组织。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; val set &#x3D; Set(&quot;a&quot;, &quot;b&quot;)</span><br><span class="line">set: scala.collection.immutable.Set[String] &#x3D; Set(a, b)</span><br></pre></td></tr></table></figure>
+<h4 id="映射-Map"><a href="#映射-Map" class="headerlink" title="映射 Map"></a>映射 Map</h4><p>key-&gt;value键值对映射</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; val university &#x3D; Map(&quot;XMU&quot; -&gt; &quot;Xiamen University&quot;)</span><br><span class="line">university: scala.collection.immutable.Map[String,String] &#x3D; Map(XMU -&gt; Xiamen University)</span><br><span class="line"></span><br><span class="line">scala&gt; university(&quot;XMU&quot;)</span><br><span class="line">res19: String &#x3D; Xiamen University</span><br></pre></td></tr></table></figure>
+<p>上述定义的Map是无法更新映射中的元素，也无法增加新的元素。如果需要更新增加元素，需要定义一个可变的映射。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; val university1 &#x3D; Map(&quot;XMU&quot;-&gt;&quot;Xiamen University&quot;);</span><br><span class="line">university1: scala.collection.mutable.Map[String,String] &#x3D; HashMap(XMU -&gt; Xiamen University)</span><br><span class="line"></span><br><span class="line">scala&gt; university1 +&#x3D; (&quot;THU&quot; -&gt; &quot;Tsinghua University&quot;)</span><br><span class="line">res22: university1.type &#x3D; HashMap(THU -&gt; Tsinghua University, XMU -&gt; Xiamen University)</span><br></pre></td></tr></table></figure>
+<p>循环遍历映射，基本格式为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for ((k, v) &lt;- map) 语句块</span><br></pre></td></tr></table></figure>
+<h4 id="迭代器-Iterator"><a href="#迭代器-Iterator" class="headerlink" title="迭代器 Iterator"></a>迭代器 Iterator</h4><p>提供一种访问集合的方法。迭代器包含两个基本操作：next和hasNext。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; val iter &#x3D; Iterator(&quot;Hadoop&quot;, &quot;Spark&quot;, &quot;Scala&quot;)</span><br><span class="line">iter: Iterator[String] &#x3D; &lt;iterator&gt;</span><br><span class="line"></span><br><span class="line">scala&gt; while(iter.hasNext)</span><br><span class="line">     | println(iter.next())</span><br><span class="line">Hadoop</span><br><span class="line">Spark</span><br><span class="line">Scala</span><br></pre></td></tr></table></figure>
+<h4 id="类-class-与Java的类相同"><a href="#类-class-与Java的类相同" class="headerlink" title="类 class 与Java的类相同"></a>类 class 与Java的类相同</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">class Counter&#123;</span><br><span class="line">    private var value &#x3D; 0;</span><br><span class="line">    def increment(): Unit &#x3D; &#123;value +&#x3D; 1&#125;</span><br><span class="line">    def current(): Int &#x3D; &#123;value&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">val myCounter &#x3D; new Counter;</span><br><span class="line">myCounter.increment();</span><br></pre></td></tr></table></figure>
+<p>在类方法的定义中使用def，上述Unit为返回值类型。在Scala中没有返回值就用Unit(Java中的void)。方法的返回值不需要return语句。方法里边最后一个表达式的值就是方法的返回值。</p>
+<p>Scala类的主构造器。Scala的主构造器与Java的构造函数有明显不同，Scala的主构造器是整个类体，需要在类名称后边罗列出构造器所需的所有参数，这些参数被编译成字段，字段的值就是创建对象时传入的参数的值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class Counter(val name:String, val mode:Int)&#123;</span><br><span class="line">    private var value &#x3D; 0;</span><br><span class="line">    def increment(step:Int):Unit &#x3D; &#123;value +&#x3D; step&#125;</span><br><span class="line">    def current():Int &#x3D; &#123;value&#125;</span><br><span class="line">    def info():Unit &#x3D; &#123;printf(&quot;Name:%s and mode is %d\n&quot;, name, mode)&#125;</span><br><span class="line">&#125;</span><br><span class="line">object MyCounter&#123;</span><br><span class="line">    def main(args:Array[String])&#123;</span><br><span class="line">        val myCounter &#x3D; new Counter(&quot;Timer&quot;, 2);</span><br><span class="line">        myCounter.info &#x2F;&#x2F;显示计数器信息</span><br><span class="line">        myCounter.increment(2) &#x2F;&#x2F;添加步长</span><br><span class="line">        printf(&quot;Current Value is: %d\n&quot;, myCounter.current) &#x2F;&#x2F;显示计数器当前值  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="对象-object"><a href="#对象-object" class="headerlink" title="对象 object"></a>对象 object</h4><p>Scala没有提供Java的静态方法或静态字段，但是可以采用object关键字实现单例对象，具备和Java静态方法同样的功能。</p>
+<ul>
+<li>单例对象，跟类定义很相似，只是用object来定义<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">object Person&#123;</span><br><span class="line">    private var lastId &#x3D; 0 &#x2F;&#x2F;一个人的身份编号</span><br><span class="line">    def newPersonId() &#x3D; &#123;</span><br><span class="line">        lastId +&#x3D; 1</span><br><span class="line">        lastId</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>伴生对象，在Java中，我们经常需要用到同时包含实例方法和静态方法的类，在Scala中可以通过伴生对象来实现。 <em>当单例对象与某个类具有相同的名称时</em> ，它被称为这个类的“伴生对象”。类和它的伴生对象必须存在同一个文件中，而且可以相互访问私有成员（字段和方法）。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">class Person&#123;</span><br><span class="line">    private val id &#x3D; Person.newPersonId() &#x2F;&#x2F;调用伴生对象的方法</span><br><span class="line">    private var name &#x3D; &quot;&quot;</span><br><span class="line">    def this(name:String)&#123; &#x2F;&#x2F;第一辅助构造器</span><br><span class="line">        this() &#x2F;&#x2F;主构造器</span><br><span class="line">        this.name &#x3D; name &#x2F;&#x2F;辅助构造器构造类字段</span><br><span class="line">    &#125;</span><br><span class="line">    def info()&#123;</span><br><span class="line">        printf(&quot;The id of %s is %d.\n&quot;, name, id)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">object Person&#123;</span><br><span class="line">    private var lastId &#x3D; 0</span><br><span class="line">    private def newPersonId() &#x3D; &#123; &#x2F;&#x2F;它承担了一个相当于Java中static方法的任务</span><br><span class="line">        lastId +&#x3D; 1</span><br><span class="line">        lastId</span><br><span class="line">    &#125;</span><br><span class="line">    def main(args:Array[String])&#123;</span><br><span class="line">        val person1 &#x3D; new Person(&quot;Ziyu&quot;)</span><br><span class="line">        val person2 &#x3D; new Person(&quot;Minxing&quot;)</span><br><span class="line">        person1.info()</span><br><span class="line">        person2.info()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>应用程序对象。每个scala应用程序都必须从一个对象的main方法开始。<br>  （1）如果代码中没有定义类，只有单例对象，那么可以不用编译或者在交互shell中直接用scala命令运行得到结果<br>  （2）先用scalac命令对代码进行编译，然后用scala命令进行运行。</p>
+</li>
+<li><p>apple方法和update方法。在scala中，用括号传递给变量（或对象）一个或多个参数时，scala会把他们转换成apply方法的调用；当对带有括号并包括一到若干参数的对象进行赋值时，编译器将调用对象的update方法。</p>
+</li>
+</ul>
+<h4 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h4><p>scala中的继承与Java的不同：</p>
+<ul>
+<li>重写一个非抽象方法必须使用override修饰符</li>
+<li>只有主构造器可以调用超类的主构造器</li>
+<li>在子类中重写超类的抽象方法时，不需要使用overrider关键字</li>
+<li>可以重写超类中的字段</li>
+</ul>
+<p>Scala与Java一样不允许从多个超类继承。</p>
+<p><em>抽象类</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">abstract class Car&#123;</span><br><span class="line">    val carBradn:String</span><br><span class="line">    def info()</span><br><span class="line">    def greeting()&#123;</span><br><span class="line">        println(&quot;Welcome to my car!&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>要点：</p>
+<ul>
+<li>定义一个抽象类，需要使用关键字abstract</li>
+<li>定义一个抽象类的抽象方法，也不需要关键字abstract，只要把方法体空着，不写方法体就可以了（而在Java中，抽象方法时必须用abstract修饰的）</li>
+<li>抽象类中定义的字段，只要没有给出初始化值，就表示是一个抽象字段，但是抽象字段必须要声明类型，不能省略类型否则会编译报错。</li>
+</ul>
+<p><em>继承类</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class BMWCar extends Car&#123;</span><br><span class="line">    override val carBrand &#x3D; &quot;BMW&quot; &#x2F;&#x2F;重写抽象字段必须加override</span><br><span class="line">    override def info()&#123;</span><br><span class="line">        printf(&quot;This is a %s car. It is on sale.&quot;, carBrand)</span><br><span class="line">    &#125; &#x2F;&#x2F;重写超类抽象方法可以不用加override，加了也不会报错</span><br><span class="line">    overrider def greeting()&#123;</span><br><span class="line">        println(&quot;Welcome to my BMW car!&quot;)</span><br><span class="line">    &#125; &#x2F;&#x2F;重写超类非抽象方法必须加override</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="特质-trait-对应于Java的接口"><a href="#特质-trait-对应于Java的接口" class="headerlink" title="特质 trait 对应于Java的接口"></a>特质 trait 对应于Java的接口</h4><p>scala的trait不仅实现了接口的功能，还具备了其他的特性。scala的trait是代码重用的基本单元，可以同时拥有抽象方法和具体方法。与Java一样，一个类只能继承自一个超类，却可以实现多个trait。</p>
+<p>跟Java的接口Interface一样，trait中的字段和方法都是默认抽象并且是public。但使用trait仍然是extends或者with。第一个实现trait用extends，之后的可以反复使用with关键字混入更多trait</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">trait CarId&#123;</span><br><span class="line">    var id:Int</span><br><span class="line">    def currentId():Int</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">trait CarGreeting&#123;</span><br><span class="line">    def greeting(msg:String) &#123;println(msg)&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class BMWCarId extends CarId with CarGreeting&#123;</span><br><span class="line">    override var id &#x3D; 20000</span><br><span class="line">    def currentId():Int &#x3D; &#123;id +&#x3D;1; id&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>trait中除了抽象字段和抽象方法，也可以包含具体实现，也就是说trait中的字段和方法不一定要是抽象的。</p>
+<h4 id="模式匹配"><a href="#模式匹配" class="headerlink" title="模式匹配"></a>模式匹配</h4><p><em>简单匹配</em><br>Java中有switch-case语句，但只能按顺序匹配简单的数据类型和表达式。在Scala中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">val colorNum &#x3D; 1</span><br><span class="line">val colorStr &#x3D; colorNum match&#123;</span><br><span class="line">    case 1 &#x3D;&gt; &quot;red&quot;</span><br><span class="line">    case 2 &#x3D;&gt; &quot;green&quot;</span><br><span class="line">    case 3 &#x3D;&gt; &quot;yellow&quot;</span><br><span class="line">    case _ &#x3D;&gt; &quot;Not Allowed&quot;</span><br><span class="line">    &#x2F;&#x2F;也可以使用</span><br><span class="line">    case unexpected &#x3D;&gt; unexpected + &quot;is Not Allowed&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><em>类型匹配</em><br>scala可以对表达式的类型进行匹配</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">for(elem &lt;- List(9, 12.3, &quot;Spark&quot;, &quot;Hadoop&quot;, &quot;Hello&quot;))&#123;</span><br><span class="line">    val str &#x3D; elem match&#123;</span><br><span class="line">        case i:Int &#x3D;&gt; i + &quot;is an int value&quot;</span><br><span class="line">        case d:Double &#x3D;&gt; d + &quot;is a double value&quot;</span><br><span class="line">        case &quot;Spark&quot; &#x3D;&gt; &quot;Spark is found&quot;</span><br><span class="line">        case s:String &#x3D;&gt; s + &quot;is a string value&quot;</span><br><span class="line">        case _ &#x3D;&gt; &quot;This is an unexpected value&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><em>守卫guard语句</em><br>可以在模式匹配中添加一些必要的处理逻辑。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">for(elem &lt;- List(1,2,3,4))&#123;</span><br><span class="line">    elem match&#123;</span><br><span class="line">        case_ if(elem%2 &#x3D;&#x3D; 0) &#x3D;&gt; println(elem + &quot;is even.&quot;)</span><br><span class="line">        case_ &#x3D;&gt; println(elem + &quot;is odd.&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><em>for表达式中的模式</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for((k, v) &lt;- 映射) 语句块</span><br></pre></td></tr></table></figure>
+<p><em>case类的匹配</em><br>case类是一种特殊的类，经过优化被用于模式匹配</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">case class Car(brand:String, price:Int) &#x2F;&#x2F;case类,主构造器</span><br><span class="line">val myBMWCar &#x3D; new Car(&quot;BMW&quot;, 1200000)</span><br><span class="line">for (car &lt;- List(myBMWCar))&#123;</span><br><span class="line">    car match&#123;</span><br><span class="line">        case Car(&quot;BMW&quot;, 1200000) &#x3D;&gt; println(&quot;Hello, BMW!&quot;)</span><br><span class="line">        case Car(brand, price) &#x3D;&gt; println(&quot;Brand:&quot; + brand + &quot;, Price:&quot; + price + &quot;, do you want it?&quot; )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><em>Option类型</em><br>Option类型用case类来表示可能存在、也可能不存在的值。对于每种语言来说，都会有一个关键字来表示一个对象引用的是“无”，在Java中使用的是null。Scala融合了函数式编程风格，当预计变量或函数返回值可能不会引用任何值的时候，建议使用Option类型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; var myMap &#x3D; Map(&quot;hadoop&quot;-&gt;5, &quot;spark&quot;-&gt;4, &quot;car&quot;-&gt;3)</span><br><span class="line">myMap: scala.collection.immutable.Map[String,Int] &#x3D; Map(hadoop -&gt; 5, spark -&gt; 4, car -&gt; 3)</span><br><span class="line"></span><br><span class="line">scala&gt; myMap.get(&quot;hadoop&quot;)</span><br><span class="line">res1: Option[Int] &#x3D; Some(5)</span><br><span class="line"></span><br><span class="line">scala&gt; myMap.get(&quot;hive&quot;)</span><br><span class="line">res2: Option[Int] &#x3D; None</span><br><span class="line"></span><br><span class="line">val found &#x3D; myMap.get(&quot;hadoop&quot;)</span><br><span class="line">found.get &#x2F;&#x2F;返回Some中的数据</span><br><span class="line"></span><br><span class="line">val found &#x3D; myMap.get(&quot;hive&quot;)</span><br><span class="line">found.getOrElse(&quot;Not Found&quot;) &#x2F;&#x2F;会返回字符串</span><br></pre></td></tr></table></figure>
+
+<h3 id="函数编程"><a href="#函数编程" class="headerlink" title="函数编程"></a>函数编程</h3><p>函数式编程可以较好的满足分布式并行编程的需求（函数式编程的一个重要特性就是值不可变性，这对于编写可扩展的并发程序可以带来巨大好处，因为它避免了对公共的可变状态进行同步访问控制的复杂问题）。<br>函数字面量可以体现函数式编程的核心理念。字面量包括整数字面量，浮点数字面量，布尔型字面量，字符字面量，字符串字面量，符号字面量，函数字面量和元组字面量。</p>
+<p><strong>函数字面量</strong> ：在函数式编程中，函数可以像任何其他数据类型一样被传递和操作，也就是说函数的使用方式和其他数据类型的使用方式完全一致。由此就区分开了函数的“类型”和函数的“值”两个概念，而函数的“值”，就是“函数字面量”。</p>
+<p>传统函数<br><code>def counter(value:Int):Int = {value += 1}</code><br>上面这个传统函数的 <em>类型</em> 为<br><code>(Int) =&gt; Int</code><br>上面这个函数的 <em>值</em> 为<br><code>(value) =&gt; {value += 1}</code><br>那么我们可以按照如下方式定义上述传统函数<br><code>val counter: (Int)=&gt;Int = {(value) =&gt; value+=1}</code><br>这与scala中定义变量字面量的方式是一致的：<br><code>val num: Int = 5</code></p>
+<p><strong>匿名函数</strong>：我们不需要给每个函数命名<br><code>(num:Int) =&gt; num*2</code><br>这种匿名函数的表达方式为’lambda表达式‘。<br><code>(参数) =&gt; 表达式</code><br>在lambda表达式中，至少需要在一处表明参数的类型，才可以推断参数类型</p>
+<p><strong>闭包</strong>：闭包是一个比较特殊的函数。反应一个从开放到封闭的过程。对于普通函数而言，函数中只会应用函数中定义的变量，不会引入函数外部的变量。而闭包会引用函数外部的变量。<br><code>val addMore = (x:Int) =&gt; x+more</code><br>在这个函数定义中，引用了变量more。而more并没有在函数中定义，是一个函数外部的变量。如果现在去执行这条语句，编译器会因为more是一个自由变量还没有绑定值而报错。此时函数是开放的。因为为了使该lambda函数得到正常结果，必须在函数外部给出more的值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var more &#x3D; 1</span><br><span class="line">val addMore &#x3D; (x:Int) &#x3D;&gt; x+more</span><br></pre></td></tr></table></figure>
+<p>在给定more具体数值1之后，lambda表达式中的more变量也就绑定了具体的值1，不再是自由变量。这个lambda函数也就从开放状态转成了封闭状态。每次addMore函数被调用时都会创建一个新闭包，每个闭包都会访问闭包创建时活跃的more变量。</p>
+<p><strong>高阶函数</strong><br>一个接受其他函数作为参数或者返回一个函数的函数就是高阶函数<br>例如，有一个函数对给定两个数区间内的所有整数求和：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">def sumInts(a:Int, b:Int):Int &#x3D; &#123;</span><br><span class="line">    if(a &gt; b) 0 else a+sumInts(a+1, b)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>重新设计该函数的实现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;定义一个新的函数sum，以函数f为参数</span><br><span class="line">def sum(f:Int &#x3D;&gt; Int, a:Int, b:Int):Int &#x3D; &#123;</span><br><span class="line">    if(a&gt;b) 0 else f(a) + sum(f, a+1, b)</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F;定义一个新的函数self,该函数出入一个整数x，然后直接输出x本身</span><br><span class="line">def self(x:Int): Int &#x3D; x</span><br><span class="line">&#x2F;&#x2F;重新定义sumInts函数</span><br><span class="line">def sumInts(a:Int, b:Int): Int &#x3D; sum(self, a, b)</span><br></pre></td></tr></table></figure>
+<p>这其中sum函数的类型是<code>(Int=&gt;Int, Int, Int) =&gt; Int</code> 接受了一个函数作为参数，因此是一个高阶函数。</p>
+<p>高阶函数可以实现对同样的字段通过控制传入函数f来进行不同操作的类似操作，简化编写逻辑。</p>
+<p><strong>占位符语法</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; val numList &#x3D; List(-3, -5, 1, 6, 9)</span><br><span class="line">numList: List[Int] &#x3D; List(-3, -5, 1, 6, 9)</span><br><span class="line"></span><br><span class="line">scala&gt; numList.filter(x &#x3D;&gt; x&gt;0)</span><br><span class="line">res10: List[Int] &#x3D; List(1, 6, 9)</span><br><span class="line"></span><br><span class="line">scala&gt; numList.filter(_ &gt;0)</span><br><span class="line">res11: List[Int] &#x3D; List(1, 6, 9)</span><br></pre></td></tr></table></figure>
+
+<p>可以看出<code>x =&gt; x&gt;0</code>与<code>_ &gt; 0</code>这两个函数字面量是等价的。当采用下划线表示方法时，对于列表numList中的每个元素都会依次传入用来替换下划线。</p>
+<h3 id="函数式编程中针对集合的操作"><a href="#函数式编程中针对集合的操作" class="headerlink" title="函数式编程中针对集合的操作"></a>函数式编程中针对集合的操作</h3><h4 id="列表的遍历"><a href="#列表的遍历" class="headerlink" title="列表的遍历"></a>列表的遍历</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">val list &#x3D; List(1,2,3,4,5)</span><br><span class="line">for(elem &lt;- list) println(elem)</span><br></pre></td></tr></table></figure>
+<p>或者使用foreach进行遍历</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list.foreach(elem &#x3D;&gt; println(elem))</span><br></pre></td></tr></table></figure>
+<h4 id="映射的遍历"><a href="#映射的遍历" class="headerlink" title="映射的遍历"></a>映射的遍历</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for((k, v) &lt;- 映射) 语句块</span><br></pre></td></tr></table></figure>
+<h4 id="map操作和flatMap操作"><a href="#map操作和flatMap操作" class="headerlink" title="map操作和flatMap操作"></a>map操作和flatMap操作</h4><p>map操作是针对集合的典型变换操作，它将 <em>某个函数</em> 应用到集合中的 <em>每个元素</em> ，并产生一个 <em>结果集合</em> 。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">val books &#x3D; List(&quot;Hadoop&quot;, &quot;Hive&quot;, &quot;HDFS&quot;)</span><br><span class="line">books.map(s &#x3D;&gt; s.toUpperCase)</span><br></pre></td></tr></table></figure>
+<p>对所有的s，都执行s.toUpperCase操作</p>
+<p>flatMap是对map的一种扩展。在flatMap中，我们会传入一个函数，该函数对每个输入都会返回 <em>一个集合</em> ，然后flatMap会把生成的多个集合“拍扁”成为一个集合。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">val list &#x3D; List(&quot;Hadoop&quot;, &quot;Spark&quot;)</span><br><span class="line">list: List[String] &#x3D; List(Hadoop, Spark)</span><br><span class="line"></span><br><span class="line">scala&gt; list.flatMap(s &#x3D;&gt; s.toUpperCase)</span><br><span class="line">res15: List[Char] &#x3D; List(H, A, D, O, O, P, S, P, A, R, K)</span><br></pre></td></tr></table></figure>
+<h4 id="filter操作"><a href="#filter操作" class="headerlink" title="filter操作"></a>filter操作</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">val university &#x3D; Map(&quot;XMU&quot; -&gt; &quot;Xiamen University&quot;, &quot;THU&quot; -&gt; &quot;Tsinghua University&quot;)</span><br><span class="line">val universityOfXiamen &#x3D; university filter&#123;kv &#x3D;&gt; kv._2 contains &quot;Xiamen&quot;&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Reduce操作"><a href="#Reduce操作" class="headerlink" title="Reduce操作"></a>Reduce操作</h4><p>在Scala中，使用reduce对集合中的元素进行规约，他是一个二元操作。<br>reduce包含reduceLeft和reduceRight两种操作，前者从集合的头部开始操作，后者从集合的尾部开始操作。默认reduce操作是reduceLeft</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">val list &#x3D; List(1,2,3,4,5)</span><br><span class="line">list.reduceLeft( _ + _ ) &#x2F;&#x2F;从列表头部开始，对两两元素进行求和操作，下划线是占位符用来获取当前的两个元素。</span><br><span class="line">list.reduceRight( _ - _ )</span><br></pre></td></tr></table></figure>
+<h4 id="fold操作"><a href="#fold操作" class="headerlink" title="fold操作"></a>fold操作</h4><p>fold操作与reduce操作比较类似。fold操作需要从一个初始的”种子“值开始，并以该值作为上下文，处理集合中的每一个元素。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">val list &#x3D; List(1,2,3,4,5)</span><br><span class="line">list.fold(10)(_*_)</span><br></pre></td></tr></table></figure>
+<p>fold需要提供一个初始值，首先第一个操作时初始值与第一个遍历参数进行计算。同样提供了foldLeft和foldRight操作，默认fold操作时从左到右。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Scala/" rel="tag"># Scala</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/30/2019-07-30-SparkSQL/" rel="next" title="Spark SQL， RDD 与 DataFrame">
+                <i class="fa fa-chevron-left"></i> Spark SQL， RDD 与 DataFrame
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/02/2019-08-02-Java%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/" rel="prev" title="Java网络编程基础">
+                Java网络编程基础 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="Shao Guoliang" />
+            
+              <p class="site-author-name" itemprop="name">Shao Guoliang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/floodshao" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:guoliang_shao@u.nus.edu" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么使用Scala语言"><span class="nav-number">1.</span> <span class="nav-text">为什么使用Scala语言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Scala安装"><span class="nav-number">2.</span> <span class="nav-text">Scala安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#在macOS下安装"><span class="nav-number">2.1.</span> <span class="nav-text">在macOS下安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux下安装"><span class="nav-number">2.2.</span> <span class="nav-text">Linux下安装</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Scala编程"><span class="nav-number">3.</span> <span class="nav-text">Scala编程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Scala与Java编程的区别"><span class="nav-number">3.1.</span> <span class="nav-text">Scala与Java编程的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Scala语法-Scala-2-13-0"><span class="nav-number">4.</span> <span class="nav-text">Scala语法(Scala 2.13.0)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#变量与声明值"><span class="nav-number">4.1.</span> <span class="nav-text">变量与声明值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本数据类型"><span class="nav-number">4.2.</span> <span class="nav-text">基本数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Range"><span class="nav-number">4.3.</span> <span class="nav-text">Range</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#读写文件"><span class="nav-number">4.4.</span> <span class="nav-text">读写文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#控制结构与Java语言相同"><span class="nav-number">4.5.</span> <span class="nav-text">控制结构与Java语言相同</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据结构"><span class="nav-number">4.6.</span> <span class="nav-text">数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数组"><span class="nav-number">4.6.1.</span> <span class="nav-text">数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#列表"><span class="nav-number">4.6.2.</span> <span class="nav-text">列表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#元组。"><span class="nav-number">4.6.3.</span> <span class="nav-text">元组。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#集合-Set。"><span class="nav-number">4.6.4.</span> <span class="nav-text">集合 Set。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#映射-Map"><span class="nav-number">4.6.5.</span> <span class="nav-text">映射 Map</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#迭代器-Iterator"><span class="nav-number">4.6.6.</span> <span class="nav-text">迭代器 Iterator</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类-class-与Java的类相同"><span class="nav-number">4.6.7.</span> <span class="nav-text">类 class 与Java的类相同</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对象-object"><span class="nav-number">4.6.8.</span> <span class="nav-text">对象 object</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#继承"><span class="nav-number">4.6.9.</span> <span class="nav-text">继承</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#特质-trait-对应于Java的接口"><span class="nav-number">4.6.10.</span> <span class="nav-text">特质 trait 对应于Java的接口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#模式匹配"><span class="nav-number">4.6.11.</span> <span class="nav-text">模式匹配</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数编程"><span class="nav-number">4.7.</span> <span class="nav-text">函数编程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数式编程中针对集合的操作"><span class="nav-number">4.8.</span> <span class="nav-text">函数式编程中针对集合的操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#列表的遍历"><span class="nav-number">4.8.1.</span> <span class="nav-text">列表的遍历</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#映射的遍历"><span class="nav-number">4.8.2.</span> <span class="nav-text">映射的遍历</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#map操作和flatMap操作"><span class="nav-number">4.8.3.</span> <span class="nav-text">map操作和flatMap操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#filter操作"><span class="nav-number">4.8.4.</span> <span class="nav-text">filter操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Reduce操作"><span class="nav-number">4.8.5.</span> <span class="nav-text">Reduce操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#fold操作"><span class="nav-number">4.8.6.</span> <span class="nav-text">fold操作</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shao Guoliang</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Pisces</a> v6.0.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.0.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.0.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.0.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.0.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'S8hhGklf9TcnfdaayOcyEXaY-gzGzoHsz',
+        appKey: 'N9bcSWiTfFKC2MYa8vY5GFGi',
+        placeholder: 'Leave your comments',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=6.0.0"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=6.0.0"></script>
+
+
+  
+
+</body>
+</html>

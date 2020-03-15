@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.0.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.0.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.0.0" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Categories">
+<meta property="og:url" content="http://yoursite.com/categories/index.html">
+<meta property="og:site_name" content="Shao Guoliang的博客">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-10-31T02:33:06.000Z">
+<meta property="article:modified_time" content="2019-10-31T02:34:17.920Z">
+<meta property="article:author" content="Shao Guoliang">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.0.0',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/categories/"/>
+
+
+
+
+
+  <title>Spark启动历史日志以及Web UI | Shao Guoliang的博客</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Shao Guoliang的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">未来不迎，当时不杂，过往不恋</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/05/2019-08-05-Spark%E5%90%AF%E5%8A%A8%E5%8E%86%E5%8F%B2%E6%97%A5%E5%BF%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shao Guoliang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shao Guoliang的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Spark启动历史日志以及Web UI</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-05T00:00:00+08:00">2019-08-05</time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/08/05/2019-08-05-Spark%E5%90%AF%E5%8A%A8%E5%8E%86%E5%8F%B2%E6%97%A5%E5%BF%97/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/05/2019-08-05-Spark%E5%90%AF%E5%8A%A8%E5%8E%86%E5%8F%B2%E6%97%A5%E5%BF%97/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在使用Spark的过程中，我们有时候会关注job的历史日志，但在spark的默认设置下，历史日志是关闭的。本篇记录如何启动spark的历史日志。</p>
+<p>环境：</p>
+<ul>
+<li>单机伪分布</li>
+<li>MacOS系统</li>
+<li>Hadoop-2.9.2</li>
+<li>Spark-2.4.3<a id="more"></a> <!-- 摘要 -->
+
+</li>
+</ul>
+<h3 id="Spark-伪分布安装"><a href="#Spark-伪分布安装" class="headerlink" title="Spark 伪分布安装"></a>Spark 伪分布安装</h3><p>接上文 <a href="/2019/07/10/2019-07-10-Spark%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E4%B8%8ERDD%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/" title="Spark环境搭建与RDD编程基础">Spark环境搭建与RDD编程基础</a><br>在将spark安装包解压并添加环境变量后，我们需要修改spark安装包用户权限。<br><code>chown -R shaoguoliang:staff spark-2.4.3-bin-hadoop2.7</code> 为了防止之后运行出现权限问题。</p>
+<h4 id="修改Spark配置文件"><a href="#修改Spark配置文件" class="headerlink" title="修改Spark配置文件"></a>修改Spark配置文件</h4><p>配置文件为 <code>conf/spark-env.sh</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 配置文件修改如下</span><br><span class="line">export JAVA_HOME&#x3D;&#x2F;usr&#x2F;local&#x2F;jdk</span><br><span class="line">export SCALA_HOME&#x3D;&#x2F;usr&#x2F;local&#x2F;scala</span><br><span class="line">export SPARK_WORKER_MEMORY&#x3D;1G</span><br><span class="line">export HADOOP_HOME&#x3D;&#x2F;usr&#x2F;local&#x2F;hadoop</span><br><span class="line">export HADOOP_CONF_DIR&#x3D;&#x2F;usr&#x2F;local&#x2F;hadoop&#x2F;etc&#x2F;hadoop</span><br><span class="line">export SPARK_MASTER_IP&#x3D;localhost</span><br></pre></td></tr></table></figure>
+
+<h4 id="启动hadoop"><a href="#启动hadoop" class="headerlink" title="启动hadoop"></a>启动hadoop</h4><p>在$HADOOP_HOME/sbin下启动<code>./start-all.sh</code><br>此时运行<code>jps</code>命令会得到</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">83603 NodeManager</span><br><span class="line">74787</span><br><span class="line">83012 SecondaryNameNode</span><br><span class="line">82532 DataNode</span><br><span class="line">83143 ResourceManager</span><br><span class="line">85677 Jps</span><br></pre></td></tr></table></figure>
+
+<h4 id="启动spark"><a href="#启动spark" class="headerlink" title="启动spark"></a>启动spark</h4><p>在$SPARK_HOME/sbin下启动<code>./start-all.sh</code><br>此时运行<code>jps</code>命令会得到</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">86112 Worker  #spark</span><br><span class="line">83603 NodeManager</span><br><span class="line">74787</span><br><span class="line">83012 SecondaryNameNode</span><br><span class="line">82532 DataNode</span><br><span class="line">83143 ResourceManager</span><br><span class="line">85720 Master  #spark</span><br><span class="line">86157 Jps</span><br></pre></td></tr></table></figure>
+
+<h4 id="浏览器查看localhost-8080"><a href="#浏览器查看localhost-8080" class="headerlink" title="浏览器查看localhost:8080"></a>浏览器查看localhost:8080</h4><p><img src="/images/2019-08-05-Spark%E5%90%AF%E5%8A%A8%E5%8E%86%E5%8F%B2%E6%97%A5%E5%BF%97/Spark%E6%B5%8F%E8%A7%88%E5%99%A8%E6%9F%A5%E7%9C%8B%E7%8A%B6%E6%80%81.png" alt="Spark浏览器查看状态"><br>此时说明spark启动成功</p>
+<h3 id="Spark查看历史日志"><a href="#Spark查看历史日志" class="headerlink" title="Spark查看历史日志"></a>Spark查看历史日志</h3><ol>
+<li><p>修改配置文件 spark-defaults.conf 添加如下内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 修改配置信息</span><br><span class="line">spark.eventLog.enabled          true</span><br><span class="line"># 设置hdfs目录，需要和自己的hadoop目录匹配</span><br><span class="line">spark.eventLog.dir              hdfs:&#x2F;&#x2F;localhost:9000&#x2F;var&#x2F;log&#x2F;spark</span><br><span class="line">spark.eventLog.compress         true</span><br></pre></td></tr></table></figure>
+<p>注意spark.eventLog.dir是log文件最终存放的地点，如果是配置在hdfs上就采取上述地址<br>如果是配置在本地主机上，那么要改为<code>file:///Users/shaoguoliang/var/log/spark</code></p>
+</li>
+<li><p>修改配置文件 spark-env.sh</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;配置文件最后加入</span><br><span class="line">export SPARK_HISTORY_OPTS&#x3D;&quot;-Dspark.history.ui.port&#x3D;18080 -Dspark.history.retainedApplications&#x3D;3 -Dspark.history.fs.logDirectory&#x3D;hdfs:&#x2F;localhost:9000&#x2F;var&#x2F;log&#x2F;spark&quot;</span><br></pre></td></tr></table></figure>
+<p>同上，如果是保存在本地主机上，那么最后一项要改为相应的位置。<br>同时如果想要修改显示web端口位置，那么更改相应的port NO.</p>
+</li>
+<li><p>创建目录日志<br>spark不会创建目录日志，需要我们自己去创建</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;首先进入hadoop的bin目录</span><br><span class="line">cd &#x2F;usr&#x2F;local&#x2F;hadoop&#x2F;bin</span><br><span class="line">&#x2F;&#x2F;创建文件夹命令</span><br><span class="line">.&#x2F;hadoop fs -mkdir &#x2F;var</span><br><span class="line">.&#x2F;hadoop fs -mkdir &#x2F;var&#x2F;log</span><br><span class="line">.&#x2F;hadoop fs -mkdir &#x2F;var&#x2F;log&#x2F;spark</span><br></pre></td></tr></table></figure>
+<p>如果是保存在本地主机上，那么在相应位置建立文件夹</p>
+</li>
+<li><p>启动spark历史日志web端</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;进入spark的bin目录</span><br><span class="line">cd &#x2F;usr&#x2F;local&#x2F;spark&#x2F;sbin</span><br><span class="line">&#x2F;&#x2F;如果spark集群正在启动，首先停止集群</span><br><span class="line">.&#x2F;stop-all.sh</span><br><span class="line">&#x2F;&#x2F;重新启动集群</span><br><span class="line">.&#x2F;start-all.sh</span><br><span class="line">&#x2F;&#x2F;启动job历史端口</span><br><span class="line">.&#x2F;start-history-server.sh</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p><strong>一定要启动最后一个 start-history-server</strong>，否则log文件只会存在上述建立的log文件目录中，并不会以web显示的方式展现出来。</p>
+<ol start="5">
+<li>查看spark日志是否启动成功 localhost:18080</li>
+</ol>
+<p><img src="/images/2019-08-05-Spark%E5%90%AF%E5%8A%A8%E5%8E%86%E5%8F%B2%E6%97%A5%E5%BF%97/spark-localhost_18080.png" alt="spark18080"></p>
+<p>做了一个union操作可以通过DAG图来展示</p>
+<p><img src="/images/2019-08-05-Spark%E5%90%AF%E5%8A%A8%E5%8E%86%E5%8F%B2%E6%97%A5%E5%BF%97/DAG-union-operation.png" alt="spark18080"></p>
+<h3 id="Spark-Web-UI解析"><a href="#Spark-Web-UI解析" class="headerlink" title="Spark Web UI解析"></a>Spark Web UI解析</h3><p>参考<a href="https://blog.csdn.net/qq_27639777/article/details/81069893" target="_blank" rel="noopener">https://blog.csdn.net/qq_27639777/article/details/81069893</a></p>
+<h4 id="Jobs"><a href="#Jobs" class="headerlink" title="Jobs"></a>Jobs</h4><p>在提交spark任务运行后，日志中会输出tracking URL即任务的日志链接。在浏览器中打开tracking URL后，默认进入Jobs页。Jobs展示的是整个spark应用任务的job整体信息：</p>
+<ul>
+<li>User: spark任务提交的用户，用以进行权限控制与资源分配。</li>
+<li>Total Uptime: spark application总的运行时间，从appmaster开始运行到结束的整体时间。</li>
+<li>Scheduling Mode: application中task任务的调度策略，由参数spark.scheduler.mode来设置，可选的参数有FAIR和FIFO，默认是FIFO。这与yarn的资源调度策略的层级不同，yarn的资源调度是针对集群中不同application间的，而spark scheduler mode则是针对application内部task set级别的资源分配，不同FAIR策略的参数配置方式与yarn中FAIR策略的配置方式相同。</li>
+<li>Completed Jobs: 已完成Job的基本信息，如想查看某一个Job的详细情况，可点击对应Job进行查看。</li>
+<li>Active Jobs: 正在运行的Job的基本信息。</li>
+<li>Event Timeline: 在application应用运行期间，Job和Exector的增加和删除事件进行图形化的展现。这个就是用来表示调度job何时启动何时结束，以及Excutor何时加入何时移除。我们可以很方便看到哪些job已经运行完成，使用了多少Excutor，哪些正在运行。</li>
+</ul>
+<p>Job间默认是串行提交运行的，如果Job间没有依赖可以使用<strong>多线程</strong>并行提交job，实现job多并发。</p>
+<h4 id="Job-details"><a href="#Job-details" class="headerlink" title="Job details"></a>Job details</h4><p>点进一个Job后可以看到如下信息：</p>
+<ul>
+<li>Staus: 展示Job的当前状态信息。</li>
+<li>Active Stages: 正在运行的stages信息，点击某个stage可进入查看具体的stage信息。</li>
+<li>Pending Stages: 排队的stages信息，根据解析的DAG图stage可并发提交运行，而有依赖的stage未运行完时则处于等待队列中。</li>
+<li>Completed Stages: 已经完成的stages信息。</li>
+<li>Event Timeline: 展示当前Job运行期间stage的提交与结束、Executor的加入与退出等事件信息。</li>
+<li>DAG Visualization: 当前Job所包含的所有stage信息（stage中包含的明细的tranformation操作），以及各stage间的DAG依赖图。DAG也是一种调度模型，在spark的作业调度中，有很多作业存在依赖关系，所以没有依赖关系的作业可以并行执行，有依赖的作业不能并行执行。 </li>
+</ul>
+<h4 id="Stages"><a href="#Stages" class="headerlink" title="Stages"></a>Stages</h4><ul>
+<li>Total time across all tasks: 当前stage中所有task花费的时间和。</li>
+<li>Locality Level Summary: 不同本地化级别下的任务数，本地化级别是指数据与计算间的关系（PROCESS_LOCAL进程本地化：task与计算的数据在同一个Executor中。NODE_LOCAL节点本地化：情况一：task要计算的数据是在同一个Worker的不同Executor进程中；情况二：task要计算的数据是在同一个Worker的磁盘上，或在 HDFS 上，恰好有 block 在同一个节点上。RACK_LOCAL机架本地化，数据在同一机架的不同节点上：情况一：task计算的数据在Worker2的Executor中；情况二：task计算的数据在Worker2的磁盘上。ANY跨机架，数据在非同一机架的网络上，速度最慢）。</li>
+<li>Input Size/Records: 输入的数据字节数大小/记录条数。</li>
+<li>Shuffle Write: 为下一个依赖的stage提供输入数据，shuffle过程中通过网络传输的数据字节数/记录条数。应该尽量减少shuffle的数据量及其操作次数，这是spark任务优化的一条基本原则。</li>
+<li>DAG Visualization: 当前stage中包含的详细的tranformation操作流程图。</li>
+<li>Metrics: 当前stage中所有task的一些指标（每一指标项鼠标移动上去后会有对应解释信息）统计信息。</li>
+<li>Event Timeline: 清楚地展示在每个Executor上各个task的各个阶段的时间统计信息，可以清楚地看到task任务时间是否有明显倾斜，以及倾斜的时间主要是属于哪个阶段，从而有针对性的进行优化。</li>
+<li>Aggregated Metrics by Executor: 将task运行的指标信息按excutor做聚合后的统计信息，并可查看某个Excutor上任务运行的日志信息。</li>
+<li>Tasks: 当前stage中所有任务运行的明细信息，是与Event Timeline中的信息对应的文字展示（可以点击某个task查看具体的任务日志）。 </li>
+</ul>
+<h4 id="Environment"><a href="#Environment" class="headerlink" title="Environment"></a>Environment</h4><p>Environment选项卡提供有关Spark应用程序（或SparkContext）中使用的各种属性和环境变量的信息。用户可以通过这个选项卡得到非常有用的各种Spark属性信息，而不用去翻找属性配置文件。</p>
+<h4 id="Executors"><a href="#Executors" class="headerlink" title="Executors"></a>Executors</h4><p>Executors选项卡提供了关于内存、CPU核和其他被Executors使用的资源的信息。这些信息在Executor级别和汇总级别都可以获取到。一方面通过它可以看出来每个excutor是否发生了数据倾斜，另一方面可以具体分析目前的应用是否产生了大量的shuffle，是否可以通过数据的本地性或者减小数据的传输来减少shuffle的数据量。</p>
+<ul>
+<li>Summary: 该application运行过程中使用Executor的统计信息。</li>
+<li>Executors: 每个Excutor的详细信息（包含driver），可以点击查看某个Executor中任务运行的详细日志。 </li>
+</ul>
+<h4 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h4><p>SQL选项卡（只有执行了spark SQL查询才会有SQL选项卡）可以查看SQL执行计划的细节，它提供了SQL查询的DAG以及显示Spark如何优化已执行的SQL查询的查询计划。 </p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Spark/" rel="tag"># Spark</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/04/2019-08-04-Java%E5%88%A9%E7%94%A8Log4J%E8%BE%93%E5%87%BA%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6/" rel="next" title="Java利用Log4J输出日志文件">
+                <i class="fa fa-chevron-left"></i> Java利用Log4J输出日志文件
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/06/2019-08-06-SparkWordCount%E6%8E%A2%E7%B4%A2RDD%E7%BC%96%E7%A8%8B/" rel="prev" title="Spark WordCount 探索RDD编程">
+                Spark WordCount 探索RDD编程 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="Shao Guoliang" />
+            
+              <p class="site-author-name" itemprop="name">Shao Guoliang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/floodshao" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:guoliang_shao@u.nus.edu" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Spark-伪分布安装"><span class="nav-number">1.</span> <span class="nav-text">Spark 伪分布安装</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#修改Spark配置文件"><span class="nav-number">1.1.</span> <span class="nav-text">修改Spark配置文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启动hadoop"><span class="nav-number">1.2.</span> <span class="nav-text">启动hadoop</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启动spark"><span class="nav-number">1.3.</span> <span class="nav-text">启动spark</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#浏览器查看localhost-8080"><span class="nav-number">1.4.</span> <span class="nav-text">浏览器查看localhost:8080</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spark查看历史日志"><span class="nav-number">2.</span> <span class="nav-text">Spark查看历史日志</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spark-Web-UI解析"><span class="nav-number">3.</span> <span class="nav-text">Spark Web UI解析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Jobs"><span class="nav-number">3.1.</span> <span class="nav-text">Jobs</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Job-details"><span class="nav-number">3.2.</span> <span class="nav-text">Job details</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Stages"><span class="nav-number">3.3.</span> <span class="nav-text">Stages</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Environment"><span class="nav-number">3.4.</span> <span class="nav-text">Environment</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Executors"><span class="nav-number">3.5.</span> <span class="nav-text">Executors</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SQL"><span class="nav-number">3.6.</span> <span class="nav-text">SQL</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shao Guoliang</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Pisces</a> v6.0.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.0.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.0.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.0.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.0.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'S8hhGklf9TcnfdaayOcyEXaY-gzGzoHsz',
+        appKey: 'N9bcSWiTfFKC2MYa8vY5GFGi',
+        placeholder: 'Leave your comments',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=6.0.0"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=6.0.0"></script>
+
+
+  
+
+</body>
+</html>

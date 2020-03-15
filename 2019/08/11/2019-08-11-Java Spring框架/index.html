@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.0.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.0.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.0.0" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Categories">
+<meta property="og:url" content="http://yoursite.com/categories/index.html">
+<meta property="og:site_name" content="Shao Guoliang的博客">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-10-31T02:33:06.000Z">
+<meta property="article:modified_time" content="2019-10-31T02:34:17.920Z">
+<meta property="article:author" content="Shao Guoliang">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.0.0',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/categories/"/>
+
+
+
+
+
+  <title>Java Spring框架 | Shao Guoliang的博客</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Shao Guoliang的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">未来不迎，当时不杂，过往不恋</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/11/2019-08-11-Java%20Spring%E6%A1%86%E6%9E%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shao Guoliang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shao Guoliang的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Java Spring框架</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-11T00:00:00+08:00">2019-08-11</time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/08/11/2019-08-11-Java%20Spring%E6%A1%86%E6%9E%B6/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/11/2019-08-11-Java%20Spring%E6%A1%86%E6%9E%B6/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Spring是一个基于IOC和AOP结构的J2EE系统的框架。<br>IOC反转控制是Spring的基础，简单来说就是创建对象由以前的程序员自己new构造方法来调用，变成了交由Spring创建对象。</p>
+<p>Spring创建对象<br>DI依赖注入Dependency Inject。简单地说就是拿到的对象的属性已经被注入好相关值了，直接使用即可。</p>
+<a id="more"></a> <!-- 摘要 -->
+
+<h3 id="Spring-框架测试"><a href="#Spring-框架测试" class="headerlink" title="Spring 框架测试"></a>Spring 框架测试</h3><h4 id="建立一个类"><a href="#建立一个类" class="headerlink" title="建立一个类"></a>建立一个类</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * </span><br><span class="line"> *&#x2F;</span><br><span class="line">package com.how2java.pojo;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * @author shaoguoliang</span><br><span class="line"> *</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class Category &#123;</span><br><span class="line">    private int id;</span><br><span class="line">    private String name;</span><br><span class="line">    </span><br><span class="line">    public int getId()&#123;</span><br><span class="line">    	return id;</span><br><span class="line">    &#125;</span><br><span class="line">    	</span><br><span class="line">    public void setId(int id)&#123;</span><br><span class="line">    	this.id &#x3D; id;</span><br><span class="line">    &#125;</span><br><span class="line">    	</span><br><span class="line">    public String getName()&#123;</span><br><span class="line">    	return name;</span><br><span class="line">    &#125;</span><br><span class="line">    	</span><br><span class="line">    public void setName(String name)&#123;</span><br><span class="line">    	this.name &#x3D; name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="在src文件夹下建立applicationContext-xml文件"><a href="#在src文件夹下建立applicationContext-xml文件" class="headerlink" title="在src文件夹下建立applicationContext.xml文件"></a>在src文件夹下建立applicationContext.xml文件</h4><p>在bean中配置类的实例c, 并配置实例属性。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;beans xmlns&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;beans&quot;</span><br><span class="line">    xmlns:xsi&#x3D;&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;2001&#x2F;XMLSchema-instance&quot;</span><br><span class="line">    xmlns:aop&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;aop&quot;</span><br><span class="line">    xmlns:tx&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;tx&quot;</span><br><span class="line">    xmlns:context&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;context&quot;</span><br><span class="line">    xsi:schemaLocation&#x3D;&quot;</span><br><span class="line">   http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;beans</span><br><span class="line">   http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;beans&#x2F;spring-beans-3.0.xsd</span><br><span class="line">   http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;aop</span><br><span class="line">   http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;aop&#x2F;spring-aop-3.0.xsd</span><br><span class="line">   http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;tx</span><br><span class="line">   http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;tx&#x2F;spring-tx-3.0.xsd</span><br><span class="line">   http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;context     </span><br><span class="line">   http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;context&#x2F;spring-context-3.0.xsd&quot;&gt;</span><br><span class="line">  </span><br><span class="line">    &lt;bean name&#x3D;&quot;c&quot; class&#x3D;&quot;com.how2java.pojo.Category&quot;&gt;</span><br><span class="line">        &lt;property name&#x3D;&quot;name&quot; value&#x3D;&quot;category 1&quot; &#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;bean&gt;</span><br><span class="line">  </span><br><span class="line">&lt;&#x2F;beans&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="测试Spring类"><a href="#测试Spring类" class="headerlink" title="测试Spring类"></a>测试Spring类</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * </span><br><span class="line"> *&#x2F;</span><br><span class="line">package com.how2java.test;</span><br><span class="line"></span><br><span class="line">import org.springframework.context.ApplicationContext;</span><br><span class="line">import org.springframework.context.support.ClassPathXmlApplicationContext;</span><br><span class="line"></span><br><span class="line">import com.how2java.pojo.Category;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * @author shaoguoliang</span><br><span class="line"> *</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class TestSpring &#123;</span><br><span class="line">    public static void main(String[] args)&#123;</span><br><span class="line">    	ApplicationContext context &#x3D; new ClassPathXmlApplicationContext(new String[] &#123;&quot;applicationContext.xml&quot;&#125;);</span><br><span class="line">    	</span><br><span class="line">    	Category c &#x3D; (Category) context.getBean(&quot;c&quot;);</span><br><span class="line">    	</span><br><span class="line">    	System.out.println(c.getName());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="运行测试类，获得结果"><a href="#运行测试类，获得结果" class="headerlink" title="运行测试类，获得结果"></a>运行测试类，获得结果</h4><p>![testSpring_result](/images/2019-08-11-Java Spring框架/testSpring_result.png)</p>
+<h4 id="通过applicationContext注入一个对象"><a href="#通过applicationContext注入一个对象" class="headerlink" title="通过applicationContext注入一个对象"></a>通过applicationContext注入一个对象</h4><p>建立一个Product类，其字段中包含Category类。</p>
+<p>那么在applicationContext.xml文件中，按如下方式注入对象。注意<code>ref=&quot;c&quot;</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;bean name&#x3D;&quot;p&quot; class&#x3D;&quot;com.how2java.pojo.Product&quot;&gt;</span><br><span class="line">   &lt;property name&#x3D;&quot;name&quot; value&#x3D;&quot;product 1&quot; &#x2F;&gt;</span><br><span class="line">   &lt;property name&#x3D;&quot;Category&quot; ref&#x3D;&quot;c&quot; &#x2F;&gt;</span><br><span class="line">&lt;&#x2F;bean&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="通过注解来注入对象"><a href="#通过注解来注入对象" class="headerlink" title="通过注解来注入对象"></a>通过注解来注入对象</h3><h4 id="通过context-annotation-config-对注入对象行为进行注解"><a href="#通过context-annotation-config-对注入对象行为进行注解" class="headerlink" title="通过context:annotation-config/ 对注入对象行为进行注解"></a>通过<a href="context:annotation-config/">context:annotation-config/</a> 对注入对象行为进行注解</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;context:annotation-config&#x2F;&gt;</span><br><span class="line">&lt;bean name&#x3D;&quot;c&quot; class&#x3D;&quot;com.how2java.pojo.Category&quot;&gt;</span><br><span class="line">   &lt;property name&#x3D;&quot;name&quot; value&#x3D;&quot;category 1&quot;&#x2F;&gt;</span><br><span class="line">&lt;&#x2F;bean&gt;</span><br><span class="line">&lt;bean name&#x3D;&#39;p&#39; class&#x3D;&quot;com.how2java.pojo.Product&quot;&gt;</span><br><span class="line">   &lt;property name&#x3D;&quot;name&quot; value&#x3D;&quot;product 1&quot;&#x2F;&gt;</span><br><span class="line">   &lt;!-- 在Product代码中加入@Autowired注解 --&gt;</span><br><span class="line">&lt;&#x2F;bean&gt;</span><br></pre></td></tr></table></figure>
+
+<p>Product代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">public class Product &#123;</span><br><span class="line">    	</span><br><span class="line">    private int id;</span><br><span class="line">    private String name;</span><br><span class="line">    @Autowired</span><br><span class="line">    private Category category;</span><br><span class="line">    	</span><br><span class="line">    public int getId() &#123;</span><br><span class="line">    	return id;</span><br><span class="line">    &#125;</span><br><span class="line">    public String getName() &#123;</span><br><span class="line">    	return name;</span><br><span class="line">    &#125;</span><br><span class="line">    public Category getCategory() &#123;</span><br><span class="line">    	return category;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setId(int id) &#123;</span><br><span class="line">    	this.id &#x3D; id;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">    	this.name &#x3D; name;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setCategory(Category category) &#123;</span><br><span class="line">    	this.category &#x3D; category;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>也可以在setCategory(Category cat) 函数上加@autowired，可以起到同样的效果 </p>
+<p>除了@autowired之外也可以加上@Resource</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@Resource(name&#x3D;&quot;c&quot;)</span><br><span class="line">private Category category;</span><br></pre></td></tr></table></figure>
+
+<h4 id="在applicationContext-xml文件中"><a href="#在applicationContext-xml文件中" class="headerlink" title="在applicationContext.xml文件中"></a>在applicationContext.xml文件中</h4><p>添加<code>&lt;context:component-scan base-package=&quot;com.how2java.pojo&quot;/&gt;</code><br>表示告诉Spring，bean都放在com.how2java.pojo这个包里。注意的是因为配置从applicationContext.xml移植出来了，所以对象初始化要放在类定义里边。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">package com.how2java.pojo;</span><br><span class="line"> </span><br><span class="line">import javax.annotation.Resource;</span><br><span class="line"> </span><br><span class="line">import org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line">import org.springframework.stereotype.Component;</span><br><span class="line"> </span><br><span class="line">@Component(&quot;p&quot;)</span><br><span class="line">public class Product &#123;</span><br><span class="line"> </span><br><span class="line">    private int id;</span><br><span class="line">    private String name&#x3D;&quot;product 1&quot;;</span><br><span class="line">     </span><br><span class="line">    @Autowired</span><br><span class="line">    private Category category;</span><br><span class="line"> </span><br><span class="line">    public int getId() &#123;</span><br><span class="line">        return id;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    public void setId(int id) &#123;</span><br><span class="line">        this.id &#x3D; id;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">        this.name &#x3D; name;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    public Category getCategory() &#123;</span><br><span class="line">        return category;</span><br><span class="line">    &#125;</span><br><span class="line">     </span><br><span class="line">    public void setCategory(Category category) &#123;</span><br><span class="line">        this.category &#x3D; category;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">package com.how2java.pojo;</span><br><span class="line"> </span><br><span class="line">import org.springframework.stereotype.Component;</span><br><span class="line"> </span><br><span class="line">@Component(&quot;c&quot;)</span><br><span class="line">public class Category &#123;</span><br><span class="line">  </span><br><span class="line">    public int getId() &#123;</span><br><span class="line">        return id;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setId(int id) &#123;</span><br><span class="line">        this.id &#x3D; id;</span><br><span class="line">    &#125;</span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">        this.name &#x3D; name;</span><br><span class="line">    &#125;</span><br><span class="line">    private int id;</span><br><span class="line">    private String name&#x3D;&quot;category 1&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="AOP面向切面编程"><a href="#AOP面向切面编程" class="headerlink" title="AOP面向切面编程"></a>AOP面向切面编程</h3><p>AOP 即 Aspect Oriented Program面向切面编程。<br>在面向切面编程的思想里边，把功能分为<strong>核心业务功能</strong>和<strong>周边功能</strong>。<br>核心业务功能，包括登录，增加数据，删除数据等。<br>周边功能，包括性能统计，日志，事务管理等等。</p>
+<p>周边功能在Spring的面向切面编程AOP思想里，即被定义为切面。<br>在面向切面编程AOP的思想里边，核心业务功能和切面功能分别<strong>独立进行开发</strong>，然后把切面功能和核心业务功能“编制”在一起，这就叫做AOP。</p>
+<p>AOP的基本思路：</p>
+<ol>
+<li>功能分为两大类，辅助功能和核心业务功能</li>
+<li>辅助功能和核心业务功能彼此独立进行开发</li>
+<li>比如登录功能，即使没有性能统计和日志输出也可以正常运行</li>
+<li>如果有需要，就把“日志输出”和“登录”功能编织在一起，这样登录的时候就可以看到日志输出了</li>
+<li>辅助功能，又叫做切面，这种能够 <em>选择性的，低耦合的</em> 把切面和核心业务功能结合在一起的编程思想，就叫做切面编程。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;核心功能代码</span><br><span class="line"></span><br><span class="line">package com.how2java.service;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * @author shaoguoliang</span><br><span class="line"> *</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class ProductService &#123;</span><br><span class="line">    public void doSomeService()&#123;</span><br><span class="line">    	System.out.println(&quot;do Some Service&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;切面功能代码1</span><br><span class="line">package com.how2java.aspect;</span><br><span class="line"></span><br><span class="line">import org.aspectj.lang.ProceedingJoinPoint;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * @author shaoguoliang</span><br><span class="line"> *</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class LoggerAspect &#123;</span><br><span class="line">    	</span><br><span class="line">    public Object log(ProceedingJoinPoint joinPoint) throws Throwable&#123;</span><br><span class="line">    	System.out.println(&quot;start log:&quot; + joinPoint.getSignature().getName());</span><br><span class="line">    	Object object &#x3D; joinPoint.proceed();</span><br><span class="line">    	System.out.println(&quot;end log:&quot; + joinPoint.getSignature().getName());</span><br><span class="line">    	return object;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;切面功能代码2</span><br><span class="line">package com.how2java.aspect;</span><br><span class="line"></span><br><span class="line">import java.util.Date;</span><br><span class="line"></span><br><span class="line">import org.aspectj.lang.ProceedingJoinPoint;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * @author shaoguoliang</span><br><span class="line"> *</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class PerformerAspect &#123;</span><br><span class="line"></span><br><span class="line">    public Object spend(ProceedingJoinPoint proceedingJoinPoint) throws Throwable&#123;</span><br><span class="line">    	</span><br><span class="line">    	long start &#x3D; System.currentTimeMillis();</span><br><span class="line">    	System.out.println(&quot;start at &quot; + new Date(start));</span><br><span class="line">    	</span><br><span class="line">    	Object object &#x3D; proceedingJoinPoint.proceed();</span><br><span class="line">    	</span><br><span class="line">    	long end &#x3D; System.currentTimeMillis();</span><br><span class="line">       System.out.println(&quot;end at&quot;+new Date(end));</span><br><span class="line">       System.out.println(&quot;total time&quot;+(end-start)+&quot;毫秒&quot;);</span><br><span class="line">       </span><br><span class="line">       return object;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;在applicationContext.xml中进行耦合</span><br><span class="line"></span><br><span class="line">&lt;beans&gt;</span><br><span class="line">&lt;!-- 声明核心业务 --&gt;</span><br><span class="line">    &lt;bean name&#x3D;&quot;s&quot; class&#x3D;&quot;com.how2java.service.ProductService&quot;&#x2F;&gt;</span><br><span class="line">    </span><br><span class="line">    &lt;!-- 声明日志切面 --&gt;</span><br><span class="line">    &lt;bean id&#x3D;&quot;loggerAspect&quot; class&#x3D;&quot;com.how2java.aspect.LoggerAspect&quot;&#x2F;&gt;</span><br><span class="line">    &lt;bean id&#x3D;&quot;performerAspect&quot; class&#x3D;&quot;com.how2java.aspect.PerformerAspect&quot;&#x2F;&gt;</span><br><span class="line">    </span><br><span class="line">    &lt;aop:config&gt;</span><br><span class="line">    </span><br><span class="line">        &lt;!-- 设置切入点的作用对象和id --&gt;</span><br><span class="line">        &lt;aop:pointcut id&#x3D;&quot;loggerCutpoint&quot; </span><br><span class="line">        expression&#x3D;</span><br><span class="line">        &quot;execution(* com.how2java.service.ProductService.*(..)) &quot;&#x2F;&gt;</span><br><span class="line">        </span><br><span class="line">        &lt;!-- 设置切面id --&gt;</span><br><span class="line">        &lt;aop:aspect id&#x3D;&quot;logAspect&quot; ref&#x3D;&quot;loggerAspect&quot;&gt;</span><br><span class="line">            &lt;aop:around pointcut-ref&#x3D;&quot;loggerCutpoint&quot; method&#x3D;&quot;log&quot;&#x2F;&gt;</span><br><span class="line">        &lt;&#x2F;aop:aspect&gt;</span><br><span class="line">        </span><br><span class="line">        &lt;aop:aspect id&#x3D;&quot;performAspect&quot; ref&#x3D;&quot;performerAspect&quot;&gt;</span><br><span class="line">            &lt;aop:around pointcut-ref&#x3D;&quot;loggerCutpoint&quot; method&#x3D;&quot;spend&quot;&#x2F;&gt;</span><br><span class="line">        &lt;&#x2F;aop:aspect&gt;</span><br><span class="line">        </span><br><span class="line">    &lt;&#x2F;aop:config&gt;</span><br><span class="line">&lt;&#x2F;beans&gt;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果</p>
+<p>![AOP](/images/2019-08-11-Java Spring框架/AOP.png)</p>
+<h4 id="使用注解方式配置AOP"><a href="#使用注解方式配置AOP" class="headerlink" title="使用注解方式配置AOP"></a>使用注解方式配置AOP</h4><p>核心功能</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">package com.how2java.service;</span><br><span class="line"></span><br><span class="line">import org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * @author shaoguoliang</span><br><span class="line"> *</span><br><span class="line"> *&#x2F;</span><br><span class="line">@Component(&quot;s&quot;)</span><br><span class="line">public class ProductService &#123;</span><br><span class="line">    public void doSomeService()&#123;</span><br><span class="line">    	System.out.println(&quot;do Some Service&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>切片功能</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">package com.how2java.aspect;</span><br><span class="line"></span><br><span class="line">import org.aspectj.lang.ProceedingJoinPoint;</span><br><span class="line">import org.aspectj.lang.annotation.Around;</span><br><span class="line">import org.aspectj.lang.annotation.Aspect;</span><br><span class="line">import org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * @author shaoguoliang</span><br><span class="line"> *</span><br><span class="line"> *&#x2F;</span><br><span class="line">@Aspect</span><br><span class="line">@Component</span><br><span class="line">public class LoggerAspect &#123;</span><br><span class="line">    @Around(value &#x3D; &quot;execution(* com.how2java.service.ProductService.*(..))&quot;)</span><br><span class="line">    public Object log(ProceedingJoinPoint joinPoint) throws Throwable&#123;</span><br><span class="line">    	System.out.println(&quot;start log:&quot; + joinPoint.getSignature().getName());</span><br><span class="line">    	Object object &#x3D; joinPoint.proceed();</span><br><span class="line">    	System.out.println(&quot;end log:&quot; + joinPoint.getSignature().getName());</span><br><span class="line">    	return object;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>applicationContext.xml配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;context:component-scan base-package&#x3D;&quot;com.how2java.aspect&quot;&#x2F;&gt;</span><br><span class="line">&lt;context:component-scan base-package&#x3D;&quot;com.how2java.service&quot;&#x2F;&gt;</span><br><span class="line">&lt;aop:aspectj-autoproxy&#x2F;&gt;</span><br></pre></td></tr></table></figure>
+<p>其运行结果与上述相类似。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/10/2019-08-10-Java%E7%9A%84Junit%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" rel="next" title="Java Junit单元测试">
+                <i class="fa fa-chevron-left"></i> Java Junit单元测试
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/12/2019-08-12-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" rel="prev" title="排序算法">
+                排序算法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="Shao Guoliang" />
+            
+              <p class="site-author-name" itemprop="name">Shao Guoliang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/floodshao" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:guoliang_shao@u.nus.edu" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring-框架测试"><span class="nav-number">1.</span> <span class="nav-text">Spring 框架测试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#建立一个类"><span class="nav-number">1.1.</span> <span class="nav-text">建立一个类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在src文件夹下建立applicationContext-xml文件"><span class="nav-number">1.2.</span> <span class="nav-text">在src文件夹下建立applicationContext.xml文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试Spring类"><span class="nav-number">1.3.</span> <span class="nav-text">测试Spring类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运行测试类，获得结果"><span class="nav-number">1.4.</span> <span class="nav-text">运行测试类，获得结果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#通过applicationContext注入一个对象"><span class="nav-number">1.5.</span> <span class="nav-text">通过applicationContext注入一个对象</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过注解来注入对象"><span class="nav-number">2.</span> <span class="nav-text">通过注解来注入对象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#通过context-annotation-config-对注入对象行为进行注解"><span class="nav-number">2.1.</span> <span class="nav-text">通过context:annotation-config&#x2F; 对注入对象行为进行注解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在applicationContext-xml文件中"><span class="nav-number">2.2.</span> <span class="nav-text">在applicationContext.xml文件中</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AOP面向切面编程"><span class="nav-number">3.</span> <span class="nav-text">AOP面向切面编程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用注解方式配置AOP"><span class="nav-number">3.1.</span> <span class="nav-text">使用注解方式配置AOP</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shao Guoliang</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Pisces</a> v6.0.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.0.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.0.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.0.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.0.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'S8hhGklf9TcnfdaayOcyEXaY-gzGzoHsz',
+        appKey: 'N9bcSWiTfFKC2MYa8vY5GFGi',
+        placeholder: 'Leave your comments',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=6.0.0"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=6.0.0"></script>
+
+
+  
+
+</body>
+</html>

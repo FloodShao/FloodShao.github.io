@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.0.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.0.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.0.0" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Categories">
+<meta property="og:url" content="http://yoursite.com/categories/index.html">
+<meta property="og:site_name" content="Shao Guoliang的博客">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-10-31T02:33:06.000Z">
+<meta property="article:modified_time" content="2019-10-31T02:34:17.920Z">
+<meta property="article:author" content="Shao Guoliang">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.0.0',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/categories/"/>
+
+
+
+
+
+  <title>Linux Simple Scull驱动 | Shao Guoliang的博客</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Shao Guoliang的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">未来不迎，当时不杂，过往不恋</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/01/Linux-simple-Scull%E9%A9%B1%E5%8A%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shao Guoliang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shao Guoliang的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Linux Simple Scull驱动</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-12-01T11:15:05+08:00">2019-12-01</time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/12/01/Linux-simple-Scull%E9%A9%B1%E5%8A%A8/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/12/01/Linux-simple-Scull%E9%A9%B1%E5%8A%A8/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>参考《Linux设备驱动程序第3版》</p>
+<h2 id="Scull字符型驱动程序的设备描述"><a href="#Scull字符型驱动程序的设备描述" class="headerlink" title="Scull字符型驱动程序的设备描述"></a>Scull字符型驱动程序的设备描述</h2><p>字符设备驱动程序是分配一段内存，然后提供对这个设备的管理方式，我们通过它提供的操作来操纵字符驱动设备。本质上是一个我们分配的模拟内存来模拟驱动设备。</p>
+<p>###设备编号<br>字符型驱动设备可以通过命令<code>ls -l</code>查看文件类型为c的设备。</p>
+<ul>
+<li>major主设备编号标识设备对应的驱动程序</li>
+<li>minor次设备号由内核使用，用于正确确定设备文件所指的设备。</li>
+<li>在内核中，dev_t(定义在&lt;linux/types.h&gt;中)用来保存设备编号，包括major和minor。</li>
+<li>在建立一个字符设备之前，驱动程序首先要获取一个或多个设备编号。函数为<code>register_chrdev_region</code>在&lt;linux/fs.h中声明&gt;。清除函数为<code>unregister_chrdev_region</code>。这种方式属于<strong>静态分配</strong>一个当前没有使用的设备号为主设备号。</li>
+<li>动态分配<code>alloc_chrdev_region</code>。</li>
+<li>一旦分配了设备号，就可以从/proc/devices中得到。</li>
+<li>安装scull设备，使用内核命令insmod(/sbin/insmod)<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">#!&#x2F;bin&#x2F;sh</span><br><span class="line">module&#x3D;&quot;scull&quot;</span><br><span class="line">device&#x3D;&quot;scull&quot;</span><br><span class="line">mode&#x3D;&quot;664&quot;</span><br><span class="line"></span><br><span class="line">#install scull，invoke insmod with all arguments we got</span><br><span class="line">#use a pathname, as insmod doesn&#39;t look in . by default</span><br><span class="line">&#x2F;sbin&#x2F;insmod .&#x2F;$module.ko $* || exit 1</span><br><span class="line"></span><br><span class="line">#retrieve the major number</span><br><span class="line">major&#x3D;$( awk &quot;\$2&#x3D;&#x3D;\&quot;$module&quot; &#123;print \$1&#125;&quot; &#x2F;proc&#x2F;devices)</span><br><span class="line">#which is same as</span><br><span class="line">major&#x3D;$( awk &quot;\$2&#x3D;&#x3D;\&quot;scull\&quot; &#123;print \$1&#125;&quot; \proc\devices)</span><br><span class="line"></span><br><span class="line">#remove stale nodes</span><br><span class="line">rm -f &#x2F;dev&#x2F;$&#123;device&#125;[0-3]</span><br><span class="line"></span><br><span class="line">echo $&#123;device&#125;0 $&#123;major&#125;0</span><br><span class="line"></span><br><span class="line">#make nodes，创建了四个设备</span><br><span class="line">mknod &#x2F;dev&#x2F;$&#123;device&#125;0 c $major 0</span><br><span class="line">mknod &#x2F;dev&#x2F;$&#123;device&#125;1 c $major 1</span><br><span class="line">mknod &#x2F;dev&#x2F;$&#123;device&#125;2 c $major 2</span><br><span class="line">mknod &#x2F;dev&#x2F;$&#123;device&#125;3 c $major 3</span><br><span class="line"></span><br><span class="line">ln -sf $&#123;device&#125;0 &#x2F;dev&#x2F;$&#123;device&#125;</span><br><span class="line"></span><br><span class="line"># grep -q表示quiet不显示任何结果，正则表达式匹配^表示匹配字</span><br><span class="line">符串起始位置</span><br><span class="line"># wheel组包含特殊权限，可以执行root权限但并不需要知道root管理员密码。</span><br><span class="line">if grep -q &#39;^staff:&#39; &#x2F;etc&#x2F;group; then</span><br><span class="line">    group&#x3D;&#39;staff&#39;</span><br><span class="line">else</span><br><span class="line">    group&#x3D;&#39;wheel&#39;</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">chgrp $group &#x2F;dev&#x2F;$&#123;device&#125;[0-3]</span><br><span class="line">chmod $mode &#x2F;dev&#x2F;$&#123;device&#125;[0-3] #配置权限664</span><br></pre></td></tr></table></figure></li>
+<li>卸载设备<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#!&#x2F;bin&#x2F;sh</span><br><span class="line">module&#x3D;&quot;scull&quot;</span><br><span class="line">device&#x3D;&quot;scull&quot;</span><br><span class="line"></span><br><span class="line">#remove module from the kernel</span><br><span class="line">&#x2F;sbin&#x2F;rmmod $module $* || exit 1</span><br><span class="line"></span><br><span class="line">#remove the device file</span><br><span class="line">rm -f &#x2F;dev&#x2F;$&#123;device&#125; &#x2F;dev&#x2F;$&#123;device&#125;[0-3]</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><img src="/images/Linux-simple-Scull%E9%A9%B1%E5%8A%A8/%E5%AE%89%E8%A3%85%E5%A5%BD%E7%9A%84dev.png" alt="安装好的dev"><br>可以看出在/dev下，scull这个模块包含四个设备，保存在一个文件夹中，并且文件夹指向scull0设备。</p>
+<ul>
+<li>除了使用load和unload脚本之外，还可以编写一个init脚本，并保存在发行版使用的init脚本目录中（scull.init）。接收约定的参数（start、stop、restart）也可以完成scull_load和scull_unload双重任务。</li>
+<li><strong>分配设备号的最佳方式</strong>。默认采用动态方式，同时保留加载或编译是指定的主设备编号。<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">dev_t</span> dev = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> result;</span><br><span class="line"><span class="keyword">if</span>(scull_major)&#123; <span class="comment">//存在驱动程序</span></span><br><span class="line">    dev = MKDEV(scull_major, scull_minor);</span><br><span class="line">    result = register_chrdev_region(dev, scull_nr_devs, <span class="string">"scull"</span>); <span class="comment">//在dev设备上注册设备</span></span><br><span class="line">&#125; <span class="keyword">else</span>&#123;</span><br><span class="line">    result = alloc_chrdev_region(&amp;dev, scull_minor, scull_nr_devs, <span class="string">"scull"</span>); <span class="comment">//分配major驱动程序编号</span></span><br><span class="line">    scull_major = MAJOR(dev); <span class="comment">//获取设备驱动</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(result &lt; <span class="number">0</span>)&#123;</span><br><span class="line">    printk(KERN_WARNING <span class="string">"scull: can't get major %d\n"</span>, scull_major);</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="驱动程序需要的数据结构"><a href="#驱动程序需要的数据结构" class="headerlink" title="驱动程序需要的数据结构"></a>驱动程序需要的数据结构</h3><p>大部分基本的驱动程序操作涉及到三个重要的内核数据结构，分别是file_operations、file和inode。</p>
+<h4 id="file-operations-文件操作"><a href="#file-operations-文件操作" class="headerlink" title="file_operations 文件操作"></a>file_operations 文件操作</h4><ul>
+<li>file_operations是建立驱动程序操作与设备编号之间的连接。该结构定义在&lt;linux/fs.h&gt;，其中包含一组函数指针。</li>
+<li>每个打开的文件（file）和一组函数关联。这些操作主要用来实现系统调用。我们可以认为文件是一个”对象“，而操作他的函数是”方法“。</li>
+<li>在查看file_operations方法清单时，我们会注意到许多参数包含__user字符串，表明指针是一个用户空间地址，不能被直接饮用。</li>
+</ul>
+<p>基本的file_operations数据结构：</p>
+<ul>
+<li>struct module *owner ：指向”拥有“该结构的木偶快的指针。内核使用这个字段来避免在模块的操作正在被使用时卸载该模块。该成员都会被初始化为<code>THIS_MODULE</code>, which is defined in &lt;linux/module.h&gt;</li>
+<li>loff_t (**llseek) (struct file *, loff_t, int); 该方法用来修改文件当前读写位置，并将新的位置（正的）作为返回值返回。loff_t是一个长偏移量。如果这个函数指针是NULL，那么对seek的调用将以某种不可预期的方式修改file结构中的位置计数器。</li>
+<li>ssize_t (*read) (struct file *, char __user *, size_t, loff_t *); 从设备中读取数据，该函数指针为NULL时，将导致read系统调用出错并返回-EINVAL（invalid argument）。函数返回成功读取的字节数。对应的异步读取函数为aio_read。</li>
+<li>ssize_t (*write) (struct file *, const char __user *, size_t, loff_t); 向设备发送数据。对应的异步写入操作 (aio_write)</li>
+<li>int (*open) (struct inode *, struct file *); 这是对设备文件执行的第一个操作，但并不是一定要声明，如果入口为NULL，设备的打开操作会永远成功，但系统不会通知驱动程序。</li>
+<li>int (*lock) (struct file *, int, struct file_lock *); lock方法用于实现文件锁定，锁定是常规文件不可缺少的特性，但设备驱动程序基本不会实现这个方法。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">struct file_operations scull_fops&#x3D;&#123;</span><br><span class="line">    .owener &#x3D;   THIS_MODULE,</span><br><span class="line">    .llseek &#x3D;   scull_llseek,</span><br><span class="line">    .read &#x3D;     scull_read,</span><br><span class="line">    .write &#x3D;    scull_write,</span><br><span class="line">    .ioctl &#x3D;    scull_ioctl,</span><br><span class="line">    .open &#x3D;     scull_open,</span><br><span class="line">    .release &#x3D;  scull_release,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="file文件结构"><a href="#file文件结构" class="headerlink" title="file文件结构"></a>file文件结构</h4><ul>
+<li>file结构与用户空间程序中的FILE没有任何联系，（FILE是在C库中定义的，所以不会出现在内核中）struct file是一个内核结构，不会出现在用户结构中。</li>
+<li>struct file表示一个打开的文件（不仅仅限定于设备驱动程序，系统中每个打开的文件在内核空间中都有一个对应的file结构）。由内核在open操作时创建，并传递给该文件上进行操作的所有函数，直到最后close函数。</li>
+<li>mode_t f_mode: 文件模式，通过FMODE_READ和FMODE_WRITE来标识文件是否可读或可写。内核在调用驱动程序的read和write之前已经检查了访问权限，没有访问权限的情况下内核将拒绝对该文件进行读写操作。</li>
+<li>loff_t f_pos: 当前read/write位置 （long offsite）。如果驱动程序需要知道文件中的当前位置，可以读取这个值。</li>
+<li>unsigned int f_flags: 文件标志，检查用户请求的是否是非阻塞式操作。</li>
+<li>struct file_operations *f_op 文件相关操作。</li>
+<li>void *pricate_data: open调用前将这个指针置为NULL。驱动可以将这个字段用于任何目的，是跨系统调用时保存状态信息非常有用的资源。</li>
+<li>struct dentry *f_dentry: 文件对应的目录项结构。</li>
+</ul>
+<h4 id="inode结构"><a href="#inode结构" class="headerlink" title="inode结构"></a>inode结构</h4><ul>
+<li>内核用inode结构在内部表示文件，和file结构不同，file表示打开的文件描述符。对单个文件，可能会有许多个表示打开的file结构，但他们都指向单个inode结构。</li>
+<li>inode结构中包含了大量的有关文件信息。常规只有以下两个字段对驱动有用：</li>
+<li>dev_t i_rdev 表示设备文件的inode结构，包含了真正的设备编号</li>
+<li>struct cdev *i_cdev 表示私服设备的内核的内部结构。</li>
+</ul>
+<h3 id="Scull设备的注册"><a href="#Scull设备的注册" class="headerlink" title="Scull设备的注册"></a>Scull设备的注册</h3><p>内核内部使用struct cdev来表示字符设备。在内核调用设备之前，必须分配并注册一个或多个cdev。（定义在&lt;linux/cdev.h&gt;）</p>
+<p>分配和初始化cdev的方法：</p>
+<ul>
+<li>在运行时获取一个独立的cdev结构：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">struct cdev *my_cdev &#x3D; cdev_alloc();</span><br><span class="line">my_cdev-&gt;ops &#x3D; *my_fops;</span><br></pre></td></tr></table></figure></li>
+<li>也可以初始化的时候进行分配<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void cdev_init(struct cdev *cdev, struct file_operations *fops);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="定义Scull设备-并初始化Scull设备"><a href="#定义Scull设备-并初始化Scull设备" class="headerlink" title="定义Scull设备, 并初始化Scull设备"></a>定义Scull设备, 并初始化Scull设备</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">struct scull_dev&#123;</span><br><span class="line">    struct scull_qset *data;</span><br><span class="line">    int quantum;</span><br><span class="line">    int qset;</span><br><span class="line">    unsigned long size;</span><br><span class="line">    unsigned int access_key;</span><br><span class="line">    struct semaphore sem;</span><br><span class="line">    struct cdev cdev; &#x2F;&#x2F;定义这是一个字符设备结构</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>Scull设备初始化</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> scull_major =   SCULL_MAJOR; <span class="comment">//defined in scull.h</span></span><br><span class="line"><span class="keyword">int</span> scull_minor =   <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> scull_nr_devs = SCULL_NR_DEVS;	<span class="comment">/* number of bare scull devices */</span></span><br><span class="line"><span class="keyword">int</span> scull_quantum = SCULL_QUANTUM;</span><br><span class="line"><span class="keyword">int</span> scull_qset =    SCULL_QSET;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">scull_dev</span> *<span class="title">scull_devices</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">scull_init_module</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123; <span class="comment">//内核函数，无参数的标准形式都要加上void</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> result, i;</span><br><span class="line">    <span class="keyword">dev_t</span> dev;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//1. 定义驱动程序major</span></span><br><span class="line">    <span class="keyword">if</span>(scull_major)&#123;</span><br><span class="line">        dev = MKDEV(scull_major, scull_minor); <span class="comment">//创建dev</span></span><br><span class="line">        result = register_chrdev_region(dev, scull_nr_devs, <span class="string">"scull"</span>); <span class="comment">//注册   </span></span><br><span class="line">    &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">        result  = alloc_chrdev_region(&amp;dev, scull_minor, scull_nr_devs, <span class="string">"scull"</span>);</span><br><span class="line">        scull_major = MAJOR(dev);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(result&lt;<span class="number">0</span>)&#123;</span><br><span class="line">        printk(KERN_WARNING <span class="string">"scull: can't get major %d\n"</span>, scull_major);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//2. 建立并分配设备文件（动态分配）</span></span><br><span class="line">    scull_devices = kmalloc(scull_nr_devs * <span class="keyword">sizeof</span>(struct scull_dev), GFP_KERNEL);</span><br><span class="line">    <span class="keyword">if</span>(!scull_devices)&#123;</span><br><span class="line">        result = -ENOMEM; <span class="comment">//内存不足错误</span></span><br><span class="line">        <span class="keyword">goto</span> fail;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">memset</span>(scull_devices, <span class="number">0</span>, scull_nr_devs * <span class="keyword">sizeof</span>(struct scull_dev));</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//3. 初始化每个设备</span></span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i&lt;scull_nr_devs; i++)&#123;</span><br><span class="line">        scull_device[i].quantum = scull_quantum;</span><br><span class="line">        scull_device[i].qset = scull_qset;</span><br><span class="line">        <span class="comment">//linux 4.0内核更新, 初始化互斥量</span></span><br><span class="line">        sema_init(&amp;scull_device[i], <span class="number">1</span>);</span><br><span class="line">        scull_setup_cdev(&amp;scull_device[i], i);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    dev = MKDEV(scull_major, scull_minor+scull_nr_devs);</span><br><span class="line">    dev += scull_p_init(dev);</span><br><span class="line">    dev += scull_access_init(dev);</span><br><span class="line">    </span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> SCULL_DEBUG</span></span><br><span class="line">    scull_create_proc();</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">fail:</span><br><span class="line">    scull_cleanup_module();</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>定义scull函数接口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">struct file_operations scull_fops &#x3D; &#123; </span><br><span class="line">    .owner &#x3D; THIS_MODULE,</span><br><span class="line">    .llseek &#x3D; scull_llseek,</span><br><span class="line">    .read   &#x3D; scull_read,</span><br><span class="line">    .write  &#x3D; scull_write,</span><br><span class="line">   &#x2F;&#x2F; .ioctl  &#x3D; scull_ioctl, 最新内核删掉了这个接口</span><br><span class="line">    .open   &#x3D; scull_open,</span><br><span class="line">    .release&#x3D; scull_release,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Scull设备操作接口"><a href="#Scull设备操作接口" class="headerlink" title="Scull设备操作接口"></a>Scull设备操作接口</h2><h3 id="open和release"><a href="#open和release" class="headerlink" title="open和release"></a>open和release</h3><h4 id="open方法"><a href="#open方法" class="headerlink" title="open方法"></a>open方法</h4><p>open方法应该完成：</p>
+<ul>
+<li>检查设备特定的错误（如设备未就绪或类似的硬件问题）</li>
+<li>如果设备首次打开，则初始化</li>
+<li>如果有必要，更新f_op指针</li>
+<li>分配并填写置于filp-&gt;private_data里的数据结构</li>
+</ul>
+<p>int (*open) (struct inode *inode, struct file *filp);<br>经过简化的scull_open代码，没有进行设备初始化工作。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">scull_open</span><span class="params">(struct inode *inode, struct file *filp)</span></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">scull_dev</span> *<span class="title">dev</span>;</span></span><br><span class="line">    dev = container_of(inode-&gt;i_cdev, struct scull_dev, cdev);</span><br><span class="line">    filp-&gt;private_data = dev;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//trim to 0 the length of the device if open was write-only</span></span><br><span class="line">    <span class="keyword">if</span>((filp-&gt;f_flags &amp; O_ACCMODE) == O_WRONLY)&#123;</span><br><span class="line">        scull_trim(dev);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="release方法"><a href="#release方法" class="headerlink" title="release方法"></a>release方法</h4><p>与open方法相反。release完成以下任务：</p>
+<ul>
+<li>释放由open分配的，保存在filp-&gt;private_data中的所有内容</li>
+<li>在最后一个关闭操作时关闭设备。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int scull_release(struct inode *inode, struct file *filp)&#123;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>并不是每个close系统调用都会引起release方法的调用。只有那些真正释放设备数据结构的close调用才会调用这个方法。内核对每个file结构维护其被使用多少次的计数器。无论是fork还是dup，都不会创建新的数据结构（数据结构只能由open创建），它只是增加已有结构的记数。只有在file结构的计数归0的时候，close系统调用才会执行release方法。</p>
+<h3 id="Scull内存使用"><a href="#Scull内存使用" class="headerlink" title="Scull内存使用"></a>Scull内存使用</h3><p>scull驱动程序引入了内存管理的两个核心函数kmalloc和kfree，定义在&lt;linux/slab.h&gt;。</p>
+<p>void *kmalloc(size_t size, int flags);</p>
+<ul>
+<li>试图分配 size个自己的大小，返回值为内存指针。flags为描述内存的分配方法。目前始终使用GFP_KERNEL。<br>void kfree(void *ptr);</li>
+</ul>
+<p>在scull中，每个设备都使用一个指针链表，每个指针都只想一个scull_qset结构。如下图：<br>我们把每一个内存区成为一个量子（4000字节），指针数组成为量子集(1000个地址)。</p>
+<p><img src="/images/Linux-simple-Scull%E9%A9%B1%E5%8A%A8/scull%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D.png" alt="scull内存分配"></p>
+<p>这样scull写入一个字节就会消耗8000或者12000个字节的内存。（每个量子占4000字节，一个量子集占1000*4或1000*8个字节）那么为量子和量子集选择合适的数值就可以配置如何使用该设备。</p>
+<ul>
+<li>在编译时可以修改scull.h中的宏SCULL_QUANTUM和SCULL_QSET。</li>
+<li>在加载模块时，可以设置scull_quantum和scull_qset的整数值。</li>
+<li>或者在运行时，使用ioctl修改当前值或默认值（可能不使用与linux 4.0）</li>
+</ul>
+<h3 id="read和write"><a href="#read和write" class="headerlink" title="read和write"></a>read和write</h3><p>ssize_t read(struct file *filp, char __user *buff, size_t count, loff_t *offp);<br>ssize_t write(struct file *filp, const char __user *buff, size_t count, loff_t *offp);</p>
+<p>count是请求传输的数据长度，buff是指向<strong>用户空间</strong>的缓冲间，最后offp是一个指向长偏移量对象的指针，指明用户在文件中进行存取操作的位置。</p>
+<p>显然，驱动程序必须访问<strong>用户空间</strong>的缓冲区以便完成自己的工作。这个过程由内核专用函数提供 &lt;linux/uaccess.h&gt; (在linux4.0版)</p>
+<p>unsigned long copy_to_user(void __user *to, const void* from, unsigned long count);<br>unsigned long copy_from_user(void* to, const void __user *from, unsigned long count);</p>
+<p>这两个函数很像memcpy，但内核访问用户空间时，被寻址的用户空间页面可能并不在内存中，这时候该驱动进程就会转为睡眠状态直到页面加载进内存。带来的结果是访问用户空间的任何函数都必须是可重入的，并且能和其他驱动程序函数并发执行，而且必须处于能够合法休眠的状态。</p>
+<p>read代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">ssize_t</span> <span class="title">scull_read</span><span class="params">(struct file *filp, <span class="keyword">char</span> __user *buf, <span class="keyword">size_t</span> count, <span class="keyword">loff_t</span> *f_ops)</span></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">scull_dev</span> *<span class="title">dev</span> = <span class="title">filp</span>-&gt;<span class="title">private_data</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">scull_qset</span> *<span class="title">dptr</span>;</span></span><br><span class="line">    <span class="keyword">int</span> quantum = dev-&gt;quantum, qset = dev-&gt;qset;</span><br><span class="line">    <span class="keyword">int</span> itemsize = quantum * qset;</span><br><span class="line">    <span class="keyword">int</span> item, s_pos, q_pos, rest;</span><br><span class="line">    <span class="keyword">ssize_t</span> retval = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(down_interruptible(&amp;dev-&gt;sem))</span><br><span class="line">        <span class="keyword">return</span> -ERESTARTSYS;</span><br><span class="line">    <span class="keyword">if</span>(*f_pos &gt;= dev-&gt;<span class="built_in">size</span>)</span><br><span class="line">        <span class="keyword">goto</span> out;</span><br><span class="line">    <span class="keyword">if</span>(*f_pos + count &gt; dev-&gt;<span class="built_in">size</span>)</span><br><span class="line">        count = dev-&gt;<span class="built_in">size</span> - *f_pos;</span><br><span class="line">    <span class="comment">//在量子集中寻找链表项，qset索引以及偏移量</span></span><br><span class="line">    item = (<span class="keyword">long</span>) *f_pos / itemsize; <span class="comment">//在哪一个qset</span></span><br><span class="line">    rest = (<span class="keyword">long</span>) *f_pos % itemsize; <span class="comment">//在当前qset的多少个字节偏移处</span></span><br><span class="line">    s_pos = rest / quantum; q_pos = rest%quantum; <span class="comment">//s_pos找到是哪一个quantum，q_pos找到是当前quantum的哪一个偏移</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//沿该链表前行，直到正确的位置</span></span><br><span class="line">    dptr = scull_follow(dev, item);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(dptr == <span class="literal">NULL</span> || !dptr-&gt;data || !dptr-&gt;data[s_pos])</span><br><span class="line">        <span class="keyword">goto</span> out;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(count &gt; quantum - q_pos)</span><br><span class="line">        count = quantum - q_pos;</span><br><span class="line">    <span class="keyword">if</span>(copy_to_user(buf, dptr-&gt;data[s_pos], count))&#123; <span class="comment">//拷贝成功返回0</span></span><br><span class="line">        retval = -EFAULT;</span><br><span class="line">        <span class="keyword">goto</span> out;</span><br><span class="line">    &#125;</span><br><span class="line">    *f_pos += count;</span><br><span class="line">    retval = count;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> retval;</span><br><span class="line">    </span><br><span class="line">out:</span><br><span class="line">    up(&amp;dev-&gt;sem);</span><br><span class="line">    <span class="keyword">return</span> retval;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>write代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">ssize_t</span> <span class="title">scull_write</span><span class="params">(struct file *filp, <span class="keyword">const</span> <span class="keyword">char</span> __user *buf, <span class="keyword">size_t</span> count, <span class="keyword">loff_t</span> *f_ops)</span></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">scull_dev</span> *<span class="title">dev</span> = <span class="title">filp</span>-&gt;<span class="title">private_data</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">scull_qset</span> *<span class="title">dptr</span>;</span></span><br><span class="line">    <span class="keyword">int</span> quantum = dev-&gt;quantum, qset = dev-&gt;qset;</span><br><span class="line">    <span class="keyword">int</span> itemsize = quantum * qset;</span><br><span class="line">    <span class="keyword">int</span> item, s_pos, q_pos, rest;</span><br><span class="line">    <span class="keyword">ssize_t</span> retval = -ENOMEM;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(down_interruptible(&amp;dev-&gt;sem)) <span class="comment">//就是获得信号量</span></span><br><span class="line">        <span class="keyword">return</span> -ERESTARTSYS; <span class="comment">//表示信号函数处理完毕后重新执行信号函数前的某个系统调用, linux上层系统受到这个返回值之后会重新执行这个信号函数的系统调用</span></span><br><span class="line">    </span><br><span class="line">    item = *f_ops / itemsize;</span><br><span class="line">    rest = *f_ops % itemsize;</span><br><span class="line">    s_pos = rest / quantum;</span><br><span class="line">    q_pos = rest % quantum;</span><br><span class="line">    </span><br><span class="line">    dptr = scull_follow(dev, item); <span class="comment">//找到qset</span></span><br><span class="line">    <span class="keyword">if</span>(dptr == <span class="literal">NULL</span>) <span class="keyword">goto</span> out;</span><br><span class="line">    <span class="keyword">if</span>(!dptr-&gt;data)&#123; <span class="comment">//找到的qset为空</span></span><br><span class="line">        dptr-&gt;data = kmalloc(qset * <span class="keyword">sizeof</span>(<span class="keyword">char</span> *), GFP_KERNEL); <span class="comment">//分配qset的数组地址，注意这个data是保存指针的</span></span><br><span class="line">        <span class="keyword">if</span>(!dptr-&gt;data) <span class="keyword">goto</span> out; <span class="comment">//分配失败</span></span><br><span class="line">        <span class="built_in">memset</span>(dptr-&gt;data, <span class="number">0</span>, qset * <span class="keyword">sizeof</span>(<span class="keyword">char</span> *));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(!dptr-&gt;data[s_pos])&#123; <span class="comment">//qset当前不是空, quantum是一个新的</span></span><br><span class="line">        dptr-&gt;data[s_pos] = kmalloc(quntum, GFP_KERNEL);</span><br><span class="line">        <span class="keyword">if</span>(!dptr-&gt;data[s_pos]) <span class="keyword">goto</span> out;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(count &gt; quantum - q_pos) count = quantum - q_pos;</span><br><span class="line">    <span class="keyword">if</span>(copy_from_user(dptr-&gt;data[s_pos]+q_pos, buf, count))&#123;</span><br><span class="line">        retval = -EFAULT;</span><br><span class="line">        <span class="keyword">goto</span> out;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    *f_pos += count;</span><br><span class="line">    retval = count;</span><br><span class="line">    <span class="comment">//更新文件大小</span></span><br><span class="line">    <span class="keyword">if</span>(dev-&gt;<span class="built_in">size</span> &lt; *f_pos) dev-&gt;<span class="built_in">size</span> = *f_pos;</span><br><span class="line">    </span><br><span class="line">out:</span><br><span class="line">    up(&amp;dev-&gt;sem);</span><br><span class="line">    <span class="keyword">return</span> retval;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux%E9%A9%B1%E5%8A%A8/" rel="tag"># Linux驱动</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/29/git%E8%AF%A6%E8%A7%A3/" rel="next" title="Git详解">
+                <i class="fa fa-chevron-left"></i> Git详解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/12/02/2019Dec%E6%96%B0%E5%8A%A0%E5%9D%A1%E8%A1%8C%E7%A8%8B/" rel="prev" title="2019Dec新加坡行程">
+                2019Dec新加坡行程 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="Shao Guoliang" />
+            
+              <p class="site-author-name" itemprop="name">Shao Guoliang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/floodshao" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:guoliang_shao@u.nus.edu" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Scull字符型驱动程序的设备描述"><span class="nav-number">1.</span> <span class="nav-text">Scull字符型驱动程序的设备描述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#驱动程序需要的数据结构"><span class="nav-number">1.1.</span> <span class="nav-text">驱动程序需要的数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#file-operations-文件操作"><span class="nav-number">1.1.1.</span> <span class="nav-text">file_operations 文件操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#file文件结构"><span class="nav-number">1.1.2.</span> <span class="nav-text">file文件结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#inode结构"><span class="nav-number">1.1.3.</span> <span class="nav-text">inode结构</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Scull设备的注册"><span class="nav-number">1.2.</span> <span class="nav-text">Scull设备的注册</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定义Scull设备-并初始化Scull设备"><span class="nav-number">1.3.</span> <span class="nav-text">定义Scull设备, 并初始化Scull设备</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Scull设备操作接口"><span class="nav-number">2.</span> <span class="nav-text">Scull设备操作接口</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#open和release"><span class="nav-number">2.1.</span> <span class="nav-text">open和release</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#open方法"><span class="nav-number">2.1.1.</span> <span class="nav-text">open方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#release方法"><span class="nav-number">2.1.2.</span> <span class="nav-text">release方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Scull内存使用"><span class="nav-number">2.2.</span> <span class="nav-text">Scull内存使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#read和write"><span class="nav-number">2.3.</span> <span class="nav-text">read和write</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shao Guoliang</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Pisces</a> v6.0.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.0.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.0.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.0.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.0.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'S8hhGklf9TcnfdaayOcyEXaY-gzGzoHsz',
+        appKey: 'N9bcSWiTfFKC2MYa8vY5GFGi',
+        placeholder: 'Leave your comments',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=6.0.0"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=6.0.0"></script>
+
+
+  
+
+</body>
+</html>

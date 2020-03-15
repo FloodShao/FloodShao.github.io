@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.0.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.0.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.0.0" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Categories">
+<meta property="og:url" content="http://yoursite.com/categories/index.html">
+<meta property="og:site_name" content="Shao Guoliang的博客">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-10-31T02:33:06.000Z">
+<meta property="article:modified_time" content="2019-10-31T02:34:17.920Z">
+<meta property="article:author" content="Shao Guoliang">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.0.0',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/categories/"/>
+
+
+
+
+
+  <title>Hive与MySQL数据库操作 | Shao Guoliang的博客</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Shao Guoliang的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">未来不迎，当时不杂，过往不恋</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/15/2019-08-15-Hive%E4%B8%8EMySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shao Guoliang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shao Guoliang的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Hive与MySQL数据库操作</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-15T00:00:00+08:00">2019-08-15</time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/08/15/2019-08-15-Hive%E4%B8%8EMySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/15/2019-08-15-Hive%E4%B8%8EMySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="基本通用的SQL语句"><a href="#基本通用的SQL语句" class="headerlink" title="基本通用的SQL语句"></a>基本通用的SQL语句</h2><h3 id="Hive数据类型"><a href="#Hive数据类型" class="headerlink" title="Hive数据类型"></a>Hive数据类型</h3><p>Hive所有的数据类型分为如下四种：</p>
+<ul>
+<li>列类型<ul>
+<li>整形 INT，当数据范围超过INT时需要使用BIGINT</li>
+<li>字符串类型 可以使用单引号或双引号来指定，包含VARCHAR和CHAR两种数据类型。</li>
+<li>时间戳 支持传统的UNIX时间戳可选纳秒的精度</li>
+<li>日期 DATE</li>
+<li>小数点</li>
+<li>联合类型</li>
+</ul>
+</li>
+<li>文字<ul>
+<li>浮点类型</li>
+<li>十进制类型</li>
+</ul>
+</li>
+<li>Null 缺少值通过特殊值 NULL 来表示</li>
+<li>复杂类型<ul>
+<li>数组</li>
+<li>映射</li>
+<li>结构体</li>
+</ul>
+</li>
+</ul>
+<h3 id="创建数据库，删除数据库，选择使用数据库"><a href="#创建数据库，删除数据库，选择使用数据库" class="headerlink" title="创建数据库，删除数据库，选择使用数据库"></a>创建数据库，删除数据库，选择使用数据库</h3><h4 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h4><p><code>create database [if not exists] &lt;database_name&gt;;</code><br>这里if not exists是可选自居，通知用户已经存在相同名称的数据库。<br><code>show databases;</code> 显示所有数据库<br><code>drop database &lt;database_name&gt;</code><br><code>use &lt;database_name&gt;</code> 选择数据库</p>
+<h4 id="Hive"><a href="#Hive" class="headerlink" title="Hive"></a>Hive</h4><p><code>create database|schema [if not exists] &lt;database_name&gt;;</code><br><code>show databases;</code><br><code>drop database StatementDrop (database|schema) [if exists] &lt;database_name&gt; [restrict|cascade];</code><br>使用cascade查询删除数据库表示在删除数据库之前全部删除相应的表。<br><code>use &lt;database_name&gt;</code></p>
+<h3 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h3><h4 id="MySQL-1"><a href="#MySQL-1" class="headerlink" title="MySQL"></a>MySQL</h4><p>通用表示为<code>create table table_name (col_name data_type)</code></p>
+<p>例子:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">create table config(</span><br><span class="line">	id int auto_increment,</span><br><span class="line">    key_ varchar(255),</span><br><span class="line">    value varchar(255),</span><br><span class="line">    primary key (id)</span><br><span class="line">) ENGINE&#x3D;InnoDB DEFAULT CHARSET&#x3D;utf8;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Hive-1"><a href="#Hive-1" class="headerlink" title="Hive"></a>Hive</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">create [temporary] [external] table [if not exists] [db_name.] table_name</span><br><span class="line">[(col_name data_type [comment col_comment], ...)]</span><br><span class="line">[comment table_comment]</span><br><span class="line">[row format row_format]</span><br><span class="line">[stored as file_format]</span><br></pre></td></tr></table></figure>
+<p>注意Hive没有主键(primary key)或者基于序列密钥生成的自增键(auto_increment)的概念。</p>
+<p>一般来说，sql创建表后，可以使用insert语句来插入数据。在Hive中，可以使用load data语句插入数据。<br>同时将数据插入到hive，最好是使用load data来存储大量记录。有两种方法用来加载数据：1. 从本地文件系统，2.从hadoop文件系统</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">load data [local] inpath &#39;filepath&#39; [overwrite] into table tablename [partition (partcol1&#x3D;val, partcol2&#x3D;val2 ...)]</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改表"><a href="#修改表" class="headerlink" title="修改表"></a>修改表</h3><h4 id="MySQL-2"><a href="#MySQL-2" class="headerlink" title="MySQL"></a>MySQL</h4><p><code>alter table name operation;</code></p>
+<h4 id="Hive-2"><a href="#Hive-2" class="headerlink" title="Hive"></a>Hive</h4><p>修改数据表属性的alter语句</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">alter table name rename to new_name;</span><br><span class="line">alter table name add columns (col_spec[, col_spec ...]);</span><br><span class="line">alter table name drop [column] column_name;</span><br><span class="line">alter table name change column_name new_name new_type;</span><br><span class="line">alter table name replace columns (col_spec[, col_spec ...]);</span><br></pre></td></tr></table></figure>
+
+<h2 id="差异很大的操作"><a href="#差异很大的操作" class="headerlink" title="差异很大的操作"></a>差异很大的操作</h2><h3 id="查询表结构信息"><a href="#查询表结构信息" class="headerlink" title="查询表结构信息"></a>查询表结构信息</h3><h4 id="Hive-3"><a href="#Hive-3" class="headerlink" title="Hive"></a>Hive</h4><p><code>desc table_name</code> 显示表字段信息<br><code>desc formatted table_name</code> 显示包含表存储等详细信息,包括数据库在hdfs中的存储位置信息。</p>
+<h4 id="MySQL-3"><a href="#MySQL-3" class="headerlink" title="MySQL"></a>MySQL</h4><p><code>show table_name</code> 显示表字段信息。</p>
+<p>###Hive 模糊搜索表<br><code>show tables like &#39;*name*&#39;</code></p>
+<h3 id="Hive分区"><a href="#Hive分区" class="headerlink" title="Hive分区"></a>Hive分区</h3><p>Hive组织表到分区。它是将一个表基于分区列，如日期，城市和部门的值相关方式。使用分区，很容易对数据进行部分查询。<br>表或分区是细分成桶，以提供额外的结构，可以使用更高效的查询的数据。桶的工作是基于表的一些列的散列函数值。</p>
+<p>例如，一个名为Tab1表包含雇员数据。假设需要检索所有在2012年加入，查询搜索整个表所需的信息员工的详细信息。如果用年份分区雇员数据并将其存储在一个单独的文件，就减少了查询处理时间。</p>
+<p><strong>如何建立建立分区</strong>：</p>
+<ul>
+<li>因为整个Hive数据库是分布式存储的，一个分区实际上是以一个单独文件的形式独立存放的，所以必须在建立数据库的时候就声明分区是什么。一旦建立数据库，就无法再使用alter语句对数据库进行分区修改了。</li>
+<li>建立数据库<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hive&gt; create table student_parted_gender (eid int, name string, age int) partitioned by (gender string)</span><br><span class="line">    &gt; row format delimited</span><br><span class="line">    &gt; fields terminated by &#39;\t&#39;</span><br><span class="line">    &gt; lines terminated by &#39;\n&#39;;</span><br></pre></td></tr></table></figure></li>
+<li><code>fields terminated by &#39;\t&#39;</code> 表示导入数据的时候数据单元格之间以<code>tab</code>为间隔</li>
+<li><code>lines terminated by &#39;\n&#39;</code> 表示每条数据之间以<code>换行</code>为间隔</li>
+<li><code>partitioned by</code> 后边的属性不能与前边定义的属性重复，也就是说，建立分区是单独的column，然而在select查看表内容的时候分区还是以column形式出现。</li>
+<li>建立数据库后要增加分区：（注意，增加分区的意思是，在gender这一列的属性中增加一个’M‘的属性，而不是说增加一个叫做gender的列）<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table student_parted_gender add partition (gender&#x3D;&#39;M&#39;);</span><br></pre></td></tr></table></figure></li>
+<li>导入数据<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">load data loca inpath &#39;&#x2F;usr&#x2F;local&#x2F;hadoop&#x2F;hdfs_local_dir&#x2F;student_parted_gender_M.txt&#39; overwrite into table student_parted_gender partition (gender&#x3D;&#39;M&#39;);</span><br></pre></td></tr></table></figure>
+这里overwrite表示重新覆盖数据库的数据数据。<br>不过这里要注意：<br>在txt文件中可以不包含gender这一项。如果包含了gender这一项，那么在导入的时候，源数据会直接被置为一直的’M‘，即使源数据里是’F‘。<br>并且，txt文件中可以包含多个列，但读取fields只会选取最前边的几个列。</li>
+</ul>
+<h4 id="添加分区"><a href="#添加分区" class="headerlink" title="添加分区"></a>添加分区</h4><p>假设我们有一个表叫employee， 拥有id， name， salary， designation， dept， yoj（year of join）等字段。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table table_name add [if not exists] partition partition_spec[location &#39;location1&#39;] partition_spec [location &#39;location2&#39;] ...;</span><br></pre></td></tr></table></figure>
+<p>也就是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hive&gt; alter table employee</span><br><span class="line">&gt; add partition (year&#x3D;&#39;2013&#39;)</span><br><span class="line">&gt; location &#39;&#x2F;2012&#x2F;part2012&#39;;</span><br></pre></td></tr></table></figure>
+<h4 id="重命名分区"><a href="#重命名分区" class="headerlink" title="重命名分区"></a>重命名分区</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table table_name partition partition_spec rename to partition partition_spec;</span><br></pre></td></tr></table></figure>
+<h4 id="删除分区"><a href="#删除分区" class="headerlink" title="删除分区"></a>删除分区</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table table_name drop [if exists] partition partition_spec, partition partition_spec, ...;</span><br></pre></td></tr></table></figure>
+<h4 id="查看分区信息"><a href="#查看分区信息" class="headerlink" title="查看分区信息"></a>查看分区信息</h4><p><code>show partitions table_name;</code></p>
+<h4 id="根据分区查询数据"><a href="#根据分区查询数据" class="headerlink" title="根据分区查询数据"></a>根据分区查询数据</h4><p><code>select table_column from table_name where partition_name=&#39;partition_spec&#39;</code></p>
+<h3 id="Hive创建一个视图"><a href="#Hive创建一个视图" class="headerlink" title="Hive创建一个视图"></a>Hive创建一个视图</h3><p>在实行select语句的时候，可以创建一个视图来保存数据及结果。与SQL视图用法相同</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">create view [if not exists] view_name [(column_name [Comment column_comment], ...)] [comment table_comment]</span><br><span class="line">as select ...</span><br></pre></td></tr></table></figure>
+
+<h3 id="Hive内置函数"><a href="#Hive内置函数" class="headerlink" title="Hive内置函数"></a>Hive内置函数</h3><p>全部参考 <a href="https://www.yiibai.com/hive/hive_built_in_functions.html" target="_blank" rel="noopener">https://www.yiibai.com/hive/hive_built_in_functions.html</a></p>
+<p>主要有</p>
+<table>
+<thead>
+<tr>
+<th>返回类型</th>
+<th>函数名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>BIGINT</td>
+<td>round(double a)</td>
+<td>返回离a最近的BIGNINT</td>
+</tr>
+<tr>
+<td>BIGINT</td>
+<td>floor(double a)</td>
+<td>返回小于等于a的最大BIGINT</td>
+</tr>
+<tr>
+<td>BIGINT</td>
+<td>ceil(double a)</td>
+<td>返回大于等于a的最小BIGINT</td>
+</tr>
+<tr>
+<td>double</td>
+<td>rand(), rand(int seed)</td>
+<td>返回随机数</td>
+</tr>
+<tr>
+<td>string</td>
+<td>concat(string A, string B, …)</td>
+<td>返回A和B的串联字符串</td>
+</tr>
+<tr>
+<td>string</td>
+<td>substr(string A, int start, int length)</td>
+<td>返回字符串字串</td>
+</tr>
+<tr>
+<td>string</td>
+<td>upper(string A)</td>
+<td>转换成大写</td>
+</tr>
+<tr>
+<td>string</td>
+<td>lower(String A)</td>
+<td>转换成小写</td>
+</tr>
+<tr>
+<td>string</td>
+<td>trim(string A)</td>
+<td>减掉字符串A两端的空格</td>
+</tr>
+<tr>
+<td>int</td>
+<td>size(Map(K, V))</td>
+<td>返回映射类型的元素数量</td>
+</tr>
+<tr>
+<td>int</td>
+<td>size(Array<T>)</td>
+<td>返回数组类型的元素数量</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Hive/" rel="tag"># Hive</a>
+          
+            <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/12/2019-08-12-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" rel="next" title="排序算法">
+                <i class="fa fa-chevron-left"></i> 排序算法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/16/2019-08-12-%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95/" rel="prev" title="回溯算法">
+                回溯算法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="Shao Guoliang" />
+            
+              <p class="site-author-name" itemprop="name">Shao Guoliang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/floodshao" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:guoliang_shao@u.nus.edu" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本通用的SQL语句"><span class="nav-number">1.</span> <span class="nav-text">基本通用的SQL语句</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Hive数据类型"><span class="nav-number">1.1.</span> <span class="nav-text">Hive数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建数据库，删除数据库，选择使用数据库"><span class="nav-number">1.2.</span> <span class="nav-text">创建数据库，删除数据库，选择使用数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MySQL"><span class="nav-number">1.2.1.</span> <span class="nav-text">MySQL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Hive"><span class="nav-number">1.2.2.</span> <span class="nav-text">Hive</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建表"><span class="nav-number">1.3.</span> <span class="nav-text">创建表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MySQL-1"><span class="nav-number">1.3.1.</span> <span class="nav-text">MySQL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Hive-1"><span class="nav-number">1.3.2.</span> <span class="nav-text">Hive</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改表"><span class="nav-number">1.4.</span> <span class="nav-text">修改表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MySQL-2"><span class="nav-number">1.4.1.</span> <span class="nav-text">MySQL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Hive-2"><span class="nav-number">1.4.2.</span> <span class="nav-text">Hive</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#差异很大的操作"><span class="nav-number">2.</span> <span class="nav-text">差异很大的操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#查询表结构信息"><span class="nav-number">2.1.</span> <span class="nav-text">查询表结构信息</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Hive-3"><span class="nav-number">2.1.1.</span> <span class="nav-text">Hive</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MySQL-3"><span class="nav-number">2.1.2.</span> <span class="nav-text">MySQL</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hive分区"><span class="nav-number">2.2.</span> <span class="nav-text">Hive分区</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#添加分区"><span class="nav-number">2.2.1.</span> <span class="nav-text">添加分区</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重命名分区"><span class="nav-number">2.2.2.</span> <span class="nav-text">重命名分区</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除分区"><span class="nav-number">2.2.3.</span> <span class="nav-text">删除分区</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看分区信息"><span class="nav-number">2.2.4.</span> <span class="nav-text">查看分区信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#根据分区查询数据"><span class="nav-number">2.2.5.</span> <span class="nav-text">根据分区查询数据</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hive创建一个视图"><span class="nav-number">2.3.</span> <span class="nav-text">Hive创建一个视图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hive内置函数"><span class="nav-number">2.4.</span> <span class="nav-text">Hive内置函数</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shao Guoliang</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Pisces</a> v6.0.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.0.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.0.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.0.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.0.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'S8hhGklf9TcnfdaayOcyEXaY-gzGzoHsz',
+        appKey: 'N9bcSWiTfFKC2MYa8vY5GFGi',
+        placeholder: 'Leave your comments',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=6.0.0"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=6.0.0"></script>
+
+
+  
+
+</body>
+</html>

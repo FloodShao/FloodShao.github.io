@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.0.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.0.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.0.0" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Categories">
+<meta property="og:url" content="http://yoursite.com/categories/index.html">
+<meta property="og:site_name" content="Shao Guoliang的博客">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-10-31T02:33:06.000Z">
+<meta property="article:modified_time" content="2019-10-31T02:34:17.920Z">
+<meta property="article:author" content="Shao Guoliang">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.0.0',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/categories/"/>
+
+
+
+
+
+  <title>Spark RDD编程 | Shao Guoliang的博客</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Shao Guoliang的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">未来不迎，当时不杂，过往不恋</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/11/2019-07-11-Spark_RDD_Programming/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shao Guoliang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shao Guoliang的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Spark RDD编程</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-11T00:00:00+08:00">2019-07-11</time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/07/11/2019-07-11-Spark_RDD_Programming/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/11/2019-07-11-Spark_RDD_Programming/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ol>
+<li>RDD是什么</li>
+<li>RDD常用操作</li>
+</ol>
+<a id="more"></a> <!-- 摘要 -->
+
+<h3 id="1-RDD是什么"><a href="#1-RDD是什么" class="headerlink" title="1. RDD是什么"></a>1. RDD是什么</h3><p>RDD是Spark对数据的核心抽象（弹性分布式数据集 Resilient Distributed Dataset）。其实就是分布式的元素集合。在spark中，对数据的所有操作都基于RDD创建，RDD Transformation，RDD Action。在这个过程中，spark会自动将RDD中的数据分发到集群上，并将操作并行化执行。</p>
+<p>RDD是一个不可变的分布式对象集合。每个RDD都被分为多个分区，这些分区运行在集群中的不同节点上。</p>
+<p>每个spark程序或shell会话都会按照如下方式工作：<br>（1）从外部数据创建出输入RDD<br>（2）使用诸如filter()这样的转化操作对RDD进行转化，以定义新的RDD<br>（3）告诉spark对需要被重用的中间结果RDD执行persist()操作，或cache()<br>（4）使用行动操作来触发一次并行计算，spark会对计算进行优化后再执行。</p>
+<h3 id="2-RDD操作"><a href="#2-RDD操作" class="headerlink" title="2. RDD操作"></a>2. RDD操作</h3><h4 id="1-创建RDD"><a href="#1-创建RDD" class="headerlink" title="1. 创建RDD"></a>1. 创建RDD</h4><p>spark提供了两种创建RDD的方式：读取外部数据结构；在驱动器程序中对一个集合进行并行化。</p>
+<p>例子：把程序中一个已有的集合传给SparkContext的parallelize()方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">lines &#x3D; sc.parallelize([&quot;panadas&quot;, &quot;i like pandas&quot;])</span><br><span class="line">    </span><br><span class="line">JavaRDD&lt;String&gt; lines &#x3D; sc.parallelize(Arrays.asList(&quot;panads&quot;, &quot;i like pandas&quot;));</span><br><span class="line">    </span><br><span class="line">从外部存储中创建RDD</span><br><span class="line">lines &#x3D; sc.textFile(path);</span><br><span class="line">    </span><br><span class="line">JavaRDD&lt;String&gt; lines &#x3D; sc.textFile(path);</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-RDD操作-1"><a href="#2-RDD操作-1" class="headerlink" title="2. RDD操作"></a>2. RDD操作</h4><ul>
+<li><em>转化操作</em> ： 返回一个新的RDD操作，但并不触发实际的计算，比如map(), filter()，union()。转化操作可以操作任意数量的输入RDD。spark会用谱系图来记录这些不同RDD之间的依赖关系。</li>
+<li><em>行动操作</em> ： 将最终求得的结果返回到驱动器程序，或者写入外部存储系统中。他会强制执行哪些求值过程中必须用到的RDD转化操作。</li>
+</ul>
+<h4 id="3-传递函数"><a href="#3-传递函数" class="headerlink" title="3. 传递函数"></a>3. 传递函数</h4><p>spark大部分转化操作和一部分行动操作，都需要依赖用户传递的函数来计算。<br><strong>Python</strong> ：<br>（1）传递lambda表达式：word = rdd.filter(lambda s: “error” in s)<br>（2）传递顶层函数或局部函数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">def containsError(s):</span><br><span class="line">    return &quot;error&quot; in s</span><br><span class="line">word &#x3D; rdd.filter(containesError)</span><br></pre></td></tr></table></figure>
+<p>传递函数的过程中，python可能会将函数所在的对象也序列化传出去。当你传递的对象是某个对象的成员，或者包含对某个对象中的一个字段的引用时，spark就会把整个对象发送到工作节点上。如果传递的类里包含python不知道如何序列化传输的对象，也会导致程序失败。<br>替代方案是记住，传输rdd的函数引用的应该都是 <em>局部变量</em> 。<br><strong><em>Java</em></strong> ：<br>函数需要实现spark的org.apache.spark.api.java.function包中的任意函数接口对象来传递。这时候需要maven来建立包依赖。<br>    标准Java函数接口：</p>
+<table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>实现的方法</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Function&lt;T, R&gt;</td>
+<td>R call(T)</td>
+<td>接收一个输入值并返回一个输出值，类似于map()和filter()</td>
+</tr>
+<tr>
+<td>Function&lt;T1, T2, R&gt;</td>
+<td>R call(T1, T2)</td>
+<td>接收两个输入值并返回一个输出值，类似于aggregate()和fold()操作</td>
+</tr>
+<tr>
+<td>FlatMapFunction&lt;T, R&gt;</td>
+<td>Iterable<R> call(T)</td>
+<td>接收一个输入值并返回任一个输出，用于类似flatMap()这样的操作</td>
+</tr>
+</tbody></table>
+<p>可以把函数类内联定义为匿名内部类，也可以创建一个具名类。<br>在Java8中也可以使用lambda表达式进行基本函数传递。<br>RDD<String> errors = lines.filter(s -&gt; s.contains(“error”));</p>
+<h4 id="4-常见的转化操作和行动操作"><a href="#4-常见的转化操作和行动操作" class="headerlink" title="4. 常见的转化操作和行动操作"></a>4. 常见的转化操作和行动操作</h4><p>Tips:<br>所有的传入函数function&lt;T, K, V&gt;之类的，放在前边的都是输入类型，放在后边的都是输出类型。</p>
+<p><em>基本RDD转化操作</em> ：<br><em>（1）针对各个元素的转化操作：map()和filter()。</em><br>   有时候我们希望每个输入元素生成多个输出元素，flatMap()。flatMap()函数分别应用到了输入RDD的每个元素上，不过返回的不是一个元素，而是一个返回值序列的迭代器。<br>   <strong>注意，我们使用的是spark-2.4,这里的call函数返回值已经改成了Iterator<R></strong>。原版本的Iterable<R>已经更改了。<br>   <img src="/images/2019-07-11-Spark_RDD/Spark-2.4-FlatMapFunctionAPI.png" alt="spark-api"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Spark-2.4 API</span><br><span class="line">@FunctionalInterface</span><br><span class="line">public interface FlatMapFunction&lt;T, R&gt; extends Serializable &#123;</span><br><span class="line">Iterator&lt;R&gt; call(T t) throws Exception;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;切分单词</span><br><span class="line">JavaRDD&lt;String&gt; words &#x3D; input.flatMap(</span><br><span class="line">new FlatMapFunction&lt;String, String&gt;() &#123;</span><br><span class="line">		public Iterator&lt;String&gt; call(String arg0) throws Exception &#123;</span><br><span class="line">			&#x2F;&#x2F; TODO Auto-generated method stub</span><br><span class="line">			String[] splitStrings &#x3D; arg0.split(&quot; &quot;);</span><br><span class="line">			return Arrays.asList(splitStrings).iterator();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p>Tips:<br>Java 中Iterable和Iterator的区别：<br>Iterable接口是java集合框架的顶级接口,实现此接口使集合对象可以通过迭代器遍历自身元素,我们可以看下它的成员方法：</p>
+<ul>
+<li>返回Iterator<T> 方法iterator() 返回一个内部元素为T的迭代器</li>
+<li>返回void 方法forEach() 对内部元素进行遍历</li>
+<li>返回Spliterator<T> 方法spliterator() 返回一个可分割迭代器</li>
+</ul>
+<p>我们常用的Collection， List， Set等都是Iterable的子类。可以通过.iterator()返回该类型的迭代器。<br>而Iterator接口就只是单向移动的迭代器，创建它的代价比较小。</p>
+<p><em>（2）伪集合操作</em></p>
+<p>尽管RDD本身不是严格意义上的集合，但它也支持许多数学上的集合操作，比如合并和相交操作。注意这些操作都要求操作的RDD是相同数据类型的。<br>RDD中最常确实的集合属性是元素的唯一性，因为常常有重复的元素。<br>RDD.distinct()转化操作来生成一个只包含不同元素的新RDD。不过distinct()操作的开销很大，需要将所有数据通过网络混洗。<br>RDD.intersection(other)转化操作来返回两个RDD中都有的元素。需要混洗<br>RDD.subtract(other)接收另一个RDD作为参数，返回一个由只存在第一个RDD中而不存在与第二个RDD中的所有元素组成的RDD。需要混洗<br>RDD.cartesian(other)计算两个RDD的笛卡尔积。返回一个矩阵。</p>
+<p><em>基本RDD行动操作</em> ：</p>
+<ul>
+<li>reduce()操作，接收一个函数为参数，这个函数操作两个相同类型的RDD并返回一个同样类型的新元素。依然通过传入function来进行相应的reduce操作。</li>
+<li>fold()和reduce()类似，接收一个与reduce()接收函数签名相同的函数，再加上一个初始值作为每个分区第一次调用的结果。</li>
+</ul>
+<p><img src="/images/2019-07-11-Spark_RDD/Spark-2.4_Function2.png" alt="spark-function2"><br><img src="/images/2019-07-11-Spark_RDD/Spark-2.4-PairFunction.png" alt="spark-pairfunction"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">wordcount reduce操作</span><br><span class="line">   </span><br><span class="line">&#x2F;&#x2F;转换为键值对技术 action</span><br><span class="line">JavaPairRDD&lt;String, Integer&gt; counts &#x3D; words.mapToPair(</span><br><span class="line">	new PairFunction&lt;String, String, Integer&gt;() &#123;</span><br><span class="line"></span><br><span class="line">		public Tuple2&lt;String, Integer&gt; call(String t) throws Exception &#123;</span><br><span class="line">			&#x2F;&#x2F; TODO Auto-generated method stub</span><br><span class="line">			return new Tuple2&lt;String, Integer&gt;(t, 1);</span><br><span class="line">		&#125;	</span><br><span class="line">	&#125;</span><br><span class="line">).reduceByKey(</span><br><span class="line">	new Function2&lt;Integer, Integer, Integer&gt;() &#123;</span><br><span class="line"></span><br><span class="line">		public Integer call(Integer v1, Integer v2) throws Exception &#123;</span><br><span class="line">			&#x2F;&#x2F; TODO Auto-generated method stub</span><br><span class="line">			return v1+v2;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>aggregate() 累加器。 提供一个我们期待返回的类型的初始值，然后通过一个函数将RDD中的元素合并起来放入累加器。</li>
+</ul>
+<p>JavaRDD.aggregate(zeroValue, seqOp, combOp)聚合操作</p>
+<ul>
+<li><p>@param zeroValue the initial value for the accumulated result of each partition for the <code>seqOp</code> operator, and also the initial value for the combine results from different partitions for the <code>combOp</code> operator - this will typically be the neutral element (e.g. <code>Nil</code> for list concatenation or <code>0</code> for summation)</p>
+<ul>
+<li>@param seqOp an operator used to accumulate results within a partition</li>
+<li>@param combOp an associative operator used to combine results from different partitions</li>
+</ul>
+<p>zeroValue就是初始值，之后的聚合操作都是在这个初始值上进行操作<br>seqOp先在分区上进行聚合操作<br>combOp将不同分区上的聚合结果进行总聚合</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">class AvgCount implements Serializable&#123; &#x2F;&#x2F;创建一个可序列化对象</span><br><span class="line">   public AvgCount(int total, int num)&#123;</span><br><span class="line">       this.total &#x3D; total;</span><br><span class="line">       this.num &#x3D; num;</span><br><span class="line">   &#125;</span><br><span class="line">   public int total;</span><br><span class="line">   public int num;</span><br><span class="line">   </span><br><span class="line">   public double avg()&#123; &#x2F;&#x2F;计算平均值函数</span><br><span class="line">       return (double) total&#x2F;num;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line">Function2&lt;AvgCount, Integer, AvgCount&gt; addAndCount &#x3D; </span><br><span class="line">   new Function2&lt;AvgCount, Integer, AvgCount&gt;()&#123;</span><br><span class="line">       public AvgCount call(AvgCount a, Integer x)&#123;</span><br><span class="line">           a.total +&#x3D; x;</span><br><span class="line">           a.num +&#x3D; 1;</span><br><span class="line">           return a; &#x2F;&#x2F;注意传入的a是实时更改的。</span><br><span class="line">       &#125; </span><br><span class="line">   &#125;;</span><br><span class="line">   </span><br><span class="line">Function2&lt;AvgCount, AvgCount, AvgCount&gt; combine &#x3D; </span><br><span class="line">   new Function2&lt;AvgCount, AvgCount, AvgCount&gt;()&#123;</span><br><span class="line">       public AvgCount call(AvgCount a, AvgCount b)&#123;</span><br><span class="line">           a.total +&#x3D; b.total;</span><br><span class="line">           a.num +&#x3D; b.num;</span><br><span class="line">           return a; &#x2F;&#x2F;注意这相当于在实际的a中添加了b，而不是新生成了一个对象</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;;</span><br><span class="line">    </span><br><span class="line">&#x2F;&#x2F; aggregate 操作</span><br><span class="line">AvgCount initial &#x3D; new AvgCount(0, 0); 初始值</span><br><span class="line">AvgCount result &#x3D; rdd.aggregate(initial, addAndCount, combine);</span><br></pre></td></tr></table></figure>
+<p><em>常见的对RDD的行动操作</em> ：</p>
+<table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>目的</th>
+<th>示例scala</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>collect()</td>
+<td>返回RDD中的所有元素</td>
+<td>rdd.collect()</td>
+</tr>
+<tr>
+<td>count()</td>
+<td>返回RDD中所有元素的个数</td>
+<td>rdd.count()</td>
+</tr>
+<tr>
+<td>countByValue()</td>
+<td>各元素在RDD中出现的次数</td>
+<td>rdd.countByValue()</td>
+</tr>
+<tr>
+<td>take()</td>
+<td>从RDD中返回num个元素</td>
+<td>rdd.take(2)</td>
+</tr>
+<tr>
+<td>top()</td>
+<td>返回RDD中最前面的num个元素</td>
+<td>rdd.top(2)</td>
+</tr>
+<tr>
+<td>takeOrdered(num)(ordering)</td>
+<td>返回RDD按提供的顺序返回最前面的num个元素</td>
+<td>rdd.takeOrdered(2)(myordering)</td>
+</tr>
+<tr>
+<td>reduce(func)</td>
+<td>并行整合rdd所有的数据</td>
+<td></td>
+</tr>
+<tr>
+<td>fold(zero)(cunf)</td>
+<td>和reduce()一样，但要提供初始值</td>
+<td>rdd.fold(0)((x, y) =&gt; x+y)</td>
+</tr>
+<tr>
+<td>aggregate(zeroValue)(seqOp, combOp)</td>
+<td>和reduce()类似，但是通常返回不同的数据类型</td>
+<td>rdd.aggregate((0,0))((x, y) =&gt; (x._1+y, x._2+1), (x, y) =&gt; (x._1 + y._1, x._2 + y._2))</td>
+</tr>
+<tr>
+<td>foreach(func)</td>
+<td>对RDD中的每个元素使用给定的函数</td>
+<td>rdd.foreach(func)</td>
+</tr>
+</tbody></table>
+<h4 id="5-在不同的RDD类型间转化"><a href="#5-在不同的RDD类型间转化" class="headerlink" title="5. 在不同的RDD类型间转化"></a>5. <strong>在不同的RDD类型间转化</strong></h4><p>有些函数只能用于特定类型的RDD，比如mean()和variance()只能用于数值RDD上，而join()只能用在键值对RDD上。在Scala或者Java中，这些函数都没有定义在标准的RDD类中，要访问这些附加功能，必须确保获得了正确的专用RDD类。</p>
+<p>在Java中有两个专门的类JavaDoubleRDD和JavaPairRDD来处理特殊类型的RDD。</p>
+<h4 id="6-RDD持久化-缓存"><a href="#6-RDD持久化-缓存" class="headerlink" title="6. RDD持久化(缓存)"></a>6. <strong>RDD持久化(缓存)</strong></h4><p>如果我们希望能多次使用同一个RDD，并且避免多次计算同一个RDD，可以让spark对数据进行持久化。当让spark持久化存储一个RDD时，计算出RDD的阶段会分别保存他们所求出的分区数据。如果一个有持久化数据的节点发生故障，spark会在需要用到缓存数据时重新计算丢失的数据分区。<br>默认情况下，persist()会把数据以序列化的形式缓存在JVM的堆空间中。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Spark/" rel="tag"># Spark</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/10/2019-07-10-Spark%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E4%B8%8ERDD%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/" rel="next" title="Spark环境搭建与RDD编程基础">
+                <i class="fa fa-chevron-left"></i> Spark环境搭建与RDD编程基础
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/12/2019-07-12-Java_mysql/" rel="prev" title="MySQL操作, Java JDBC">
+                MySQL操作, Java JDBC <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="Shao Guoliang" />
+            
+              <p class="site-author-name" itemprop="name">Shao Guoliang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/floodshao" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:guoliang_shao@u.nus.edu" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-RDD是什么"><span class="nav-number">1.</span> <span class="nav-text">1. RDD是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-RDD操作"><span class="nav-number">2.</span> <span class="nav-text">2. RDD操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-创建RDD"><span class="nav-number">2.1.</span> <span class="nav-text">1. 创建RDD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-RDD操作-1"><span class="nav-number">2.2.</span> <span class="nav-text">2. RDD操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-传递函数"><span class="nav-number">2.3.</span> <span class="nav-text">3. 传递函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-常见的转化操作和行动操作"><span class="nav-number">2.4.</span> <span class="nav-text">4. 常见的转化操作和行动操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-在不同的RDD类型间转化"><span class="nav-number">2.5.</span> <span class="nav-text">5. 在不同的RDD类型间转化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-RDD持久化-缓存"><span class="nav-number">2.6.</span> <span class="nav-text">6. RDD持久化(缓存)</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shao Guoliang</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Pisces</a> v6.0.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.0.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.0.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.0.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.0.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'S8hhGklf9TcnfdaayOcyEXaY-gzGzoHsz',
+        appKey: 'N9bcSWiTfFKC2MYa8vY5GFGi',
+        placeholder: 'Leave your comments',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=6.0.0"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=6.0.0"></script>
+
+
+  
+
+</body>
+</html>

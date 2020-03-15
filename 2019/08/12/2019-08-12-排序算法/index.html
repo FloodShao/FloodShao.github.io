@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.0.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.0.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.0.0" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Categories">
+<meta property="og:url" content="http://yoursite.com/categories/index.html">
+<meta property="og:site_name" content="Shao Guoliang的博客">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-10-31T02:33:06.000Z">
+<meta property="article:modified_time" content="2019-10-31T02:34:17.920Z">
+<meta property="article:author" content="Shao Guoliang">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.0.0',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/categories/"/>
+
+
+
+
+
+  <title>排序算法 | Shao Guoliang的博客</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Shao Guoliang的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">未来不迎，当时不杂，过往不恋</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/12/2019-08-12-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shao Guoliang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shao Guoliang的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">排序算法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-12T00:00:00+08:00">2019-08-12</time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/08/12/2019-08-12-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/12/2019-08-12-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a> <!-- 摘要 -->
+
+<h3 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h3><p>冒泡排序的基本思想是，每一次冒泡，都从数组末端将最小的数或者最大的数冒泡到最上端。<br>时间复杂度为<code>o(n^2)</code>。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">sortArray</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(nums.<span class="built_in">size</span>() &lt;=<span class="number">1</span>) <span class="keyword">return</span> nums;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;nums.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = nums.<span class="built_in">size</span>()<span class="number">-1</span>; j&gt;i; j--)&#123;</span><br><span class="line">                <span class="keyword">if</span>(nums[j] &lt; nums[j<span class="number">-1</span>])&#123;</span><br><span class="line">                    swap(nums, j, j<span class="number">-1</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> nums;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> tmp = nums[i];</span><br><span class="line">        nums[i] = nums[j];</span><br><span class="line">        nums[j] = tmp;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h3><p>选择排序思想有点类似于冒泡排序，都是在一次排序后把最小的元素放到最前边。但是过程不同。<br>冒泡排序是通过交换相邻元素。而选择排序是通过对整体的选择。<br>例如，对[5,3,8,6,4]进行选择排序：</p>
+<ol>
+<li>5和剩余序列[3, 8, 6, 4]中最小的元素交换。变为[3, 5, 8, 6, 4]。</li>
+<li>5和剩余序列[8, 6, 4]中最小元素交换。变为[3, 4, 8, 6, 5]。</li>
+<li>依次类推<br>可以看出时间复杂度仍为<code>O(n^2)</code>。</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">sortArray</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(nums.<span class="built_in">size</span>() &lt;=<span class="number">1</span>) <span class="keyword">return</span> nums;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;nums.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> minIdx = i;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = i+<span class="number">1</span>; j&lt;nums.<span class="built_in">size</span>(); j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(nums[j] &lt; nums[minIdx])&#123;</span><br><span class="line">                    minIdx = j;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span>(minIdx != i)&#123; <span class="comment">//如果发现了剩余序列的最小值</span></span><br><span class="line">                swap(nums, i, minIdx);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> nums;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> tmp = nums[i];</span><br><span class="line">        nums[i] = nums[j];</span><br><span class="line">        nums[j] = tmp;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h3><p>例如[5, 3, 8, 6, 4]进行排序。</p>
+<ol>
+<li>假设第一个数5位置是对的</li>
+<li>下一个拿到3，就要把3放在5前边，5向后移位</li>
+<li>以此类推，要保证每一次插入，前边的序列是有序的。<br>时间复杂度仍然为<code>O(n^2)</code>。</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">sortArray</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(nums.<span class="built_in">size</span>() &lt;=<span class="number">1</span>) <span class="keyword">return</span> nums;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i&lt;nums.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> j = i;</span><br><span class="line">            <span class="keyword">int</span> target = nums[i];</span><br><span class="line">            <span class="keyword">while</span>(j &gt; <span class="number">0</span> &amp;&amp; target &lt; nums[j<span class="number">-1</span>])&#123;</span><br><span class="line">                nums[j] = nums[j<span class="number">-1</span>]; <span class="comment">//向后移位，这时原本的nums[i]已经保存成了target</span></span><br><span class="line">                j--;</span><br><span class="line">            &#125;</span><br><span class="line">            nums[j] = target;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> nums;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h3><p>快速排序是<strong>冒泡+二分法</strong>。在冒泡排序中，每一次只能把整个序列的一个最值浮出来。而快速排序实现了一次遍历将最小和最大分别移到中点两侧。<strong>思路是：两个指针，右指针找比基准大的，左指针找比基准小的。直到相遇。</strong><br>举例：[5, 3, 8, 6, 4]</p>
+<ol>
+<li>以5为中点，将剩余序列分为比5大的和比5小的。左指针指向最左，右指针指向最右。相向遍历。</li>
+<li><strong>首先移动右指针还是左指针？</strong>。这取决于最后你的左右指针在何处相遇，因为我们要交换基准点和指针相遇处的值。一般我们选择序列第一个值为基准点，那么我们需要指针相遇在<strong>小于基准点的那个界限</strong>，这样才符合我们的思路。那么我们就需要<strong>先移动右指针</strong>。如果先移动左指针就会相遇在大于基准点的界限。</li>
+<li>在指针相遇之前，如果左指针大于基准，右指针小于基准，那么交换两指针的值，继续进行遍历。</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">sortArray</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(nums.<span class="built_in">size</span>() &lt;=<span class="number">1</span>) <span class="keyword">return</span> nums;</span><br><span class="line">        </span><br><span class="line">        quickSort(nums, <span class="number">0</span>, nums.<span class="built_in">size</span>()<span class="number">-1</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> nums;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">quickSort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> start, <span class="keyword">int</span> <span class="built_in">end</span>)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(start &gt;= <span class="built_in">end</span>) <span class="keyword">return</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> baseP = partition(nums, start, <span class="built_in">end</span>); <span class="comment">//一次遍历，找到基准位置</span></span><br><span class="line">        quickSort(nums, start, baseP<span class="number">-1</span>);</span><br><span class="line">        quickSort(nums, baseP+<span class="number">1</span>, <span class="built_in">end</span>);</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">partition</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> start, <span class="keyword">int</span> <span class="built_in">end</span>)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> basePoint = nums[start];</span><br><span class="line">        <span class="keyword">int</span> leftP = start;</span><br><span class="line">        <span class="keyword">int</span> rightP = <span class="built_in">end</span>;</span><br><span class="line">        <span class="keyword">while</span>(leftP &lt; rightP)&#123;</span><br><span class="line">            <span class="keyword">while</span>(leftP &lt; rightP &amp;&amp; nums[rightP] &gt;= basePoint)&#123;</span><br><span class="line">                rightP--;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">while</span>(leftP &lt; rightP &amp;&amp; nums[leftP] &lt;= basePoint)&#123;</span><br><span class="line">                leftP++;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            swap(nums, leftP, rightP);</span><br><span class="line">        &#125;</span><br><span class="line">        swap(nums, start, leftP);<span class="comment">//将基准换到中间去</span></span><br><span class="line">        <span class="keyword">return</span> leftP; <span class="comment">//返回当前基准点的位置</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> tmp = nums[i];</span><br><span class="line">        nums[i] = nums[j];</span><br><span class="line">        nums[j] = tmp;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h3><h4 id="1-什么是堆："><a href="#1-什么是堆：" class="headerlink" title="1. 什么是堆："></a>1. 什么是堆：</h4><p>堆（Heap）是一种具有如下性质的<strong>二叉树</strong>：每个结点的值都大于或等于其左右孩子结点的值，称为大顶堆；或者每个结点的值都小于或等于其左右孩子结点的值，称为小顶堆。<br>也就是：<br>大顶堆满足 root &gt; left &amp;&amp; root &gt; right<br>小顶堆满足 root &lt; left &amp;&amp; root &lt; right<br>这样一种数据结构能够满足，整个堆的根节点一定是最大值或者最小值。</p>
+<h4 id="2-堆排序："><a href="#2-堆排序：" class="headerlink" title="2. 堆排序："></a>2. 堆排序：</h4><p>根据堆这种数据结构进行<strong>选择排序</strong>，也就是一个一个确定最大数或最小数（遍历n），然后再对剩余序列进行操作（遍历logn），最坏最好时间复杂度均为<code>O(nlogn)</code>。也是不稳定排序。</p>
+<h4 id="3-用线性数组表示堆："><a href="#3-用线性数组表示堆：" class="headerlink" title="3. 用线性数组表示堆："></a>3. 用线性数组表示堆：</h4><ul>
+<li>现在我们用<strong>先序遍历</strong>二叉树得到一个线性数组，那么此时root和child之间的下标关系是什么呢。</li>
+<li>我们知道每一个root至多对应两个child，在堆中不允许出现空缺叶节点。所以：</li>
+<li>第i行总共有$2^{i-1}$个节点</li>
+<li>等比数列可知，第i行最后一个节点下标为$2^i-1-1 = 2^i-2$</li>
+<li>第i行的第一个节点下标为$2^{i-1}-2+1 = 2^{i-1}-1$</li>
+<li>所以第i行的第m个节点下标为$root=2^{i-1}+m-2$</li>
+<li>那么第i行的第m个节点对应的左节点为第i+1行的第$(m-1)*2+1$个节点，也就是下标为$left=2^{i}-2+2*(m-1)+1=2^{i}+2*m-3=2*(2^{i-1}+m-2)+1=2*root+1$</li>
+<li>同理$right=2*root+2$<h4 id="4-堆排序算法："><a href="#4-堆排序算法：" class="headerlink" title="4. 堆排序算法："></a>4. 堆排序算法：</h4>堆排序算法要解决两个问题：</li>
+<li>如何从无序数组构建一个堆<br>考虑一个root根节点，如何实现一个堆。（以大顶堆为例）<br>第一，找到两个子节点中最大的那个large<br>第二，如果root&gt;large那么该根节点已经满足<br>第三，如果root&lt;large，那个交换root和large，此时注意，该节点的结构发生了变化，要跟踪root表示的值以及其子树的变化<br>第四，从第一个非叶子节点开始遍历，一直到堆顶。第一个非叶子节点一般取（n/2）</li>
+<li>在输出堆首后，如何重建堆<br>重要的是<strong>升序大顶堆，降序小顶堆</strong>因为在最后构建排序数组的时候要堆顶出栈，而堆顶出栈肯定不能仍然放在堆顶，那么只能放在最末端。<br>算法实现：</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">sortArray</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(nums.<span class="built_in">size</span>() == <span class="number">0</span> || nums.<span class="built_in">size</span>() == <span class="number">1</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> nums;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = nums.<span class="built_in">size</span>()/<span class="number">2</span>; i&gt;=<span class="number">0</span>; i--)&#123;</span><br><span class="line">            <span class="comment">//构建大推顶</span></span><br><span class="line">            heapAdjust(nums, i, nums.<span class="built_in">size</span>()<span class="number">-1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = nums.<span class="built_in">size</span>()<span class="number">-1</span>; i&gt;=<span class="number">0</span>; i--)&#123;</span><br><span class="line">            swap(nums, <span class="number">0</span>, i); <span class="comment">//大推顶交换，heap 头一定是最大的，那么放到最末尾去</span></span><br><span class="line">            heapAdjust(nums, <span class="number">0</span>, i<span class="number">-1</span>); <span class="comment">//重新构建大推顶 </span></span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> nums;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">heapAdjust</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> start, <span class="keyword">int</span> <span class="built_in">end</span>)</span></span>&#123;</span><br><span class="line">        <span class="comment">//just deal with the start node</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">//heap head</span></span><br><span class="line">        <span class="keyword">int</span> tmp = nums[start];</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>*start+<span class="number">1</span>; i&lt;=<span class="built_in">end</span>; i=i*<span class="number">2</span>+<span class="number">1</span>)&#123; </span><br><span class="line">            <span class="comment">//找到子节点</span></span><br><span class="line">            <span class="comment">//left is 2*start+1, right is 2*start+2</span></span><br><span class="line">            <span class="keyword">if</span>(i&lt;<span class="built_in">end</span> &amp;&amp; nums[i]&lt;nums[i+<span class="number">1</span>])&#123;</span><br><span class="line">                i++;<span class="comment">//升序用大推顶，找到子节点中较大的那个</span></span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="comment">//here nums[i] is the largest child</span></span><br><span class="line">            <span class="keyword">if</span>(tmp &gt;= nums[i])&#123;</span><br><span class="line">                <span class="keyword">break</span>; <span class="comment">//已经满足大推顶</span></span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="comment">//swap the top and the smallest child</span></span><br><span class="line">            nums[start] = nums[i];</span><br><span class="line">            start = i; <span class="comment">//check the new heap</span></span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//insert the original root to the right place</span></span><br><span class="line">        nums[start] = tmp;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span></span>&#123;</span><br><span class="line">            <span class="keyword">int</span> tmp = nums[i];</span><br><span class="line">            nums[i] = nums[j];</span><br><span class="line">            nums[j] = tmp;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h3><p>希尔排序是插入排序的一种高效率实现，也叫缩小增量排序。他的依据是，当序列是有序的时候，插入排序的最佳时间复杂度为<code>O(n)</code>。基本思想：先将整个待排记录序列分割成为若干子序列分别进行直接插入排序，待整个序列中的记录基本有序时再对全体记录进行一次直接插入排序。</p>
+<p>希尔排序的时间复杂度是复杂的，在大量的实验基础上，可以证明在n属于一定范围的时候，时间复杂度约为<br>O(n^1.3)。</p>
+<p>图解见:<a href="https://www.cnblogs.com/chengxiao/p/6104371.html" target="_blank" rel="noopener">https://www.cnblogs.com/chengxiao/p/6104371.html</a></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">//插入排序移动法</span></span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">sortArray</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(nums.<span class="built_in">size</span>()&lt;=<span class="number">1</span>) <span class="keyword">return</span> nums;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//逐步缩小gap</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> gap = nums.<span class="built_in">size</span>()/<span class="number">2</span>; gap&gt;<span class="number">0</span>; gap/=<span class="number">2</span>)&#123;</span><br><span class="line">            <span class="comment">//对每个分组进行插入排序。注意这里i++,其实每次对应的是一个分组的添加</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = gap; i&lt;nums.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">                <span class="keyword">int</span> j = i;</span><br><span class="line">                <span class="keyword">int</span> tmp = nums[j];</span><br><span class="line">                <span class="keyword">while</span>(j-gap&gt;=<span class="number">0</span> &amp;&amp; tmp &lt; nums[j-gap])&#123;</span><br><span class="line">                    nums[j] = nums[j-gap];</span><br><span class="line">                    j -= gap; <span class="comment">//原版插入排序是减1，现在是减gap</span></span><br><span class="line">                &#125;</span><br><span class="line">                nums[j] = tmp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> nums;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//插入排序交换法，其实就是冒泡的变体</span></span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">sortArray</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span></span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(nums.<span class="built_in">size</span>() &lt;= <span class="number">1</span>) <span class="keyword">return</span> nums;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> gap = nums.<span class="built_in">size</span>()/<span class="number">2</span>; gap&gt;<span class="number">0</span>; gap/=<span class="number">2</span>)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = gap; i&lt;nums.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">                <span class="keyword">int</span> j = i;</span><br><span class="line">                <span class="keyword">while</span>(j-gap &gt;=<span class="number">0</span> &amp;&amp; nums[j] &lt; nums[j-gap])&#123;</span><br><span class="line">                    swap(nums, j, j-gap);</span><br><span class="line">                    j -= gap;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//传统交换</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> tmp = nums[i];</span><br><span class="line">        nums[i] = nums[j];</span><br><span class="line">        nums[j] = tmp;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//不新开辟内存空间</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span></span>&#123;</span><br><span class="line">        nums[i] = nums[i] + nums[j];</span><br><span class="line">        nums[j] = nums[i] - nums[j];</span><br><span class="line">        nums[i] = nums[i] - nums[j];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h3><p>归并排序是另一种不同的排序方法，完全使用了分治思想。思路就是，将一个序列看成两个有序的序列进行合并，然后递归解决问题。时间复杂度为<code>O(nlogn)</code>。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">sortArray</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        </span><br><span class="line">        mSort(nums, <span class="number">0</span>, nums.<span class="built_in">size</span>()<span class="number">-1</span>);</span><br><span class="line">        <span class="keyword">return</span> nums;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">mSort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> start, <span class="keyword">int</span> <span class="built_in">end</span>)</span></span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(start &gt;= <span class="built_in">end</span>) <span class="keyword">return</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> mid = (start+<span class="built_in">end</span>)/<span class="number">2</span>;</span><br><span class="line">        mSort(nums, start, mid); <span class="comment">//一分为2</span></span><br><span class="line">        mSort(nums, mid+<span class="number">1</span>, <span class="built_in">end</span>);</span><br><span class="line">        merge(nums, start, mid, <span class="built_in">end</span>); <span class="comment">//两个分数组合并</span></span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp;nums, <span class="keyword">int</span> start, <span class="keyword">int</span> mid, <span class="keyword">int</span> <span class="built_in">end</span>)</span></span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">tmp</span><span class="params">(<span class="built_in">end</span>-start+<span class="number">1</span>)</span></span>;</span><br><span class="line">        <span class="keyword">int</span> i = start;</span><br><span class="line">        <span class="keyword">int</span> j = mid+<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> k = <span class="number">0</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//两个数组都没遍历完</span></span><br><span class="line">        <span class="keyword">while</span>(i&lt;=mid &amp;&amp; j&lt;=<span class="built_in">end</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[i] &lt;= nums[j])&#123;</span><br><span class="line">                tmp[k++] = nums[i++];</span><br><span class="line">            &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">                tmp[k++] = nums[j++];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(i&lt;=mid)&#123;</span><br><span class="line">            tmp[k++] = nums[i++];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(j&lt;=<span class="built_in">end</span>)&#123;</span><br><span class="line">            tmp[k++] = nums[j++];</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k&lt;<span class="built_in">end</span>-start+<span class="number">1</span>; k++)&#123;</span><br><span class="line">            nums[start+k] = tmp[k];</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="计数排序"><a href="#计数排序" class="headerlink" title="计数排序"></a>计数排序</h3><p>如果面试的过程中面试官要求写一个时间复杂度为O(n)的排序，那么这是可能的。虽然前边的排序方法时间复杂度的下线是O(nlogn)。但确实是有线性时间复杂度的排序，但对待排序的数要满足一定的范围的整数。而且计数排序需要更多的辅助空间。基本思想： <em>用待排序的数作为计数数组的下标，统计每个数字的个数。然后依次输出即可得到有序序列。</em> </p>
+<p>因为待排序数组是计数数组的下标，那么就要求待排序数组是<strong>非负整数</strong>。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">sortArray</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(nums.<span class="built_in">size</span>() &lt;= <span class="number">1</span>) <span class="keyword">return</span> nums;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> MAX = <span class="built_in">max</span>(nums);</span><br><span class="line">        </span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">count</span><span class="params">(MAX+<span class="number">1</span>, <span class="number">0</span>)</span></span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;nums.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">            count[nums[i]]++;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> k = <span class="number">0</span>;</span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">res</span><span class="params">(nums.<span class="built_in">size</span>(), <span class="number">0</span>)</span></span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;=<span class="built_in">max</span>; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j&lt;count[i]; j++)&#123;</span><br><span class="line">                res[k++] = i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> nums;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">max</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> MAX = INT_MIN;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> ele:nums)&#123;</span><br><span class="line">            <span class="keyword">if</span>(ele &gt; MAX)&#123;</span><br><span class="line">                MAX = ele;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> MAX;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="桶排序"><a href="#桶排序" class="headerlink" title="桶排序"></a>桶排序</h3><p>桶排序是计数排序的一种改进和推广。<br>基本思想：<br>假设有一组长度为N的待排关键字序列K[1, 2, …, n]。首先将这个序列划分为M个的子区间（桶）。然后基于某种<strong>映射函数</strong>，将待排序列的关键字k映射到第i个桶中（即桶数组B的下标i），那么该关键字k就作为B[i]中的元素（每个桶B[i]都是一组大小为N/M的序列。）接着对每个桶B[i]中的所有元素进行比较排序（也可以使用快排）。然后依次枚举输出B[0]…B[M]中的全部内容即是一个有序序列。</p>
+<p>桶排序的高效性体现在映射函数：他必须做到，如果关键字<code>k1 &lt; k2</code>,那么 <code>f(k1) &lt; f(k2)</code>。</p>
+<p>举例：</p>
+<p><img src="/images/2019-08-12-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/%E6%A1%B6%E6%8E%92%E5%BA%8F.gif" alt="桶排序"></p>
+<p>桶排序利用函数的映射关系，减少了几乎所有的比较工作。实际上，桶排序的f(k)值的计算，其作用就相当于快排中的划分，希尔排序中的子序列，归并排序中的子问题，已经把大量数据分隔成了基本有序的数据块。然后只需要对桶中少量的数据做先进的比较排序即可。</p>
+<p>对N个关键字进行桶排序的时间复杂度分为两个部分：</p>
+<ol>
+<li>循环计算每个关键字的桶映射函数，时间复杂度为O(N)</li>
+<li>利用先进的比较排序算法对每个桶内的所有数据进行排序，时间复杂度为 $\sum O(N_ilog{N_i})$。其中$N_i$为第i个桶的数据量。</li>
+</ol>
+<p>显然第2部分是桶排序性能好坏的决定性因素。所以尽量减少桶内数据的数量是提高效率的唯一办法。（因为基于比较排序的最好平均时间复杂度就是O(nlogn)）。因此需要做到两点：</p>
+<ol>
+<li>映射函数f(k)能够将N个数据平均分配到M个桶中，这样每个桶就有[N/M]个数据量。</li>
+<li>尽量增大桶的数量。极限情况下，每个桶只能得到一个数据（就是计数排序），这样就完全避开了桶内数据的比较排序操作。当然，数据量巨大的情况下，f[k]函数会使桶集合的数量巨大，空间浪费严重。这就是一个时间代价和空间代价的权衡问题。</li>
+</ol>
+<p>所以平均时间复杂度为<br><code>O(N) + O(M*(N/M)*log(N/M)) = O(N+NlogN-NlogM)</code></p>
+<p>所以当N=M时，即极限情况下每个桶只有一个数据能够达到最好效率O(N)。</p>
+<p>例子参考<a href="http://www.codeceo.com/article/10-sort-algorithm-interview.html#0-tsina-1-10490-397232819ff9a47a7b7e80a40613cfe1" target="_blank" rel="noopener">http://www.codeceo.com/article/10-sort-algorithm-interview.html#0-tsina-1-10490-397232819ff9a47a7b7e80a40613cfe1</a>。</p>
+<h3 id="基数排序"><a href="#基数排序" class="headerlink" title="基数排序"></a>基数排序</h3><p>基数排序又是一种和前面排序方式不同的排序方式，基数排序不需要进行记录关键字之间的比较。基数排序是一种借助多关键字排序思想对单逻辑关键字进行排序的方法。所谓的多关键字排序就是有多个优先级不同的关键字。比如说成绩的排序，如果两个人总分相同，则语文高的排在前面，语文成绩也相同则数学高的排在前面。如果对数字进行排序，那么个位、十位、百位就是不同优先级的关键字，如果要进行升序排序，那么个位、十位、百位优先级一次增加。基数排序是通过多次的收分配和收集来实现的，关键字优先级低的先进行分配和收集。</p>
+<h3 id="什么是稳定的排序"><a href="#什么是稳定的排序" class="headerlink" title="什么是稳定的排序"></a>什么是稳定的排序</h3><p>假定在待排序的记录序列中，存在多个具有相同的关键字的记录，若经过排序，这些记录的相对次序保持不变，即在原序列中，r[i]=r[j]，且r[i]在r[j]之前，而在排序后的序列中，r[i]仍在r[j]之前，则称这种排序算法是稳定的；否则称为不稳定的。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><img src="/images/2019-08-12-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F%E6%80%BB%E7%BB%93.png" alt="排序总结"></p>
+<p>冒泡排序、选择排序、插入排序三种简单的排序及其变种快速排序、堆排序、希尔排序三种比较高效的排序。基于分治递归思想的归并排序还有计数排序、桶排序、基数排序三种线性排序。我们可以知道排序算法要么简单有效，要么是利用简单排序的特点加以改进，要么是以空间换取时间在特定情况下的高效排序。</p>
+<ol>
+<li>从平均时间来看，快速排序是效率最高的，但快速排序在最坏情况下的时间性能不如堆排序和归并排序。而后者相比较的结果是，在n较大时归并排序使用时间较少，但使用辅助空间较多。</li>
+<li>上面说的简单排序包括除希尔排序之外的所有冒泡排序、插入排序、简单选择排序。其中直接插入排序最简单，但序列基本有序或者n较小时，直接插入排序是好的方法，因此常将它和其他的排序方法，如快速排序、归并排序等结合在一起使用。</li>
+<li>基数排序的时间复杂度也可以写成O(d*n)。因此它最使用于n值很大而关键字较小的的序列。若关键字也很大，而序列中大多数记录的最高关键字均不同，则亦可先按最高关键字不同，将序列分成若干小的子序列，而后进行直接插入排序。</li>
+<li>从方法的稳定性来比较，基数排序是稳定的内排方法，所有时间复杂度为O(n^2)的简单排序也是稳定的。但是快速排序、堆排序、希尔排序等时间性能较好的排序方法都是不稳定的。稳定性需要根据具体需求选择。</li>
+<li>上面的算法实现大多数是使用线性存储结构，像插入排序这种算法用链表实现更好，省去了移动元素的时间。具体的存储结构在具体的实现版本中也是不同的。</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/LeetCode/" rel="tag"># LeetCode</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/11/2019-08-11-Java%20Spring%E6%A1%86%E6%9E%B6/" rel="next" title="Java Spring框架">
+                <i class="fa fa-chevron-left"></i> Java Spring框架
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/15/2019-08-15-Hive%E4%B8%8EMySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/" rel="prev" title="Hive与MySQL数据库操作">
+                Hive与MySQL数据库操作 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="Shao Guoliang" />
+            
+              <p class="site-author-name" itemprop="name">Shao Guoliang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/floodshao" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:guoliang_shao@u.nus.edu" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#冒泡排序"><span class="nav-number">1.</span> <span class="nav-text">冒泡排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#选择排序"><span class="nav-number">2.</span> <span class="nav-text">选择排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插入排序"><span class="nav-number">3.</span> <span class="nav-text">插入排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#快速排序"><span class="nav-number">4.</span> <span class="nav-text">快速排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#堆排序"><span class="nav-number">5.</span> <span class="nav-text">堆排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-什么是堆："><span class="nav-number">5.1.</span> <span class="nav-text">1. 什么是堆：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-堆排序："><span class="nav-number">5.2.</span> <span class="nav-text">2. 堆排序：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-用线性数组表示堆："><span class="nav-number">5.3.</span> <span class="nav-text">3. 用线性数组表示堆：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-堆排序算法："><span class="nav-number">5.4.</span> <span class="nav-text">4. 堆排序算法：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#希尔排序"><span class="nav-number">6.</span> <span class="nav-text">希尔排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#归并排序"><span class="nav-number">7.</span> <span class="nav-text">归并排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#计数排序"><span class="nav-number">8.</span> <span class="nav-text">计数排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#桶排序"><span class="nav-number">9.</span> <span class="nav-text">桶排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基数排序"><span class="nav-number">10.</span> <span class="nav-text">基数排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是稳定的排序"><span class="nav-number">11.</span> <span class="nav-text">什么是稳定的排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">12.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shao Guoliang</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Pisces</a> v6.0.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.0.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.0.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.0.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.0.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'S8hhGklf9TcnfdaayOcyEXaY-gzGzoHsz',
+        appKey: 'N9bcSWiTfFKC2MYa8vY5GFGi',
+        placeholder: 'Leave your comments',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=6.0.0"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=6.0.0"></script>
+
+
+  
+
+</body>
+</html>

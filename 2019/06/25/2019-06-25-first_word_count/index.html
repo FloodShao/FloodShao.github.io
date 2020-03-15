@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.0.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.0.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.0.0" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Categories">
+<meta property="og:url" content="http://yoursite.com/categories/index.html">
+<meta property="og:site_name" content="Shao Guoliang的博客">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-10-31T02:33:06.000Z">
+<meta property="article:modified_time" content="2019-10-31T02:34:17.920Z">
+<meta property="article:author" content="Shao Guoliang">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.0.0',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/categories/"/>
+
+
+
+
+
+  <title>执行第一个WordCount MapReduce 例程 | Shao Guoliang的博客</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Shao Guoliang的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">未来不迎，当时不杂，过往不恋</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/25/2019-06-25-first_word_count/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shao Guoliang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shao Guoliang的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">执行第一个WordCount MapReduce 例程</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-25T00:00:00+08:00">2019-06-25</time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/06/25/2019-06-25-first_word_count/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/06/25/2019-06-25-first_word_count/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="基本要求"><a href="#基本要求" class="headerlink" title="基本要求"></a>基本要求</h2><ol>
+<li>完成Hadoop配置，参考<a href="https://floodshao.github.io/posts/hadoop_zookeeper_hbase_setup" target="_blank" rel="noopener">https://floodshao.github.io/posts/hadoop_zookeeper_hbase_setup</a></li>
+<li>MapReduce基本了解。<a id="more"></a> <!-- 摘要 -->
+
+</li>
+</ol>
+<h2 id="MapReduce基础"><a href="#MapReduce基础" class="headerlink" title="MapReduce基础"></a>MapReduce基础</h2><ol>
+<li>MapReduce任务过程分为两个处理阶段：map阶段和reduce阶段。每个阶段都以key-value作为输入输出，其类型由程序员来选择。需要写两个函数：map函数和reduce函数。</li>
+<li>map阶段输入<strong>原始数据</strong>。注意这里的原始数据指的是最原始的记录文本数据。一般将原始数据的每一行作为文本输入。key为某一行起始位置相对于文件起始位置的偏移量，但这个信息我们不需要。（在hadoop权威指南里，NCDC数据每一行是一条数据；在wordcount里就是一行文本，包含多个单词）</li>
+<li>map函数的输出依然是key-value经MapReduce框架处理（combine）后，最后发送到reduce函数。这个combine处理是对key-value进行排序和分组。</li>
+<li>reduce函数对输入的key-value进行相应的处理，得到我们想要的结果（在wordcount中就是统计每个单词出现的个数）</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">MapReduce 流程：</span><br><span class="line"></span><br><span class="line">1. 将文件拆分成splits过程：key为每一行起始偏移量，value为该行的文本</span><br><span class="line"></span><br><span class="line">file1:</span><br><span class="line">    hello world         &lt;&#39;0&#39;, hello world&gt;</span><br><span class="line">    bye world      &#x3D;&gt;   &lt;&#39;12&#39;, bye world&gt; </span><br><span class="line">file2:</span><br><span class="line">    hello hadoop         &lt;&#39;0&#39;, hello hadoop&gt;</span><br><span class="line">    bye hadoop      &#x3D;&gt;   &lt;&#39;12&#39;, bye hadoop&gt; </span><br><span class="line"></span><br><span class="line">2. Mapper.map()方法对上述key-value进行操作：</span><br><span class="line"></span><br><span class="line">file1:</span><br><span class="line">&lt;&#39;0&#39;, hello world&gt;      &lt;&#39;hello&#39;, 1&gt; &lt;&#39;world&#39;, 1&gt;</span><br><span class="line">&lt;&#39;12&#39;, bye world&gt;   &#x3D;&gt;  &lt;&#39;bye&#39;, 1&gt; &lt;&#39;world&#39;, 1&gt;</span><br><span class="line">file2:</span><br><span class="line">&lt;&#39;0&#39;, hello hadoop&gt;      &lt;&#39;hello&#39;, 1&gt; &lt;&#39;hadoop&#39;, 1&gt;</span><br><span class="line">&lt;&#39;12&#39;, bye hadoop&gt;   &#x3D;&gt;  &lt;&#39;bye&#39;, 1&gt; &lt;&#39;hadoop&#39;, 1&gt;</span><br><span class="line"></span><br><span class="line">3. Mapper进行combine操作，对map方法的输出进行排序和合并：</span><br><span class="line"></span><br><span class="line">&lt;&#39;hello&#39;, 1&gt; &lt;&#39;world&#39;, 1&gt;       &lt;&#39;bye&#39;, 1&gt; &lt;&#39;hello&#39;, 1&gt; &lt;&#39;world&#39;, 2&gt;</span><br><span class="line">&lt;&#39;bye&#39;, 1&gt; &lt;&#39;world&#39;, 1&gt;     &#x3D;&gt;  </span><br><span class="line"></span><br><span class="line">&lt;&#39;hello&#39;, 1&gt; &lt;&#39;hadoop&#39;, 1&gt;       &lt;&#39;bye&#39;, 1&gt; &lt;&#39;hadoop&#39;, 2&gt; &lt;&#39;hello&#39;, 1&gt;</span><br><span class="line">&lt;&#39;bye&#39;, 1&gt; &lt;&#39;hadoop&#39;, 1&gt;     &#x3D;&gt;  </span><br><span class="line"></span><br><span class="line">4. Reducer先对Mapper对所有文件的输出进行排序和合并，然后根据用户编写的reduce方法进行相应操作：</span><br><span class="line"></span><br><span class="line">&lt;&#39;bye&#39;, 1&gt; &lt;&#39;hello&#39;, 1&gt; &lt;&#39;world&#39;, 2&gt;        </span><br><span class="line">&lt;&#39;bye&#39;, 1&gt; &lt;&#39;hadoop&#39;, 2&gt; &lt;&#39;hello&#39;, 1&gt;   &#x3D;&gt; 排序合并，注意这里的合并是将数据分组</span><br><span class="line"></span><br><span class="line">&lt;&#39;bye&#39;, list[1, 1]&gt; &lt;&#39;hadoop&#39;, list[2]&gt; &lt;&#39;hello&#39;, list[1, 1]&gt; &lt;&#39;world&#39;, list[2]&gt;    &#x3D;&gt; reduce方法定义操作</span><br><span class="line"></span><br><span class="line">&lt;&#39;bye&#39;, 2&gt; &lt;&#39;hadoop&#39;, 2&gt; &lt;&#39;hello&#39;, 2&gt; &lt;&#39;world&#39;, 2&gt;</span><br></pre></td></tr></table></figure>
+
+<p>在编写的过程中，我们实际只需要写Mapper.map()和Reducer.reduce()方法。</p>
+<h2 id="自定义map和reduce"><a href="#自定义map和reduce" class="headerlink" title="自定义map和reduce"></a>自定义map和reduce</h2><h3 id="1-map方法"><a href="#1-map方法" class="headerlink" title="1. map方法"></a>1. map方法</h3><p>Mapper源代码查看：<br>    源码路径/hadoop-2.9.2-src/hadoop-mapreduce-project/hadoop-mapreduce-client/hadoop-mapreduce-client-core/<br>    package org.apache.hadoop.mapreduce<br>    在TokenizerMapper.java中继承Mapper类重写Mapper.map()方法。<br>    Mapper产生一个intermediate pairs，输入输出类型并不要求一致。<br>    The Hadoop Map-Reduce framework spawns one map task for each {@link InputSplit} generated by the {@link InputFormat} for the job. <code>Mapper</code> implementations can access the {@link Configuration} for the job via the {@link JobContext#getConfiguration()}.</p>
+<pre><code>%TokenizerMapper.java
+
+package com.fredshao.hadoop;
+
+import java.io.IOException;
+import java.util.StringTokenizer;
+
+import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapreduce.Mapper;
+
+public class TokenizerMapper extends Mapper&lt;Object, Text, Text, IntWritable&gt;{
+
+    IntWritable one = new IntWritable(1);
+    Text word = new Text();
+
+    public void map(Object key, Text value, Context context) throws IOException, InterruptedException{
+        StringTokenizer itr new StringTokenizer(value.toString());
+        while(itr.hasMoreTokens()){
+            word.set(itr.nextToken());
+            context.write(word, one);
+        }
+    }
+}</code></pre><h3 id="2-reduce方法"><a href="#2-reduce方法" class="headerlink" title="2. reduce方法"></a>2. reduce方法</h3><p>Reducer源代码查看：<br>    源码路径/hadoop-2.9.2-src/hadoop-mapreduce-project/hadoop-mapreduce-client/hadoop-mapreduce-client-core/<br>    package org.apache.hadoop.mapreduce<br>    在IntSumReducer.java中继承Reducer并重写Reducer.reduce()方法。</p>
+<pre><code>%IntSumReducer.java
+
+package com.fredshao.hadoop;
+
+import java.io.IOException;
+
+import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapreduce.Reducer;
+
+public class IntSumReducer extends Reducer&lt;Text, IntWritable, Text, IntWritable&gt;{
+    IntWritable result = new IntWritable();
+    //这里Text key是输入键，Iterable是经过combine的输入值list
+    public void reduce(Text key, Iterable&lt;IntWritable&gt; values, Context context) throws IOException, InterruptedException{
+        int sum = 0;
+        for(IntWritable val:values){
+            sum += val.get();
+        }
+        result.set(sum);
+        context.write(key, result);
+    }
+}</code></pre><h3 id="3-main函数，建立mapreduce执行入口"><a href="#3-main函数，建立mapreduce执行入口" class="headerlink" title="3. main函数，建立mapreduce执行入口"></a>3. main函数，建立mapreduce执行入口</h3><p>MapReduce中job的使用。MapReduce.Job类<br>It allows the user to configure the job, submit it, control its execution, and query the state. The set methods only work until the job is submitted, afterwards they will throw an IllegalStateException. 在mapreduce执行前对job进行设定。<br>job类一般的配置：</p>
+<ol>
+<li><p>建立新的job：</p>
+<ul>
+<li>Job job = Job.getInstance();</li>
+<li>job.setJarByClass(MyJob.class); //程序入口</li>
+</ul>
+</li>
+<li><p>设定job相关参数</p>
+<ul>
+<li>job.setJobName(“myjob”);</li>
+<li>job.setInputPath(new Path(“in”));</li>
+<li>job.setOutputPath(new Path(“out”));   </li>
+<li>job.setMapperClass(MyJob.MyMapper.class);</li>
+<li>job.setReducerClass(MyJob.MyReducer.class);</li>
+</ul>
+</li>
+<li><p>提交job，submit the job</p>
+<ul>
+<li>job.waitForCompletion(true);</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">%WordCount.java</span><br><span class="line"></span><br><span class="line">package com.fredshao.hadoop;</span><br><span class="line"></span><br><span class="line">import org.apache.hadoop.conf.Configuration;</span><br><span class="line">import org.apache.hadoop.fs.Path;</span><br><span class="line">import org.apache.hadoop.io.IntWritable;</span><br><span class="line">import org.apache.hadoop.io.Text;</span><br><span class="line">import org.apache.hadoop.mapreduce.Job;</span><br><span class="line">import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;</span><br><span class="line">import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;</span><br><span class="line">import org.apache.hadoop.util.GenericOptionsParser;</span><br><span class="line"></span><br><span class="line">public class WordCount &#123;</span><br><span class="line">    public static void main(String[] args) throws Exception&#123;</span><br><span class="line">    	Configuration conf &#x3D; new Configuration();</span><br><span class="line">    	String[] otherArgs &#x3D; new GenericOptionsParser(conf, args).getRemainingArgs();</span><br><span class="line">    	if(otherArgs.length !&#x3D; 2)&#123;</span><br><span class="line">    		System.err.println(&quot;Usage: wordcount &lt;in&gt; &lt;out&gt;&quot;);</span><br><span class="line">    		System.exit(2);</span><br><span class="line">    	&#125;</span><br><span class="line">    	</span><br><span class="line">    	Job job &#x3D; new Job(conf, &quot;wordcount&quot;);</span><br><span class="line">    	job.setJarByClass(WordCount.class);</span><br><span class="line">    	job.setMapperClass(TokenizerMapper.class);</span><br><span class="line">    	job.setReducerClass(IntSumReducer.class);</span><br><span class="line">    	job.setCombinerClass(IntSumReducer.class);</span><br><span class="line">    	job.setOutputKeyClass(Text.class);</span><br><span class="line">    	job.setOutputValueClass(IntWritable.class);</span><br><span class="line">    	FileInputFormat.addInputPath(job, new Path(otherArgs[0]));</span><br><span class="line">    	FileOutputFormat.setOutputPath(job, new Path(otherArgs[1]));</span><br><span class="line">    	System.exit(job.waitForCompletion(true)?0:1);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="程序打包流程"><a href="#程序打包流程" class="headerlink" title="程序打包流程"></a>程序打包流程</h2><p>将上述mapreduce包含的3个程序进行打包：</p>
+<ol>
+<li><p>编译需要的hadoop jar包：</p>
+<p> Hadoop 2.x 版本中jar不再集中在一个 hadoop-core-*.jar 中，而是分成多个 jar。</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$HADOOP_HOME&#x2F;share&#x2F;hadoop&#x2F;common&#x2F;hadoop-common-2.4.1.jar</span><br><span class="line">$HADOOP_HOME&#x2F;share&#x2F;hadoop&#x2F;mapreduce&#x2F;hadoop-mapreduce-client-core-2.4.1.jar</span><br><span class="line">$HADOOP_HOME&#x2F;share&#x2F;hadoop&#x2F;common&#x2F;lib&#x2F;commons-cli-1.2.jar</span><br><span class="line"></span><br><span class="line">从上述import，io，fs和util来自common，mapreduce来自mapreduce-client-core.</span><br><span class="line">commons-cli-1.2.jar是跟maven编译相关的jar包，目前不知道有什么作用。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用javac进行编译</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javac -classpath &#x2F;path1:&#x2F;path2:&#x2F;path3 -d classes&#x2F; src&#x2F;*.java</span><br></pre></td></tr></table></figure>
+<p> 注意事项：</p>
+<ul>
+<li>如果使用myeclipse进行开发的话，那么如果编写不报错，会自动在相同目录下生成bin文件夹，里边是编译好的class。直接使用就好了</li>
+<li>-d 是生成的class文件的地址</li>
+<li>-classpath是源代码中依赖库的路径，用：隔开</li>
+</ul>
+</li>
+<li><p>将class打包成jar</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jar -cvf WordCount.java classes</span><br></pre></td></tr></table></figure>
+
+<p>classes是需要打包的所有编译成功的类的目录地址</p>
+</li>
+</ol>
+<h2 id="MapReduce执行"><a href="#MapReduce执行" class="headerlink" title="MapReduce执行"></a>MapReduce执行</h2><p><strong><em>1. hadoop环境启动：</em></strong></p>
+<p>在这里，与之前在<a href="https://floodshao.github.io/posts/hadoop_zookeeper_hbase_setup" target="_blank" rel="noopener">https://floodshao.github.io/posts/hadoop_zookeeper_hbase_setup</a>的配置有些不同。</p>
+<ul>
+<li><p>core-site.xml中：master和slave中配置相同</p>
+<pre><code>&lt;name&gt;fs.defaultFS&lt;/name&gt;
+&lt;value&gt;hdfs://nn1.hadop:9000&lt;/value&gt;</code></pre></li>
+<li><p>hdfs-site.xml中：</p>
+<pre><code>&lt;property&gt;
+    &lt;name&gt;dfs.name.dir&lt;/name&gt;
+    &lt;value&gt;/home/hadoop/hadoop/name&lt;/value&gt;
+&lt;/property&gt;
+&lt;property&gt;
+    &lt;name&gt;dfs.data.dir&lt;/name&gt;
+    &lt;value&gt;/home/hadoop/hadoop/data&lt;/value&gt;
+&lt;/property&gt;</code></pre></li>
+</ul>
+<p>成功启动hadoop集群的标志是：<br><img src="/images/2019-06-25-first_word_count/hadoop_env_before_word_count.png" alt="hadoop_env_before_word_count"><br>在启动集群的过程中，出现了namenode无法启动，datanode无法启动，以及下图中出现的完全没有分配存储空间的问题：<br><img src="/images/2019-06-25-first_word_count/hadoop_fs_error.png" alt="hadoop_fs_error"></p>
+<p>采取的措施如下：</p>
+<ol>
+<li>查看netstat -tlpn，master是否在监听nn1.hadoop:9000端口。基本上出现上述问题都是看不到。因为hadoop集群启动成功一定会自动监听9000端口</li>
+<li>将hdfs-site中的name.dir和data.dir所指向的物理位置全部删除</li>
+<li>将/hadoop/logs全部删除</li>
+<li>重新初始化hadoop namenode -format</li>
+<li>注意不要多次重复初始化namenode，这样很容易继续导致上述问题</li>
+<li>然后再次进行hadoop集群初始化</li>
+</ol>
+<p><img src="/images/2019-06-25-first_word_count/hadoop_fs_correct.png" alt="hadoop_fs_correct"></p>
+<p><strong><em>2. 执行：</em></strong><br>注意mapreduce处理的文件必须是hdfs部署下的文件。<br>先查看hdfs相关操作：$HADOOP_HOME/bin/<br>hadoop fs -ls / #hdfs根目录ls<br>hadoop fs -put [本地文件files] [hdfs文件/input] #将files放入input中 </p>
+<p><strong><em>3. 执行wordcount：</em></strong><br>注意要带上package信息，因为在程序中添加了package信息。jar参数表示指定jar包的位置，主类为com.fredshao.hadoop.WordCount。运行程序处理/input目录下的文件，将结果写入/output。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hadoop&#x2F;bin&#x2F;hadoop jar wordcount&#x2F;WordCount.jar com.fredshao.hadoop.WordCount &#x2F;input &#x2F;output</span><br></pre></td></tr></table></figure>
+<p><img src="/images/2019-06-25-first_word_count/word_count_command.png" alt="word_count_command"></p>
+<p><strong><em>4. 查看运行结果</em></strong><br><img src="/images/2019-06-25-first_word_count/word_count_success.png" alt="word_count_success"><br>在/output目录下有两个文件，结果就存放在/output/part-r-00000中。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Hadoop/" rel="tag"># Hadoop</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/24/2019-06-24-MyEclipse_install/" rel="next" title="MyEclipse 安装">
+                <i class="fa fa-chevron-left"></i> MyEclipse 安装
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/26/2019-06-26-Maven_first/" rel="prev" title="Maven 初步">
+                Maven 初步 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="Shao Guoliang" />
+            
+              <p class="site-author-name" itemprop="name">Shao Guoliang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/floodshao" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:guoliang_shao@u.nus.edu" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本要求"><span class="nav-number">1.</span> <span class="nav-text">基本要求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MapReduce基础"><span class="nav-number">2.</span> <span class="nav-text">MapReduce基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义map和reduce"><span class="nav-number">3.</span> <span class="nav-text">自定义map和reduce</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-map方法"><span class="nav-number">3.1.</span> <span class="nav-text">1. map方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-reduce方法"><span class="nav-number">3.2.</span> <span class="nav-text">2. reduce方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-main函数，建立mapreduce执行入口"><span class="nav-number">3.3.</span> <span class="nav-text">3. main函数，建立mapreduce执行入口</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#程序打包流程"><span class="nav-number">4.</span> <span class="nav-text">程序打包流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MapReduce执行"><span class="nav-number">5.</span> <span class="nav-text">MapReduce执行</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shao Guoliang</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Pisces</a> v6.0.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.0.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.0.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.0.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.0.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'S8hhGklf9TcnfdaayOcyEXaY-gzGzoHsz',
+        appKey: 'N9bcSWiTfFKC2MYa8vY5GFGi',
+        placeholder: 'Leave your comments',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=6.0.0"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=6.0.0"></script>
+
+
+  
+
+</body>
+</html>

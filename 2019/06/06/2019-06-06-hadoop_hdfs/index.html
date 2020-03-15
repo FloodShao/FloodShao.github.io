@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.0.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.0.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.0.0" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Categories">
+<meta property="og:url" content="http://yoursite.com/categories/index.html">
+<meta property="og:site_name" content="Shao Guoliang的博客">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-10-31T02:33:06.000Z">
+<meta property="article:modified_time" content="2019-10-31T02:34:17.920Z">
+<meta property="article:author" content="Shao Guoliang">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.0.0',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/categories/"/>
+
+
+
+
+
+  <title>Hadoop HDFS 初始与操作 | Shao Guoliang的博客</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Shao Guoliang的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">未来不迎，当时不杂，过往不恋</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/06/2019-06-06-hadoop_hdfs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shao Guoliang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shao Guoliang的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Hadoop HDFS 初始与操作</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-06T00:00:00+08:00">2019-06-06</time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/06/06/2019-06-06-hadoop_hdfs/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/06/06/2019-06-06-hadoop_hdfs/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="什么是HDFS"><a href="#什么是HDFS" class="headerlink" title="什么是HDFS"></a>什么是HDFS</h2><p>什么是HDFS（Hadoop Distributed File System）？当数据集的大小超过一台独立的物理计算机的存储能力时，就有必要对它进行分区（partition）并存储到若干台单独的计算机上。管理网络中多态计算机存储的文件系统成为分布式文件系统（distributed filesystem）。HDFS是Hadoop自带的分布式文件系统。</p>
+<a id="more"></a> <!-- 摘要 -->
+
+<h3 id="数据块"><a href="#数据块" class="headerlink" title="数据块"></a>数据块</h3><p>HDFS采用128MB的数据块。其目的是为了最小化寻址开销。如果块足够大，从磁盘传输数据的时间会明显大于定位这个快开始位置所需要的时间。因此，传输一个由多个快组成的大文件的时间取决于磁盘传输速率。</p>
+<h3 id="namenode和datanode"><a href="#namenode和datanode" class="headerlink" title="namenode和datanode"></a>namenode和datanode</h3><ul>
+<li>HDFS集群有两类节点以<strong>管理节点（namenode）-工作节点（datanode）</strong>模式运行。</li>
+<li>namenode管理文件系统的命名空间。它维护文件系统树和整颗树内的所有文件和目录。这些信息以两个文件的形式永久保存在本地磁盘：命名空间镜像文件和编辑日志文件。</li>
+<li>client代表用户通过namenode与datanode进行交互来访问整个文件系统。客户端提供一个类似于POSIX（可一直操作系统界面）的文件系统接口。用户在编程的时候无需知道namenode和datanode也可实现其功能。</li>
+<li>datanode是文件系统的工作节点。他们根据需要存储并检索数据块，并定期向namenode发送他们所存储的块的列表。</li>
+<li>namenode用来控制datanode的块来重建文件。如果没有namenode，文件系统将无法使用，甚至运行namenode服务的机器出现损坏，文件系统上的所有文件将会丢失，因为一个文件被分成了多个数据块存储在多个datanode上，我们并不知道如何根据datanode的数据块来重建文件。因此要对namenode实现容错。</li>
+</ul>
+<h3 id="HDFS的高可用性"><a href="#HDFS的高可用性" class="headerlink" title="HDFS的高可用性"></a>HDFS的高可用性</h3><p>在hadoop2中，实现HDFS的高可用性，即实现了namenode容错快速重建。</p>
+<ol>
+<li>联合使用多个文件系统备份namenode元数据。</li>
+<li>使用备用namenode创建监测点防止数据丢失。</li>
+<li>hadoop2实现（active-standby）namenode。即当活动namenode失效，备用namenode就会接管它的任务开始服务客户端。但需要datanode同时向两个namenode发送数据块处理报告。</li>
+</ol>
+<h2 id="Hadoop模式配置"><a href="#Hadoop模式配置" class="headerlink" title="Hadoop模式配置"></a>Hadoop模式配置</h2><p>参考Hadoop权威指南附录A</p>
+<p>Hadoop的各个组件都可以利用xml文件进行配置，放置在hadoop根目录/etc/hadoop/。</p>
+<ul>
+<li>core-site.xml文件用于配置通用属性</li>
+<li>hdfs-site.xml文件用于配置HDFS属性</li>
+<li>mapred-site.xml文件用于配置MapReduce属性</li>
+<li>yarn-site.xml文件用于配置YARN属性。</li>
+</ul>
+<p>Hadoop有三种运行模型：</p>
+<ul>
+<li>独立模式：无需运行任何守护进程，所有程序都在同一个JVM上执行。在独立模式下测试和调试MapReduce程序很方便，因此该模式在开发阶段比较合适</li>
+<li>伪分布模式：Hadoop守护进程运行在本地机器上，模拟一个小规模的集群。</li>
+<li>全分布模式：Hadoop守护进程运行在一个集群上。</li>
+</ul>
+<p>不同的模式下关键配置属性</p>
+<table>
+<thead>
+<tr>
+<th>组件名称</th>
+<th>属性名称</th>
+<th>独立模式</th>
+<th>伪分布模式</th>
+<th>全分布模式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Common</td>
+<td>fs.defaultFS</td>
+<td>file:///</td>
+<td>hdfs://localhost/</td>
+<td>hdfs://namenode/</td>
+</tr>
+<tr>
+<td>HDFS</td>
+<td>dfs.replication（文件备份数量）</td>
+<td>N/A</td>
+<td>1</td>
+<td>3(默认)</td>
+</tr>
+<tr>
+<td>MapReduce</td>
+<td>mapreduce.framework.name</td>
+<td>local（默认）</td>
+<td>Yarn</td>
+<td>yarn</td>
+</tr>
+<tr>
+<td>YARN</td>
+<td>yarn.resourcemanager.hostname</td>
+<td>N/A</td>
+<td>Localhost</td>
+<td>resourcemanager</td>
+</tr>
+<tr>
+<td></td>
+<td>yarn.nodemanager.aux-services</td>
+<td>N/A</td>
+<td>mapreduce_shuffle</td>
+<td>mapreduce_shffule</td>
+</tr>
+</tbody></table>
+<p>独立模式无需运行任何守护进程，因此在独立模式下不需要更多操作。</p>
+<h3 id="伪分布模式"><a href="#伪分布模式" class="headerlink" title="伪分布模式"></a>伪分布模式</h3><p>在上述四个*-site.xml文件中添加上述表中的内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">core-site.xml</span><br><span class="line">&lt;configuration&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;fs.defaultFS&lt;&#x2F;name&gt;</span><br><span class="line">        &lt;value&gt;hdfs:&#x2F;&#x2F;localhost&#x2F;&lt;&#x2F;value&gt;</span><br><span class="line">    &lt;&#x2F;property&gt;</span><br><span class="line">&lt;&#x2F;configuration&gt;</span><br><span class="line"></span><br><span class="line">hdfs-site.xml</span><br><span class="line">&lt;configuration&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.replication&lt;&#x2F;name&gt;</span><br><span class="line">        &lt;value&gt;1&lt;&#x2F;value&gt;</span><br><span class="line">    &lt;&#x2F;property&gt;</span><br><span class="line">&lt;&#x2F;configuration&gt;</span><br><span class="line"></span><br><span class="line">mapred-site.xml</span><br><span class="line">&lt;configuration&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;mapreduce.framework.name&lt;&#x2F;name&gt;</span><br><span class="line">        &lt;value&gt;yarn&lt;&#x2F;value&gt;</span><br><span class="line">    &lt;&#x2F;property&gt;</span><br><span class="line">&lt;&#x2F;configuration&gt;</span><br><span class="line"></span><br><span class="line">yarn-site.xml</span><br><span class="line">&lt;configuration&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;yarn.resourcemanager.hostname&lt;&#x2F;name&gt;</span><br><span class="line">        &lt;value&gt;localhost&lt;&#x2F;value&gt;</span><br><span class="line">    &lt;&#x2F;property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;yarn.nodemanaer.aux-services&lt;&#x2F;name&gt;</span><br><span class="line">        &lt;value&gt;mapreduce_shuffle&lt;&#x2F;value&gt;</span><br><span class="line">    &lt;&#x2F;property&gt;</span><br><span class="line">&lt;&#x2F;configuration&gt;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p>配置ssh</p>
+<p> 伪分布模式下必须启动守护进程，启动守护进程的前提是ssh。在伪分布模式下，主机就是本地计算机localhost。需要保证用户能够用ssh连接到本地主机。具体就是将/usr/root/用户的id_rsa.pub添加到/usr/root/的authorized_keys中实现免密登录。</p>
+</li>
+<li><p>格式化HDFS文件系统，其实就是格式化namenode节点</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs namenode -format</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动和终止守护进程</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">启动守护进程</span><br><span class="line">start-dfs.sh</span><br><span class="line">start-yatn.sh</span><br><span class="line">mr-jobhistory-daemon.sh start historyserver</span><br><span class="line"></span><br><span class="line">终止守护进程</span><br><span class="line">mr-jobhistory-daemon.sh stop historyserver</span><br><span class="line">stop-yarn.sh</span><br><span class="line">stop-dfs.sh</span><br></pre></td></tr></table></figure></li>
+</ol>
+<ul>
+<li><p>本地计算机localhost将启动守护进程，一个namenode，一个附属namenode，一个datanode（hdfs）， 一个资源管理器，一个节点管理器（yarn）和一个历史服务器（mapreduce）。可以在hadoop安装目录下的logs中检查文件日志来检查守护进程是否成功。</p>
+</li>
+<li><p>或者通过Web界面：<br><a href="http://localhost:50070/查看namenode，" target="_blank" rel="noopener">http://localhost:50070/查看namenode，</a><br><a href="http://localhost:8088/查看资源管理器" target="_blank" rel="noopener">http://localhost:8088/查看资源管理器</a><br><a href="http://localhost:19888/查看历史服务器" target="_blank" rel="noopener">http://localhost:19888/查看历史服务器</a></p>
+<p>  但问题是CentOS7最小安装是命令行模式，不会有浏览器让你查看。解答：<a href="https://floodshao.github.io/CentOS7_GUI" target="_blank" rel="noopener">CentOS 7 最小化安装添加图像化界面</a></p>
+</li>
+</ul>
+<ol start="4">
+<li><p>创建用户目录</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hadoop fs -mkdir -p &#x2F;user&#x2F;$USER</span><br><span class="line">第一次不知道我就使用了&#x2F;user&#x2F;root&#x2F; 但为了避免歧义，还是选择其他名字吧</span><br></pre></td></tr></table></figure>
+<h2 id="HDFS命令行接口"><a href="#HDFS命令行接口" class="headerlink" title="HDFS命令行接口"></a>HDFS命令行接口</h2><p>HDFS有很多接口，其中命令行是最简单的。<br>文件系统基本操作: hadoop fs -help 来获取命令帮助</p>
+</li>
+<li><p>HDFS文件目录显示</p>
+<p> 命令：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop fs -ls &#x2F;user&#x2F;root</span><br></pre></td></tr></table></figure>
+<p> <img src="/images/2019-06-06-hadoop_hdfs/hdfs_dir.png" alt="hdfs_dir"></p>
+<ul>
+<li><p>第1列为文件权限模式，与POSIX模式相同（777），目录为d</p>
+</li>
+<li><p>第2列为该文件的备份数（由于我们选择了伪分布模式，在dfs.replication配置中选择了1）</p>
+</li>
+<li><p>第3，4列为文件所属用户和组别。</p>
+</li>
+<li><p><em>对于文件而言，你不能在HDFS中执行文件，所以所有文件都不可执行。对于目录而言，要访问一个目录的子项，必须需要x权限。*</em></p>
+</li>
+<li><p>默认情况下，Hadoop运行时安全措施处于停用模式，意味着客户端身份是没有经过认证的。由于客户端是远程的，一个客户端可以在远程系统上通过创建和任何一个合法用户同名的账号来进行访问。无论怎样，为了防止用户或者自动工具及程序意外修改或删除文件系统的重要部分，启动权限控制很重要（dfs.permissions.enabled默认属性）</p>
+</li>
+<li><p>super-user的概念，超级用户是namenode进程的标识，对于超级用户，系统不会执行任何权限检查。</p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="HDFS文件系统："><a href="#HDFS文件系统：" class="headerlink" title="HDFS文件系统："></a>HDFS文件系统：</h2><ul>
+<li>Hadoop有一个抽象的文件系统，HDFS只是其中的一个实现。Hadoop对文件系统提供了多个接口，它一般使用URI方案来选取合适的文件系统实例进行交互。</li>
+<li>通过Java API可以调用大部分Hadoop文件系统的交互操作。</li>
+</ul>
+<p>参考Hadoop权威指南第三章的代码。</p>
+<p>这里重点说明一下使用maven编译hadoop程序的流程。以编译ch3-URLCat.java为例：</p>
+<ol>
+<li><p>按照上述hadoop流程建立hdfs守护程序，采用伪分布模式</p>
+</li>
+<li><p>建立maven项目工程，并在/src/main/java/下编写URLCat.java程序</p>
+</li>
+<li><p>使用命令 <em>%mvn clean compile</em> 在根目录下对项目进行编译。此时会在文件根目录生成一个target目录。注意每一次clean compile都会完全清除target目录下的所有内容，然后再对项目进行编译。</p>
+</li>
+<li><p>编译不成功，显示error找不到包，此时需要在pom.xml文件中添加dependencies.如下：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">     &lt;groupId&gt;org.apache.hadoop&lt;&#x2F;groupId&gt;</span><br><span class="line">     &lt;artifactId&gt;hadoop-hdfs&lt;&#x2F;artifactId&gt;</span><br><span class="line">     &lt;version&gt;2.9.2&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">     &lt;groupId&gt;org.apache.hadoop&lt;&#x2F;groupId&gt;</span><br><span class="line">     &lt;artifactId&gt;hadoop-common&lt;&#x2F;artifactId&gt;</span><br><span class="line">     &lt;version&gt;2.9.2&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+<p> 保持网络连接，继续用上述编译命令进行编译，会从apache网站下载相关包（国内注意配置阿里云镜像）</p>
+</li>
+<li><p>编译成功，在target中生成class文件</p>
+</li>
+<li><p>在hadoop权威指南中直接用hadoop URLCat hdfs://localhost/user/root/quangle.txt来执行了命令，是因为它把整个项目生成了一个jar包放在了classpath里。</p>
+</li>
+<li><p>目前我们新建的项目还没有生成jar包，就需要把该生成的URLCat.class文件打包成jar包。<br> <em>%jar -cvf xxx.jar xxx.class</em></p>
+</li>
+<li><p>运行Hadoop命令</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop jar xxx.jar xxx hdfs:&#x2F;&#x2F;localhost&#x2F;user&#x2F;root&#x2F;quangle.txt</span><br></pre></td></tr></table></figure>
+<h2 id="Hadoop文件系统数据流"><a href="#Hadoop文件系统数据流" class="headerlink" title="Hadoop文件系统数据流"></a>Hadoop文件系统数据流</h2></li>
+</ol>
+<p>附上两张关于hdfs的读写操作：</p>
+<p><img src="/images/2019-06-06-hadoop_hdfs/hdfs_read.png" alt="hdfs_dir"></p>
+<p><img src="/images/2019-06-06-hadoop_hdfs/hdfs_write.png" alt="hdfs_dir"></p>
+<p>其实通俗的讲，就是namenode保存了文件重建的方法，并在读写过程中将中将如何重建告诉主机中的文件系统，文件系统按照该重建方法从datanode中读取或写入数据。这一过程对客户端来说是透明的。<br>守护程序就是namenode与datanode不断进行沟通，更新在哪个datanode上存着那一部分数据。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/hadoop/" rel="tag"># hadoop</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/05/2019-06-05-hadoop_download_install_instruction/" rel="next" title="Hadoop下载与安装（源码安装）">
+                <i class="fa fa-chevron-left"></i> Hadoop下载与安装（源码安装）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/06/2019-06-06-CentOS7_GUI/" rel="prev" title="CentOS 7 安装图像化界面使得能够使用浏览器">
+                CentOS 7 安装图像化界面使得能够使用浏览器 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="Shao Guoliang" />
+            
+              <p class="site-author-name" itemprop="name">Shao Guoliang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/floodshao" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:guoliang_shao@u.nus.edu" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是HDFS"><span class="nav-number">1.</span> <span class="nav-text">什么是HDFS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据块"><span class="nav-number">1.1.</span> <span class="nav-text">数据块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#namenode和datanode"><span class="nav-number">1.2.</span> <span class="nav-text">namenode和datanode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HDFS的高可用性"><span class="nav-number">1.3.</span> <span class="nav-text">HDFS的高可用性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hadoop模式配置"><span class="nav-number">2.</span> <span class="nav-text">Hadoop模式配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#伪分布模式"><span class="nav-number">2.1.</span> <span class="nav-text">伪分布模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HDFS命令行接口"><span class="nav-number">3.</span> <span class="nav-text">HDFS命令行接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HDFS文件系统："><span class="nav-number">4.</span> <span class="nav-text">HDFS文件系统：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hadoop文件系统数据流"><span class="nav-number">5.</span> <span class="nav-text">Hadoop文件系统数据流</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shao Guoliang</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Pisces</a> v6.0.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.0.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.0.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.0.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.0.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'S8hhGklf9TcnfdaayOcyEXaY-gzGzoHsz',
+        appKey: 'N9bcSWiTfFKC2MYa8vY5GFGi',
+        placeholder: 'Leave your comments',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=6.0.0"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=6.0.0"></script>
+
+
+  
+
+</body>
+</html>
