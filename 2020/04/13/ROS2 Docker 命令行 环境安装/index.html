@@ -384,7 +384,7 @@
 <ol start="2">
 <li><p>docker build 创建镜像：<br><code>docker build -t myros2:dashing .</code><br>这里注意上下文路径 <code>.</code>不能省略，<code>-t</code> 表示创建镜像的tag名称（全部要求小写）。</p>
 </li>
-<li><p>运行成功后：<br><img src="/images/ROS2-Docker-%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%8E%AF%E5%A2%83/ros2-dashing-docker-build.png" alt="ros2-dashing-docker-build"></p>
+<li><p>运行成功后：<br><img src="/images/ROS2-Docker-%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/ros2-dashing-docker-build.png" alt="ros2-dashing-docker-build"></p>
 </li>
 <li><p>创建容器，运行命令行工具进入容器<br><code>docker run -it myros2:dashing /bin/bash</code></p>
 </li>
@@ -400,7 +400,7 @@
 <li><p>运行结果：</p>
 </li>
 </ol>
-<p><img src="/images/ROS2-Docker-%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%8E%AF%E5%A2%83/ros2-dashing-docker-node-run.png" alt="ros2-dashing-docker-node-run"></p>
+<p><img src="/images/ROS2-Docker-%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/ros2-dashing-docker-node-run.png" alt="ros2-dashing-docker-node-run"></p>
 <h4 id="方法二，使用多个container，部署在同一个网络中，每一个container对应一个node"><a href="#方法二，使用多个container，部署在同一个网络中，每一个container对应一个node" class="headerlink" title="方法二，使用多个container，部署在同一个网络中，每一个container对应一个node"></a>方法二，使用多个container，部署在同一个网络中，每一个container对应一个node</h4><ol>
 <li>创建docker image与方法一相同。</li>
 <li>不同的是，并不是在container中下载git源代码（首先，你的container生命周期结束之后，这个代码就不存在了。其次，如果你采用了在Dockerfile中写RUN命令来将代码直接download进文件系统，那么可以，但是代价是你创建的image可能会很大，因为每云运行一次RUN命令，镜像文件就会多加一层。镜像文件应该保证最基本的运行环境，而不应该将代码直接加载）</li>
