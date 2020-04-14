@@ -121,7 +121,7 @@
 
 
 
-  <title>Docker下使用vnc创建相应版本的ubuntu桌面系统 | Shao Guoliang的博客</title>
+  <title>ROS2 Docker 命令行 环境安装 | Shao Guoliang的博客</title>
   
 
 
@@ -302,7 +302,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://floodshao.github.io/2020/04/14/docker%E4%B8%8B%E4%BD%BF%E7%94%A8vnc%E5%88%9B%E5%BB%BA%E7%9B%B8%E5%BA%94%E7%89%88%E6%9C%AC%E7%9A%84ubuntu%E6%A1%8C%E9%9D%A2%E7%B3%BB%E7%BB%9F/">
+    <link itemprop="mainEntityOfPage" href="http://floodshao.github.io/2020/03/14/ROS2%20Docker%20%E5%91%BD%E4%BB%A4%E8%A1%8C%20%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shao Guoliang">
@@ -319,7 +319,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Docker下使用vnc创建相应版本的ubuntu桌面系统</h1>
+          <h1 class="post-title" itemprop="name headline">ROS2 Docker 命令行 环境安装</h1>
         
 
         <div class="post-meta">
@@ -331,7 +331,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-14T09:56:27+08:00">2020-04-14</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-14T15:53:19+08:00">2020-03-14</time>
             
 
             
@@ -339,6 +339,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -348,8 +370,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2020/04/14/docker%E4%B8%8B%E4%BD%BF%E7%94%A8vnc%E5%88%9B%E5%BB%BA%E7%9B%B8%E5%BA%94%E7%89%88%E6%9C%AC%E7%9A%84ubuntu%E6%A1%8C%E9%9D%A2%E7%B3%BB%E7%BB%9F/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2020/04/14/docker%E4%B8%8B%E4%BD%BF%E7%94%A8vnc%E5%88%9B%E5%BB%BA%E7%9B%B8%E5%BA%94%E7%89%88%E6%9C%AC%E7%9A%84ubuntu%E6%A1%8C%E9%9D%A2%E7%B3%BB%E7%BB%9F/" itemprop="commentCount"></span>
+                <a href="/2020/03/14/ROS2%20Docker%20%E5%91%BD%E4%BB%A4%E8%A1%8C%20%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/03/14/ROS2%20Docker%20%E5%91%BD%E4%BB%A4%E8%A1%8C%20%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -377,28 +399,57 @@
       
 
       
-        <h3 id="ubuntu使用VNC运行基于docker的桌面系统"><a href="#ubuntu使用VNC运行基于docker的桌面系统" class="headerlink" title="ubuntu使用VNC运行基于docker的桌面系统"></a>ubuntu使用VNC运行基于docker的桌面系统</h3><p>我自己创建的docker image <code>docker pull floodshao/ros-melodic-desktop-vnc:v1.0</code> </p>
-<h4 id="基于lxde的一个ubuntu桌面系统"><a href="#基于lxde的一个ubuntu桌面系统" class="headerlink" title="基于lxde的一个ubuntu桌面系统"></a>基于lxde的一个ubuntu桌面系统</h4><ol>
-<li>docker下载地址：<code>docker pull dorowu/ubuntu-desktop-lxde-vnc</code></li>
-<li>docker运行<code>docker run -it --rm -p 8080:80 dorowu/ubuntu-desktop-lxde-vnc</code><br>其中 [镜像名/tag]</li>
-<li>运行成功后，在浏览器中实现vnc，打开<a href="http://localhost:8080" target="_blank" rel="noopener">http://localhost:8080</a>, 浏览器中会出现ubuntu桌面版，但不是传统的运行在pc上的ubuntu18.04。（在浏览器中使用桌面版，快捷键基本不能使用）</li>
-<li>在该运行容器上使用命令行工具<code>docker exec -it [container_id] /bin/bash</code></li>
-</ol>
-<p>命令选项：<br>-i 交互式操作<br>-t 终端</p>
-<h4 id="VNC服务器"><a href="#VNC服务器" class="headerlink" title="VNC服务器"></a>VNC服务器</h4><p>VNC（Virtual Network Concols）是虚拟网络控制台的缩写。是在基于UNIX和LINNUX操作系统的免费开源软件。</p>
-<p><a href="https://www.jianshu.com/p/f58fe5cdeb5f" target="_blank" rel="noopener">https://www.jianshu.com/p/f58fe5cdeb5f</a></p>
-<p>ubuntu 18.04 自带桌面共享，可以将物理桌面共享给vnc，但是无法创建新的桌面。上边链接的博主证实原生的gnome桌面基本带不动vnc，所以使用其他桌面。</p>
-<p>所以上述docker file中使用了lxde桌面，lightweight x11 desktop environment。该桌面可以再linux，bsd等posix兼容平台运行。lxde重视实用性和轻巧性，并尽量降低所消耗的系统资源。</p>
-<p>在Dockerfile目录下创建。<br><code>docker build -t [image_name:tag_name] .</code> 这里<code>.</code>代表当前目录</p>
-<h4 id="基于xfce的ubuntu桌面系统（推荐）"><a href="#基于xfce的ubuntu桌面系统（推荐）" class="headerlink" title="基于xfce的ubuntu桌面系统（推荐）"></a>基于xfce的ubuntu桌面系统（推荐）</h4><p><a href="https://www.jianshu.com/p/38a60776b28a" target="_blank" rel="noopener">https://www.jianshu.com/p/38a60776b28a</a></p>
-<p>找到了一个比较稳定且轻量的ubuntu-xfce镜像文件。<br><a href="https://hub.docker.com/r/consol/ubuntu-xfce-vnc/" target="_blank" rel="noopener">https://hub.docker.com/r/consol/ubuntu-xfce-vnc/</a><br>这个镜像文件是基于ubuntu16.04的，将其改变成18.04：</p>
+        <h3 id="ROS2-Docker-命令行-环境安装"><a href="#ROS2-Docker-命令行-环境安装" class="headerlink" title="ROS2 Docker 命令行 环境安装"></a>ROS2 Docker 命令行 环境安装</h3><p>osrf提供了官方的ros1和ros2的Docker环境<a href="https://hub.docker.com/_/ros" target="_blank" rel="noopener">https://hub.docker.com/_/ros</a><br>在上述地址中查看相关的tutorial。</p>
+<h4 id="Docker下载"><a href="#Docker下载" class="headerlink" title="Docker下载"></a>Docker下载</h4><p>本地主机环境：MacOS 10.13.6</p>
 <ol>
-<li>修改dockerfile中的FROM语句到ubuntu18.04</li>
-<li>从其github repo <a href="https://www.github.com/ConSol/docker-headless-vnc-container" target="_blank" rel="noopener">https://www.github.com/ConSol/docker-headless-vnc-container</a> 中下载相关命令源码。</li>
-<li>将<code>/src</code> folder拷贝到Dockerfile同级目录下（Dockerfile所在的目录为docker build的根目录，在ADD命令中，不能使用根目录上层的路径）</li>
-<li>进行编译<code>docker build -t local/ubuntu_1804 .</code></li>
-<li>运行docker，注意以下命令并不是进入root用户权限。（用户为default）<br><code>docker run -d -p 5901:5901 -p 6901:6901 local/ubuntu_1804</code><br>修改default user和group<br><code>docker run -d -p 5901:5901 -p 6901:6901 --user $(id -u):$(id -g) consol/centos-xfce-vnc</code><br>或<br><code>docker run -it -p 5901:5901 -p 6901:6901 local/ubuntu_1804 bash</code></li>
-<li>在vnc客户端链接<a href="localhost:5901">localhost:5901</a> 密码是<code>vncpassword</code>.</li>
+<li><code>brew install docker</code></li>
+<li>在Application中运行docker，此时docker会出现在状态栏中</li>
+<li>可以参考 <a href="https://www.runoob.com/docker/docker-tutorial.html" target="_blank" rel="noopener">菜鸟教程-Docker</a> 来进行初步的docker操作</li>
+</ol>
+<h4 id="方法一，配置Docker环境，在container中下载git代码"><a href="#方法一，配置Docker环境，在container中下载git代码" class="headerlink" title="方法一，配置Docker环境，在container中下载git代码"></a>方法一，配置Docker环境，在container中下载git代码</h4><p>这个方式是我第一次接触Docker方式开发ROS采用的方式，这种方式就是把Docker当成一个虚拟机来使用。缺点当然是没有虚拟机好使，但是资源消耗比虚拟机小太多。</p>
+<ol>
+<li>Dockerfile：<br>直接从官方镜像生成一个本地镜像：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">FROM ros:dashing-ros-core</span><br><span class="line"></span><br><span class="line">RUN apt-get update \</span><br><span class="line">    &amp;&amp; apt-get install -y python3-colcon-common-extensions \</span><br><span class="line">    &amp;&amp; rm -rf &#x2F;var&#x2F;lib&#x2F;apt&#x2F;lists&#x2F;* \</span><br><span class="line">    &amp;&amp; &#x2F;bin&#x2F;bash -c &quot;echo &#39;source &#x2F;opt&#x2F;ros&#x2F;dashing&#x2F;setup.bash&#39; &gt;&gt; &#x2F;root&#x2F;.bashrc&quot;</span><br></pre></td></tr></table></figure>
+
+<p>保存命名成<code>Dockerfile</code>.<br>如果没有RUN语句，在后边编译的时候会出现找不到ament-cmake<br>这个语句可能会出现<code>/bin/sh: 1: /opt/ros/dashing/setup.bash: Bad substitution</code>报错，这是因为你的localhost使用的是sh而不是bash。所以改为setup.sh就可以了</p>
+<ol start="2">
+<li><p>docker build 创建镜像：<br><code>docker build -t myros2:dashing .</code><br>这里注意上下文路径 <code>.</code>不能省略，<code>-t</code> 表示创建镜像的tag名称（全部要求小写）。</p>
+</li>
+<li><p>运行成功后：<br><img src="/images/ROS2-Docker-%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/ros2-dashing-docker-build.png" alt="ros2-dashing-docker-build"></p>
+</li>
+<li><p>创建容器，运行命令行工具进入容器<br><code>docker run -it myros2:dashing /bin/bash</code></p>
+</li>
+<li><p>这时容器中已经包含了ros2的最小开发环境，可以在命令行中使用<code>ros2</code>来查看。ros2安装目录位于<code>/opt/ros/dashing</code></p>
+</li>
+<li><p>创建自己的workspace：<code>mkdir -p /home/ros2_ws/src</code></p>
+</li>
+<li><p>在src中clone已经编辑好的cpp_pubsub包。<a href="https://github.com/FloodShao/ros2_ws.git" target="_blank" rel="noopener">https://github.com/FloodShao/ros2_ws.git</a> (这是我自己按照official tutorial写的)</p>
+</li>
+<li><p>编译包，并运行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">当前路径为&#x2F;home&#x2F;ros2_ws&#x2F;</span><br><span class="line">colcon build cpp_pubsub</span><br><span class="line">source .&#x2F;install&#x2F;setup.bash</span><br><span class="line">查看ros2是否已经添加包</span><br><span class="line">ros2 pkg list | grep cpp_pubsub</span><br><span class="line">运行listener和talker。因为只能开一个命令行工具，所以listener要后台运行</span><br><span class="line">ros2 run cpp_pubsub listener &amp; </span><br><span class="line">ros2 run cpp_pubsub talker</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>运行结果：</p>
+</li>
+</ol>
+<p><img src="/images/ROS2-Docker-%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/ros2-dashing-docker-node-run.png" alt="ros2-dashing-docker-node-run"></p>
+<h4 id="方法二，使用多个container，部署在同一个网络中，每一个container对应一个node"><a href="#方法二，使用多个container，部署在同一个网络中，每一个container对应一个node" class="headerlink" title="方法二，使用多个container，部署在同一个网络中，每一个container对应一个node"></a>方法二，使用多个container，部署在同一个网络中，每一个container对应一个node</h4><ol>
+<li>创建docker image与方法一相同。</li>
+<li>不同的是，并不是在container中下载git源代码（首先，你的container生命周期结束之后，这个代码就不存在了。其次，如果你采用了在Dockerfile中写RUN命令来将代码直接download进文件系统，那么可以，但是代价是你创建的image可能会很大，因为每云运行一次RUN命令，镜像文件就会多加一层。镜像文件应该保证最基本的运行环境，而不应该将代码直接加载）</li>
+<li>将localhost中的目录挂载在container的目录中，通过<code>-v</code>参数，将localhost中绝对路径<code>/&lt;dir&gt;</code>挂载在container中的<code>/workspace</code>中<br><code>docker run -it --name talker -v /&lt;dir&gt;:/workspace myros2:dashing /bin/bash</code></li>
+</ol>
+<ul>
+<li>在删除了container之后，挂载的目录并不会消失。</li>
+<li>这里使用了–name来命名这个container。</li>
+<li>删除这个container可以使用 <code>docker rm /talker</code></li>
+<li>使用<code>-d</code>让container在后台运行</li>
+<li>使用<code>docker exec -it /talker /bin/bash</code>进入container环境</li>
+</ul>
+<ol start="4">
+<li>使用launch file来进行node的创建和监控<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#pkg/launch/my_script.launch.py</span></span><br><span class="line"><span class="keyword">import</span> launch</span><br><span class="line"><span class="keyword">import</span> launch.actions</span><br><span class="line"><span class="keyword">import</span> launch.substitutions</span><br><span class="line"><span class="keyword">import</span> launch_ros.actions</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">generate_launch_description</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> launch.LaunchDescription([</span><br><span class="line"></span><br><span class="line">        launch.actions.DeclareLaunchArgument(</span><br><span class="line">            <span class="string">'node_prefix'</span>,</span><br><span class="line">            default_value=[launch.substitutions.EnvironmentVariable(<span class="string">'USER'</span>), <span class="string">'_'</span>],</span><br><span class="line">            description=<span class="string">'Prefix for node names'</span>),</span><br><span class="line">        launch_ros.actions.Node(</span><br><span class="line">            package=<span class="string">'cpp_pubsub'</span>, node_executable=<span class="string">'listener'</span>, output=<span class="string">'screen'</span>,</span><br><span class="line">            node_name=[launch.substitutions.LaunchConfiguration(<span class="string">'node_prefix'</span>), <span class="string">'listener'</span>]),</span><br><span class="line">        launch_ros.actions.Node(</span><br><span class="line">            package=<span class="string">'cpp_pubsub'</span>, node_executable=<span class="string">'talker'</span>, output=<span class="string">'screen'</span>,</span><br><span class="line">            node_name=[launch.substitutions.LaunchConfiguration(<span class="string">'node_prefix'</span>), <span class="string">'talker'</span>]),</span><br><span class="line">    ])</span><br></pre></td></tr></table></figure>
+同时在CMakelists中添加：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Install launch files.</span><br><span class="line">install(DIRECTORY</span><br><span class="line">  launch</span><br><span class="line">  DESTINATION share&#x2F;$&#123;PROJECT_NAME&#125;&#x2F;</span><br><span class="line">)</span><br></pre></td></tr></table></figure></li>
+<li>进入container之后，<code>colcon build</code>编译。</li>
+<li>launch <code>ros2 launch cpp_pubsub my_script.launch.py</code><br>node所有的输出会保存在<code>/root/.ros/log/</code></li>
 </ol>
 
       
@@ -415,6 +466,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/ROS2/" rel="tag"># ROS2</a>
+          
+        </div>
+      
 
       
       
@@ -424,8 +481,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/04/13/ROS2%20Docker%20%E5%91%BD%E4%BB%A4%E8%A1%8C%20%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/" rel="next" title="ROS2 Docker 命令行 环境安装">
-                <i class="fa fa-chevron-left"></i> ROS2 Docker 命令行 环境安装
+              <a href="/2020/03/14/docker%E4%B8%8B%E4%BD%BF%E7%94%A8vnc%E5%88%9B%E5%BB%BA%E7%9B%B8%E5%BA%94%E7%89%88%E6%9C%AC%E7%9A%84ubuntu%E6%A1%8C%E9%9D%A2%E7%B3%BB%E7%BB%9F/" rel="next" title="ubuntu使用VNC运行基于docker的桌面系统">
+                <i class="fa fa-chevron-left"></i> ubuntu使用VNC运行基于docker的桌面系统
               </a>
             
           </div>
@@ -539,7 +596,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-count">49</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -588,7 +645,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#ubuntu使用VNC运行基于docker的桌面系统"><span class="nav-number">1.</span> <span class="nav-text">ubuntu使用VNC运行基于docker的桌面系统</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基于lxde的一个ubuntu桌面系统"><span class="nav-number">1.1.</span> <span class="nav-text">基于lxde的一个ubuntu桌面系统</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#VNC服务器"><span class="nav-number">1.2.</span> <span class="nav-text">VNC服务器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基于xfce的ubuntu桌面系统（推荐）"><span class="nav-number">1.3.</span> <span class="nav-text">基于xfce的ubuntu桌面系统（推荐）</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#ROS2-Docker-命令行-环境安装"><span class="nav-number">1.</span> <span class="nav-text">ROS2 Docker 命令行 环境安装</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Docker下载"><span class="nav-number">1.1.</span> <span class="nav-text">Docker下载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法一，配置Docker环境，在container中下载git代码"><span class="nav-number">1.2.</span> <span class="nav-text">方法一，配置Docker环境，在container中下载git代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法二，使用多个container，部署在同一个网络中，每一个container对应一个node"><span class="nav-number">1.3.</span> <span class="nav-text">方法二，使用多个container，部署在同一个网络中，每一个container对应一个node</span></a></li></ol></li></ol></div>
             
 
           </div>
