@@ -377,7 +377,8 @@
       
 
       
-        <h3 id="ubuntu使用VNC运行基于docker的桌面系统"><a href="#ubuntu使用VNC运行基于docker的桌面系统" class="headerlink" title="ubuntu使用VNC运行基于docker的桌面系统"></a>ubuntu使用VNC运行基于docker的桌面系统</h3><h4 id="基于lxde的一个ubuntu桌面系统"><a href="#基于lxde的一个ubuntu桌面系统" class="headerlink" title="基于lxde的一个ubuntu桌面系统"></a>基于lxde的一个ubuntu桌面系统</h4><ol>
+        <h3 id="ubuntu使用VNC运行基于docker的桌面系统"><a href="#ubuntu使用VNC运行基于docker的桌面系统" class="headerlink" title="ubuntu使用VNC运行基于docker的桌面系统"></a>ubuntu使用VNC运行基于docker的桌面系统</h3><p>我自己创建的docker image <code>docker pull floodshao/ros-melodic-desktop-vnc:v1.0</code> </p>
+<h4 id="基于lxde的一个ubuntu桌面系统"><a href="#基于lxde的一个ubuntu桌面系统" class="headerlink" title="基于lxde的一个ubuntu桌面系统"></a>基于lxde的一个ubuntu桌面系统</h4><ol>
 <li>docker下载地址：<code>docker pull dorowu/ubuntu-desktop-lxde-vnc</code></li>
 <li>docker运行<code>docker run -it --rm -p 8080:80 dorowu/ubuntu-desktop-lxde-vnc</code><br>其中 [镜像名/tag]</li>
 <li>运行成功后，在浏览器中实现vnc，打开<a href="http://localhost:8080" target="_blank" rel="noopener">http://localhost:8080</a>, 浏览器中会出现ubuntu桌面版，但不是传统的运行在pc上的ubuntu18.04。（在浏览器中使用桌面版，快捷键基本不能使用）</li>
