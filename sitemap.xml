@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://floodshao.github.io/2020/06/03/rmf-code-reformat/</loc>
+    
+    <lastmod>2020-06-03T09:25:37.608Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://floodshao.github.io/2020/05/22/Find-a-source-compiled-package-in-your-project-CMakeList/</loc>
     
     <lastmod>2020-05-27T08:15:28.256Z</lastmod>
