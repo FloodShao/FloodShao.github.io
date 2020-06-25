@@ -121,7 +121,7 @@
 
 
 
-  <title>MyEclipse 添加 Hadoop Plugin | Shao Guoliang的博客</title>
+  <title>C++ Undefined Symbol | Shao Guoliang的博客</title>
   
 
 
@@ -302,7 +302,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://floodshao.github.io/2019/07/04/2019-07-04-hadoop-eclipse-plugin/">
+    <link itemprop="mainEntityOfPage" href="http://floodshao.github.io/2020/06/25/c-undefined-symbol/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shao Guoliang">
@@ -319,7 +319,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">MyEclipse 添加 Hadoop Plugin</h1>
+          <h1 class="post-title" itemprop="name headline">C++ Undefined Symbol</h1>
         
 
         <div class="post-meta">
@@ -331,7 +331,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-04T00:00:00+08:00">2019-07-04</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-06-25T20:07:37+08:00">2020-06-25</time>
             
 
             
@@ -370,8 +370,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/07/04/2019-07-04-hadoop-eclipse-plugin/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/04/2019-07-04-hadoop-eclipse-plugin/" itemprop="commentCount"></span>
+                <a href="/2020/06/25/c-undefined-symbol/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/06/25/c-undefined-symbol/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -399,24 +399,21 @@
       
 
       
-        <p>使用MyEclipse IDE进行hadoop 开发的时候，需要导入hadoop-eclipse-plugin。本文记录了如何通过<a href="https://github.com/winghc/hadoop2x-eclipse-plugin" target="_blank" rel="noopener">https://github.com/winghc/hadoop2x-eclipse-plugin</a>进行该插件的生成。</p>
-<a id="more"></a> <!-- 摘要 -->
-
-<p>前提是安装ant，解压包，并把安装路径添加到~/.bash_profile即可。</p>
-<ol>
-<li><p>下载或clone <a href="https://github.com/winghc/hadoop2x-eclipse-plugin" target="_blank" rel="noopener">https://github.com/winghc/hadoop2x-eclipse-plugin</a>这个包到本地</p>
-</li>
-<li><p>找到你的hadoop安装地址和myeclipse的安装地址<br> 对mac来说：<br> myeclipse的安装地址是要能够找到一个plugin文件夹的地方。<br> /Applications/MyEclipse 2017 CI/MyEclipse 2017 CI.app/Contents/Profile  </p>
-</li>
-<li><p>根据readme中的提示在相应的目录下执行：</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ant jar -Dversion&#x3D;2.9.2 -Dhadoop.version&#x3D;2.9.2 -Declipse.home&#x3D;&#x2F;Applications&#x2F;MyEclipse\ 2017\ CI&#x2F;MyEclipse\ 2017\ CI.app&#x2F;Contents&#x2F;Profile -Dhadoop.home&#x3D;&#x2F;usr&#x2F;local&#x2F;hadoop-2.9.2</span><br></pre></td></tr></table></figure></li>
-<li><p>执行上述命令后会停在一个ivy common的地方一直不动。这个时候修改./eclipse-plugin/build.xml</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;target name&#x3D;&quot;compile&quot; depends&#x3D;&quot;init, ivy-retrieve-common&quot; unless&#x3D;&quot;skip.contrib&quot;&gt;</span><br><span class="line">&lt;echo message&#x3D;&quot;contrib: $&#123;name&#125;&quot;&#x2F;&gt;</span><br><span class="line">&lt;javac</span><br><span class="line"> encoding&#x3D;&quot;$&#123;build.encoding&#125;&quot;</span><br><span class="line"> srcdir&#x3D;&quot;$&#123;src.dir&#125;&quot;</span><br><span class="line"> includes&#x3D;&quot;**&#x2F;*.java&quot;</span><br><span class="line"> destdir&#x3D;&quot;$&#123;build.classes&#125;&quot;</span><br><span class="line"> debug&#x3D;&quot;$&#123;javac.debug&#125;&quot;</span><br><span class="line"> deprecation&#x3D;&quot;$&#123;javac.deprecation&#125;&quot;&gt;</span><br><span class="line"> &lt;classpath refid&#x3D;&quot;classpath&quot;&#x2F;&gt;</span><br><span class="line">&lt;&#x2F;javac&gt;</span><br><span class="line">&lt;&#x2F;target&gt;</span><br><span class="line"></span><br><span class="line">将该条改为</span><br><span class="line">&lt;target name&#x3D;&quot;compile&quot; unless&#x3D;&quot;skip.contrib&quot;&gt;</span><br></pre></td></tr></table></figure></li>
-<li><p>继续运行上述命令。之后会得到一系列jar包找不到的报错，其实都是因为版本的问题。在google上搜索相应版本的jar包并添加进命令中hadoop的安装目录下/usr/local/hadoop-2.9.2/share/hadoop/common/lib</p>
-</li>
-</ol>
-<p>直到编译完成生成hadoop-eclipse-plugin-2.9.2.jar.</p>
-<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>这个方法只在MyEclipse下生成成功，但是在Eclipse下没有生成成功，问题应该是Eclipse中的plugins/下插件没有提供。MyEclipse和Eclipse的hadoop插件是通用的。</p>
+        <h2 id="如何查看编译好的-so-动态链接库所有的symbol"><a href="#如何查看编译好的-so-动态链接库所有的symbol" class="headerlink" title="如何查看编译好的.so 动态链接库所有的symbol"></a>如何查看编译好的.so 动态链接库所有的symbol</h2><p>列出libName.so中所有的symbol</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nm -D libName.so | grep ...</span><br></pre></td></tr></table></figure>
+<p>列出libName.so所有关联的动态链接库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ldd libName.so</span><br></pre></td></tr></table></figure>
+<h2 id="知道了函数修饰后的名字，怎么推函数声明"><a href="#知道了函数修饰后的名字，怎么推函数声明" class="headerlink" title="知道了函数修饰后的名字，怎么推函数声明"></a>知道了函数修饰后的名字，怎么推函数声明</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">c++filt _Z3bari</span><br></pre></td></tr></table></figure>
+<p>就可以反推函数声明是什么。这里要注意一点，C++规定函数不同是<strong>函数名称和参数列表</strong>，跟函数返回值没有关系，函数返回值不一样的话不能算重载。<br>这个反推挺重要的，因为我就遇到过<code>sdf::ElementPtr</code>和<code>sdf::v9::ElementPtr</code>不同的状况。会导致函数名不一样。</p>
+<h2 id="运行时出现undefined-symbol"><a href="#运行时出现undefined-symbol" class="headerlink" title="运行时出现undefined symbol"></a>运行时出现undefined symbol</h2><p>详尽参考<a href="https://github.com/Captain1986/CaptainBlackboard/blob/master/D%230001-undefined_reference_to_XXX/D%230001.md" target="_blank" rel="noopener">https://github.com/Captain1986/CaptainBlackboard/blob/master/D%230001-undefined_reference_to_XXX/D%230001.md</a></p>
+<p>搬运总结一下出现“undefined reference”问题的直接原因和解决方法。</p>
+<h3 id="Case1-链接是缺少定义了XXX的源文件或目标文件或库文件"><a href="#Case1-链接是缺少定义了XXX的源文件或目标文件或库文件" class="headerlink" title="Case1 链接是缺少定义了XXX的源文件或目标文件或库文件"></a>Case1 链接是缺少定义了XXX的源文件或目标文件或库文件</h3><p>1.1 缺源文件：这会导致编译不通过<br>1.2 缺目标文件：也是编译不通过，使用g++编译的时候要包含关联的目标文件<br>1.3 缺库文件：一般也就是动态链接库不存在，与目标文件一样。库文件其实也是一种目标文件</p>
+<h3 id="Case2-链接顺序不对"><a href="#Case2-链接顺序不对" class="headerlink" title="Case2 链接顺序不对"></a>Case2 链接顺序不对</h3><p>（这个我还没经历过，因为没有直接写makefile或者直接用g++来编译大型工程）<br>在给编译器输入源文件，目标文件或者动态库静态库文件时，<strong>如果B文件依赖于A文件的内容，那么B文件应该放在A文件的左边</strong>。</p>
+<h3 id="Case3-函数符号修饰不一样"><a href="#Case3-函数符号修饰不一样" class="headerlink" title="Case3 函数符号修饰不一样"></a>Case3 函数符号修饰不一样</h3><p>先说一下符号修饰（Name Mangling），函数从源代码编译到目标文件时，函数在目标文件中的名字是会改变的（这个改变的规则是编译器厂商定的，一般会包含函数参数列表信息，namespace信息等），在后边链接阶段，链接器是按照函数改变后的名字来索引函数的实现机器码。<strong>只要是函数符号修饰不一样，那么链接器就会认为没有找到！</strong><br>3.1 函数定义与声明不一致：这个一般也不会通过编译<br>3.2 C和C++混合编程：如果开发的代码用C++，但是有些第三方库或者代码，用的是C语言编译的，那么在应用C语言库的时候要加上<code>extern &quot;C&quot;</code>, 例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#ifndef _BAR_H_</span><br><span class="line">#define _BAR_H_</span><br><span class="line"></span><br><span class="line">#ifdef __cplusplus</span><br><span class="line">extern &quot;C&quot;&#123;</span><br><span class="line">#endif</span><br><span class="line">    </span><br><span class="line">    void baz(void);</span><br><span class="line"></span><br><span class="line">#ifdef __cplusplus</span><br><span class="line">&#125;</span><br><span class="line">#endif</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>3.3 编译器版本或者编译器选项不一致：不同的编译器版本，或者编译器版本和链接器版本不一致，用的运行时库不一样，都不一定兼容；编译器选项不一样，也可能会影响到函数签名。在开发时，最后技术团队每个程序员都用一套标准的编译器和编译器选项配置</p>
+<h3 id="Case4-把模板函数写进了cpp文件"><a href="#Case4-把模板函数写进了cpp文件" class="headerlink" title="Case4 把模板函数写进了cpp文件"></a>Case4 把模板函数写进了cpp文件</h3><p>这个可以看前一篇博文<a href="https://floodshao.github.io/2020/06/15/A-so-link-problem/#more">https://floodshao.github.io/2020/06/15/A-so-link-problem/#more</a><br>如果把模板函数写进了实现文件.cpp中，那么编译器就会认为这是一个独立的编译单元进行编译。然而因为他是模板函数，编译器不能确定到底要将他特化到哪个实现，编译器也不会搜索整个工程中所有的cpp文件来确定在当时会特化成什么类型。所以就干脆不会特化。这样你在链接时就找不到函数定义了。 看这里<a href="https://blog.csdn.net/imred/article/details/80261632" target="_blank" rel="noopener">https://blog.csdn.net/imred/article/details/80261632</a></p>
+<h3 id="Case5-api-hinden"><a href="#Case5-api-hinden" class="headerlink" title="Case5 api hinden"></a>Case5 api hinden</h3><p>如果动态库libA.so的确实现了<code>foo(...)</code>，但是在编译.so的时候使用了-fvisibility=hidden类似的开关，那么使用者也是链接不了的（但是nm还是能够看得到）。这种情况常见于一些开源库里边的不兼容，前边版本api可以用，库升级后，这个版本编程hinden了。</p>
 
       
     </div>
@@ -434,11 +431,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/hadoop/" rel="tag"># hadoop</a>
-          
-            <a href="/tags/myeclipse/" rel="tag"># myeclipse</a>
-          
-            <a href="/tags/plugin/" rel="tag"># plugin</a>
+            <a href="/tags/C/" rel="tag"># C++</a>
           
         </div>
       
@@ -451,8 +444,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/03/2019-07-03-VirtualBox-NAT-Configuration/" rel="next" title="VirtualBox NAT 端口映射实现宿主机与虚拟机相互通信">
-                <i class="fa fa-chevron-left"></i> VirtualBox NAT 端口映射实现宿主机与虚拟机相互通信
+              <a href="/2020/06/15/A-so-link-problem/" rel="next" title="A .So Link Problem">
+                <i class="fa fa-chevron-left"></i> A .So Link Problem
               </a>
             
           </div>
@@ -460,10 +453,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/07/05/2019-07-05-Java_anonymous_classes/" rel="prev" title="Java匿名类">
-                Java匿名类 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -619,7 +608,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题"><span class="nav-number">1.</span> <span class="nav-text">问题</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#如何查看编译好的-so-动态链接库所有的symbol"><span class="nav-number">1.</span> <span class="nav-text">如何查看编译好的.so 动态链接库所有的symbol</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#知道了函数修饰后的名字，怎么推函数声明"><span class="nav-number">2.</span> <span class="nav-text">知道了函数修饰后的名字，怎么推函数声明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行时出现undefined-symbol"><span class="nav-number">3.</span> <span class="nav-text">运行时出现undefined symbol</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Case1-链接是缺少定义了XXX的源文件或目标文件或库文件"><span class="nav-number">3.1.</span> <span class="nav-text">Case1 链接是缺少定义了XXX的源文件或目标文件或库文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Case2-链接顺序不对"><span class="nav-number">3.2.</span> <span class="nav-text">Case2 链接顺序不对</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Case3-函数符号修饰不一样"><span class="nav-number">3.3.</span> <span class="nav-text">Case3 函数符号修饰不一样</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Case4-把模板函数写进了cpp文件"><span class="nav-number">3.4.</span> <span class="nav-text">Case4 把模板函数写进了cpp文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Case5-api-hinden"><span class="nav-number">3.5.</span> <span class="nav-text">Case5 api hinden</span></a></li></ol></li></ol></div>
             
 
           </div>
